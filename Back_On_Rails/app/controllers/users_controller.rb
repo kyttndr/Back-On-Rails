@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       flash[:alert] = "Invalid Form!"
-      render :new
+      render 'new'
     end
   end
 
