@@ -1,0 +1,21 @@
+<h1>Listing all items</h1>
+<p>
+	<%= link_to "Register new item", new_item_path %>
+</p>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Username</th>
+	</tr>
+	<% @items.each do |item| %>
+	<tr>
+		<td><%= item.name %></td>
+		<td><%= item.description %></td>
+		<td><%= item.user.username%></td>
+		<td><%= link_to 'Edit', edit_item_path(item) %></td>
+		<td><%= link_to 'Show', item_path(item) %></td>
+		<td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
+	</tr>
+	<% end %>
+</table>

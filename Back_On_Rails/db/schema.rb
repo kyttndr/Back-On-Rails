@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_221622) do
+ActiveRecord::Schema.define(version: 2018_10_26_151647) do
 
   create_table "items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "name"
+    t.string "description"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "street_number"
+    t.string "street_name"
+    t.string "city"
+    t.string "province"
+    t.string "country"
+    t.date "date_of_birth"
+    t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

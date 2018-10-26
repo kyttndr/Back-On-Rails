@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all
   end
 
   def new
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
     if @user.save
       flash[:notice] = "Thank you for signing up!"
-      redirect_to root_url
+      redirect_to user_path(@user)
     else
       flash[:alert] = "Invalid Form!"
       render 'new'
@@ -18,15 +19,28 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(allowed_params)
+      flash[:notice] = "Successfully edited"
+      redirect_to user_path(@user)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "Deleted"
+    redirect_to users_path
   end
 
   # PRIVATE FUNCTIONS

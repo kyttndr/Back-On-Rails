@@ -1,0 +1,7 @@
+<h1><%= @item.name%></h1>
+
+<body>
+	<%= @item.description%>
+</body><br/><br/>
+<%= link_to 'Edit', edit_item_path(@item) %>
+<%= link_to 'back to items', items_path %>
