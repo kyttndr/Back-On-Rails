@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
     if @user.save
       flash[:notice] = "Thank you for signing up!"
-      redirect_to root_url
+      redirect_to user_path(@user)
     else
       flash[:alert] = "Invalid Form!"
       render :new
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
