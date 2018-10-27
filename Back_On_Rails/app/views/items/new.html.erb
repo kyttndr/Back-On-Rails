@@ -1,0 +1,29 @@
+<h1>Register Item</h1>
+<%= form_with model: @item, local: true do |form| %>
+
+	<% if @item.errors.any? %>
+		<div class="error_messages">
+			<h2>Form is invalid</h2>
+			<ul>
+				<% @item.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<!--need to be changed when item can be created by current user-->
+	<%= @item.user.username%><br/>
+	<!--------------------------------------------------------->
+	
+	<%= form.label :name %>
+	<%= form.text_field :name%><br/>
+
+	<%= form.label :description %>
+	<%= form.text_area :description%><br/>
+
+	<%= form.submit "Register" %>
+	
+	<%= link_to 'back to items', items_path %>
+
+<% end %>
