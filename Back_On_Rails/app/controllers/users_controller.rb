@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
     if @user.save
       flash[:notice] = "Thank you for signing up!"
-      redirect_to user_path(@user)
+      redirect_to new_user_profile_path(@user)
     else
       flash[:alert] = "Invalid Form!"
       render :new
