@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<%= form_for(:session, url: login_path) do |f| %>
+		<div>
+
+			<div>
+				<%= f.label :email %>
+			</div>
+
+			<div>
+				<%= f.email_field :email%>
+			</div>
+
+		</div>
+
+		<div>
+			<div>
+				<%= f.label :password %>
+			</div>
+
+			<div>
+				<%= f.password_field :password %>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<%= f.submit "Log in" %>
+			</div>
+		</div>
+		<% end %>
+	</body>
+</html>

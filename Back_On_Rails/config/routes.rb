@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     resources :profiles
   end
   resources :items
+  
+  get 'login', to: 'sessions#new'
+
+  post 'login', to: 'sessions#create'
+
+  delete 'logout', to: 'sessions#destroy'
 
   root "welcome#index"
 
