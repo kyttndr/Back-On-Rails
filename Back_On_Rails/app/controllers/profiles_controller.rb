@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
+    @profile = @user.create_profile
   end
 
   def create
