@@ -2,6 +2,9 @@
 <p>
 	<%= link_to "Register new item", new_item_path %>
 </p>
+<p>
+	<%= link_to 'Home', root_path %>
+</p>
 <table>
 	<tr>
 		<th>Title</th>
@@ -13,9 +16,11 @@
 		<td><%= item.name %></td>
 		<td><%= item.description %></td>
 		<td><%= item.user.username%></td>
-		<td><%= link_to 'Edit', edit_item_path(item) %></td>
 		<td><%= link_to 'Show', item_path(item) %></td>
-		<td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
+		<% if logged_in? && current_user == item.user %>
+			<td><%= link_to 'Edit', edit_item_path(item) %></td>
+			<td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
+		<% end %>
 	</tr>
 	<% end %>
 </table>
