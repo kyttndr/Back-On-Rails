@@ -8,6 +8,6 @@ class Borrow < ApplicationRecord
 
     validates :start_date, presence: true
     validates :end_date, presence: true
-    validates :isReturned, presence: true
+    validates :isReturned, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1]}
 
 end

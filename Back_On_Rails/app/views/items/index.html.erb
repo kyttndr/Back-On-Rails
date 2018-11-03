@@ -21,6 +21,8 @@
 			<td><%= link_to 'Edit', edit_item_path(item) %></td>
 			<td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
 		<% end %>
+		<td><%= link_to('Borrow', new_item_borrow_path(item))%></td>
+
 	</tr>
 	<% end %>
 </table>

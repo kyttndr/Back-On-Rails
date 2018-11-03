@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_181634) do
+ActiveRecord::Schema.define(version: 2018_11_03_210205) do
 
   create_table "borrows", force: :cascade do |t|
     t.integer "user_id"
     t.integer "item_id"
     t.date "start_date"
     t.date "end_date"
-    t.boolean "isReturned"
+    t.integer "isReturned"
     t.index ["item_id"], name: "index_borrows_on_item_id"
     t.index ["user_id"], name: "index_borrows_on_user_id"
   end

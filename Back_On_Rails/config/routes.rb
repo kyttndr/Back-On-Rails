@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :profiles
   end
-  resources :items
-  
+  resources :items do
+      resources :borrows
+  end
+  #resources :borrows
+
   get 'login', to: 'sessions#new'
 
   post 'login', to: 'sessions#create'
