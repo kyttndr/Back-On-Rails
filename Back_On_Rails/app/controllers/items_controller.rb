@@ -1,4 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+  
   def index
     @items = Item.all
   end
@@ -6,13 +10,13 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     #user in item will be implemented correctly when session is implemented
-    @item.user = User.first
+    @item.user = current_user
   end
 
   def create
     @item = Item.new(allowed_params)
     #user in item will be implemented correctly when session is implemented
-    @item.user = User.first
+    @item.user = current_user
     if @item.save
       flash[:notice] = "Thank you for register!"
       redirect_to item_path(@item)
@@ -23,15 +27,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(allowed_params)
       flash[:notice] = "Successfully updated"
       redirect_to item_path(@item)
@@ -41,7 +42,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
       @item.destroy
       flash[:notice] = "Deleted"
       redirect_to items_path
@@ -51,6 +51,25 @@ class ItemsController < ApplicationController
   
   def allowed_params
     params.require(:item).permit(:name, :description)
+  end
+  
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  
+  def require_user
+    if !logged_in?
+      flash[:danger] = "you need to log in"
+      redirect_to items_path
+    end
+    
+  end
+  
+  def require_same_user
+    if current_user != @item.user
+      flash[:danger] = "you can only edit or delete your own items"
+      redirect_to items_path
+    end
   end
   
 end

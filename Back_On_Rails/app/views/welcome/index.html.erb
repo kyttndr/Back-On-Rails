@@ -1,3 +1,10 @@
 <h1>Back On Rails</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
 <p><%= link_to 'Registration', new_user_path %></p>
+
+<% if session[:user_id] == nil %>
+	<p><%= link_to 'Log in', login_path %></p>
+<% else %>
+	<p><%= link_to 'Log out', logout_path, method: :delete %></p>
+<% end %>
+<p><%= link_to 'New Item (first User has it)', items_path %></p>

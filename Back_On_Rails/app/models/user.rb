@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_many :items
   has_one :profile, dependent: :destroy
+
+  has_many :borrows
+  #has_many :items, :through => :borrows
+
   has_secure_password
 
   validates :username, presence: true, uniqueness: true
