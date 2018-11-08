@@ -1,9 +1,16 @@
 class Borrow < ApplicationRecord
 
-    belongs_to :user
+    #belongs_to :user
     belongs_to :item
 
-    validates :user, presence: true
+    #lender is a fk to user_id
+    belongs_to :lender, class_name: 'User'
+
+    #borrower is a fk to user_id
+    belongs_to :borrower, class_name: 'User'
+
+    validates :lender, presence: true
+    validates :borrower, presence: true
     validates :item, presence: true
 
     validates :start_date, presence: true

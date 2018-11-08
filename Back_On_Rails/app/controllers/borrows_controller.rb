@@ -12,8 +12,9 @@ class BorrowsController < ApplicationController
 
     def create
         @borrow = Borrow.new
-        @borrow.user = @user
+        @borrow.borrower = @user
         @borrow.item = @item
+        @borrow.lender = @item.user
         @borrow.start_date = params[:borrow][:start_date]
         @borrow.end_date = params[:borrow][:end_date]
         @borrow.isReturned = 0
