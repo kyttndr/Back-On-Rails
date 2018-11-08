@@ -23,7 +23,7 @@
 			<% end %>
 
 			<% if item.isBorrowed? == 0%>
-				<td><%= link_to('Borrow', new_item_borrow_path(item))%></td>
+				<td><%= link_to('Borrow', new_item_transaction_path(item))%></td>
 			<% end %>
 
 		</tr>

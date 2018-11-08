@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_191031) do
-
-  create_table "borrows", force: :cascade do |t|
-    t.integer "item_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "isReturned"
-    t.integer "lender_id"
-    t.integer "borrower_id"
-    t.index ["borrower_id"], name: "index_borrows_on_borrower_id"
-    t.index ["item_id"], name: "index_borrows_on_item_id"
-    t.index ["lender_id"], name: "index_borrows_on_lender_id"
-  end
+ActiveRecord::Schema.define(version: 2018_11_08_193416) do
 
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -48,6 +36,18 @@ ActiveRecord::Schema.define(version: 2018_11_08_191031) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "item_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "isReturned"
+    t.integer "lender_id"
+    t.integer "borrower_id"
+    t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
+    t.index ["item_id"], name: "index_transactions_on_item_id"
+    t.index ["lender_id"], name: "index_transactions_on_lender_id"
   end
 
   create_table "users", force: :cascade do |t|

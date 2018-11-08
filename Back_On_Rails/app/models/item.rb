@@ -4,7 +4,7 @@ class Item < ApplicationRecord
     # ITEM ATTRIBUTES/COLUMNS
     belongs_to :user
 
-    has_many :borrows
+    has_many :transactions
     #has_many :users, :through => :borrows
 
     validates :name, presence: true, length: { minimum: 3}
@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
     #Check if Item instance is currently being borrowed
     def isBorrowed?
-        borrow_records = self.borrows
+        borrow_records = self.transactions
         borrow_records.each do |record|
             if(record.isReturned==0)
                 return 1    #Item is currently borrowed

@@ -1,10 +1,10 @@
 <h1>Borrow Item</h1>
 
-<% if @borrow.errors.any? %>
+<% if @transaction.errors.any? %>
     <div class="error_messages">
         <h2>Form is invalid</h2>
         <ul>
-            <% @borrow.errors.full_messages.each do |message| %>
+            <% @transaction.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -26,7 +26,7 @@
 </table>
 </p>
 
-<%=form_for(:borrow, url: item_borrows_path(@item), method: :post) do |form|%>
+<%=form_for(:transaction, url: item_transactions_path(@item), method: :post) do |form|%>
     Start Day: <%=form.date_field :start_date%></br>
     End Day: <%=form.date_field :end_date%></br>
     <%=submit_tag("Borrow Item")%></br>

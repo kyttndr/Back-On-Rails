@@ -1,4 +1,4 @@
-class BorrowsController < ApplicationController
+class TransactionsController < ApplicationController
 
     before_action :set_item_and_user, only: [:new, :create]
 
@@ -7,18 +7,18 @@ class BorrowsController < ApplicationController
     end
 
     def new
-        @borrow = Borrow.new
+        @transaction = Transaction.new
     end
 
     def create
-        @borrow = Borrow.new
-        @borrow.borrower = @user
-        @borrow.item = @item
-        @borrow.lender = @item.user
-        @borrow.start_date = params[:borrow][:start_date]
-        @borrow.end_date = params[:borrow][:end_date]
-        @borrow.isReturned = 0
-        isSaved = @borrow.save
+        @transaction = Transaction.new
+        @transaction.borrower = @user
+        @transaction.item = @item
+        @transaction.lender = @item.user
+        @transaction.start_date = params[:transaction][:start_date]
+        @transaction.end_date = params[:transaction][:end_date]
+        @transaction.isReturned = 0
+        isSaved = @transaction.save
         if(isSaved)
             flash[:notice] = "You have borrowed the item"
             redirect_to items_path

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :profiles
   end
   resources :items do
-      resources :borrows
+      resources :transactions
   end
   #resources :borrows
 
