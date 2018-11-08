@@ -4,6 +4,13 @@ class TransactionsController < ApplicationController
 
 
     def index
+        @user = User.find(params[:user_id])
+
+        #collection of borrow transactions
+        @borrow_transactions = @user.borrow_transactions
+        #collection of lend transactions
+        @lend_transactions = @user.lend_transactions
+
     end
 
     def new

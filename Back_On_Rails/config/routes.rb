@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :profiles
+    resources :transactions
   end
   resources :items do
       resources :transactions

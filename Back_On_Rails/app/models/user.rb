@@ -6,10 +6,10 @@ class User < ApplicationRecord
   #has_many :items, :through => :borrows
 
   #user has_many borrows through the lender fk in borrow model
-  has_many :transactions, foreign_key: :lender
+  has_many :borrow_transactions, class_name: 'Transaction', foreign_key: 'borrower_id', inverse_of: 'borrower'
 
   #user has_many borrows through the lender fk in borrow model
-  has_many :transactions, foreign_key: :borrower
+  has_many :lend_transactions, class_name: 'Transaction', foreign_key: 'lender_id', inverse_of: 'lender'
 
   has_secure_password
 
