@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :items do
       resources :transactions
   end
-  #resources :borrows
 
   get 'login', to: 'sessions#new'
 

@@ -18,8 +18,8 @@
                 <td><%= transaction.borrower.username%></td>
                 <td><%= transaction.start_date%></td>
                 <td><%= transaction.end_date%></td>
-                <td><%= link_to 'accept', user_transaction_path(@user, transaction, isApproved: 1), method: :put %></td>
-                <td><%= link_to 'reject', user_transaction_path(@user, transaction, isApproved: 2), method: :put %></td>
+                <td><%= link_to 'accept', user_transaction_path(@user, transaction, transaction: {isApproved: 1}), method: :put %></td>
+                <td><%= link_to 'reject', user_transaction_path(@user, transaction, transaction: {isApproved: 2}), method: :put %></td>
             </tr>
         <% end %>
     <% end %>

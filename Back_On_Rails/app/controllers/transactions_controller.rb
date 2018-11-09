@@ -53,7 +53,8 @@ class TransactionsController < ApplicationController
     def update
         @user = User.find(params[:user_id])
         @transaction = Transaction.find(params[:id])
-        @transaction.isApproved = params[:isApproved]
+        #assign_attributes will only assign to model attributes if it exists in request_params hash
+        @transaction.assign_attributes(request_params)
         @transaction.save
         redirect_to user_pending_transactions_path(@user)
     end
@@ -62,8 +63,14 @@ class TransactionsController < ApplicationController
     end
 
     private
-        def allowed_params
-          #params.require(:item).permit(:name, :description)
+        def request_params
+            params.require(:transaction).permit(:borrower,
+                                                :lender,
+                                                :item,
+                                                :start_date,
+                                                :end_date,
+                                                :isReturned,
+                                                :isApproved)
         end
 
         def set_item_and_user
