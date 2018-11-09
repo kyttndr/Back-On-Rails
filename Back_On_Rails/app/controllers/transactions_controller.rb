@@ -45,9 +45,12 @@ class TransactionsController < ApplicationController
     end
 
     def show
+        # Not needed for now
     end
 
     def edit
+        @transaction = Transaction.find(params[:id])
+        @user = User.find(params[:user_id])
     end
 
     def update
@@ -60,6 +63,12 @@ class TransactionsController < ApplicationController
     end
 
     def destroy
+        @transaction = Transaction.find(params[:id])
+        @user = User.find(params[:user_id])
+
+        @transaction.destroy
+        flash[:notice] = "Deleted Transaction"
+        redirect_to user_pending_transactions_path(@user)
     end
 
     private

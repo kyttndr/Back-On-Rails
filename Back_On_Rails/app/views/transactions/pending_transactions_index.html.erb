@@ -45,6 +45,9 @@
                 <td><%= transaction.lender.username%></td>
                 <td><%= transaction.start_date%></td>
                 <td><%= transaction.end_date%></td>
+                <td><%= link_to 'edit', edit_user_transaction_path(@user, transaction) %></td>
+                <td><%= link_to 'delete', user_transaction_path(@user, transaction), method: :delete %></td>
+
             </tr>
         <% end %>
     <% end %>

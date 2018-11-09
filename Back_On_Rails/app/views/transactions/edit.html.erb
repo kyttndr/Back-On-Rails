@@ -1,4 +1,4 @@
-<h1>Borrow Item</h1>
+<h1>Edit Transaction</h1>
 
 <% if @transaction.errors.any? %>
     <div class="error_messages">
@@ -16,18 +16,18 @@
 	<tr>
 		<th>Item</th>
 		<th>Description</th>
-		<th>Owner</th>
+		<th>Lender</th>
 	</tr>
 	<tr>
-		<td><%= @item.name %></td>
-		<td><%= @item.description %></td>
-		<td><%= @item.user.username %></td>
+		<td><%= @transaction.item.name %></td>
+		<td><%= @transaction.item.description %></td>
+		<td><%= @transaction.lender.username %></td>
 	</tr>
 </table>
 </p>
 
-<%=form_for(:transaction, url: item_transactions_path(@item), method: :post) do |form|%>
+<%=form_for(:transaction, url: user_transaction_path(@user), method: :put) do |form|%>
     Start Day: <%=form.date_field :start_date%></br>
     End Day: <%=form.date_field :end_date%></br>
-    <%=submit_tag("Request to borrow item")%></br>
+    <%=submit_tag("Edit request to borrow item")%></br>
 <%end%>
