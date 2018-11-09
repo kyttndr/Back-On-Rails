@@ -1,36 +1,7 @@
-<h1>TRANSACTION HISTORY</h1>
-
-
-<p>
-<div>BORROW HISTORY</div>
-<table>
-	<tr>
-		<th>Item</th>
-		<th>Description</th>
-		<th>Lender</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Is Returned?</th>
-	</tr>
-    <% @borrow_transactions.each do |transaction|%>
-        <% if transaction.isApproved == 1%>
-            <tr>
-                <td><%= transaction.item.name %></td>
-                <td><%= transaction.item.description %></td>
-                <td><%= transaction.lender.username%></td>
-                <td><%= transaction.start_date%></td>
-                <td><%= transaction.end_date%></td>
-                <td><%= transaction.isReturned%></td>
-            </tr>
-        <% end %>
-    <% end %>
-</table>
-</p>
-
-
+<h1>PENDING TRANSACTIONS</h1>
 
 <p>
-<div>LEND HISTORY</div>
+<div>ACCEPT OR REJECT APPLICATIONS TO BORROW YOUR ITEMS</div>
 <table>
 	<tr>
 		<th>Item</th>
@@ -38,23 +9,47 @@
 		<th>Borrower</th>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Is Returned?</th>
 	</tr>
     <% @lend_transactions.each do |transaction|%>
-        <% if transaction.isApproved == 1%>
+        <% if transaction.isApproved == 0%>
             <tr>
                 <td><%= transaction.item.name %></td>
                 <td><%= transaction.item.description %></td>
                 <td><%= transaction.borrower.username%></td>
                 <td><%= transaction.start_date%></td>
                 <td><%= transaction.end_date%></td>
-                <td><%= transaction.isReturned%></td>
+                <td><%= link_to 'accept', user_transaction_path(@user, transaction, isApproved: 1), method: :put %></td>
+                <td><%= link_to 'reject', user_transaction_path(@user, transaction, isApproved: 2), method: :put %></td>
             </tr>
         <% end %>
     <% end %>
 </table>
 </p>
 
+
+<p>
+<div>YOUR PENDING BORROW REQUESTS that have not been accepted yet</div>
+<table>
+	<tr>
+		<th>Item</th>
+		<th>Description</th>
+		<th>Lender</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+	</tr>
+    <% @borrow_transactions.each do |transaction|%>
+        <% if transaction.isApproved == 0%>
+            <tr>
+                <td><%= transaction.item.name %></td>
+                <td><%= transaction.item.description %></td>
+                <td><%= transaction.lender.username%></td>
+                <td><%= transaction.start_date%></td>
+                <td><%= transaction.end_date%></td>
+            </tr>
+        <% end %>
+    <% end %>
+</table>
+</p>
 
 <div>
 <%=link_to 'back to show user', user_path(@user)%>

@@ -16,5 +16,6 @@ class Transaction < ApplicationRecord
     validates :start_date, presence: true
     validates :end_date, presence: true
     validates :isReturned, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1]}
+    validates :isApproved, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1,2]}
 
 end

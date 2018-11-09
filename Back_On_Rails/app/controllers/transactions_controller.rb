@@ -10,7 +10,15 @@ class TransactionsController < ApplicationController
         @borrow_transactions = @user.borrow_transactions
         #collection of lend transactions
         @lend_transactions = @user.lend_transactions
+    end
 
+    def pending_transactions_index
+        @user = User.find(params[:user_id])
+
+        #collection of borrow transactions
+        @borrow_transactions = @user.borrow_transactions
+        #collection of lend transactions
+        @lend_transactions = @user.lend_transactions
     end
 
     def new
@@ -25,6 +33,7 @@ class TransactionsController < ApplicationController
         @transaction.start_date = params[:transaction][:start_date]
         @transaction.end_date = params[:transaction][:end_date]
         @transaction.isReturned = 0
+        @transaction.isApproved = 0
         isSaved = @transaction.save
         if(isSaved)
             flash[:notice] = "You have borrowed the item"
@@ -42,6 +51,11 @@ class TransactionsController < ApplicationController
     end
 
     def update
+        @user = User.find(params[:user_id])
+        @transaction = Transaction.find(params[:id])
+        @transaction.isApproved = params[:isApproved]
+        @transaction.save
+        redirect_to user_pending_transactions_path(@user)
     end
 
     def destroy

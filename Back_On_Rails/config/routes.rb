@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :profiles
+
+    get 'pending_transactions', to: 'transactions#pending_transactions_index'
     resources :transactions
   end
   resources :items do

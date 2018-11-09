@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_193416) do
+ActiveRecord::Schema.define(version: 2018_11_08_225936) do
 
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_193416) do
     t.integer "isReturned"
     t.integer "lender_id"
     t.integer "borrower_id"
+    t.integer "isApproved"
     t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
     t.index ["item_id"], name: "index_transactions_on_item_id"
     t.index ["lender_id"], name: "index_transactions_on_lender_id"
