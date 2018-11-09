@@ -13,8 +13,8 @@ class Item < ApplicationRecord
     #Check if Item instance is currently being borrowed
     def isBorrowed?
         borrow_records = self.transactions
-        borrow_records.each do |record|
-            if(record.isReturned==0)
+        borrow_records.each do |transaction|
+            if(transaction.isReturned==0 && transaction.isApproved==1)
                 return 1    #Item is currently borrowed
             end
         end

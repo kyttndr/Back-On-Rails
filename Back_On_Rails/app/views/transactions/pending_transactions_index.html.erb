@@ -51,6 +51,31 @@
 </table>
 </p>
 
+<p>
+<div>YOUR REJECTED REQUESTS TO BORROW OTHER USERS' ITEMS</div>
+<table>
+	<tr>
+		<th>Item</th>
+		<th>Description</th>
+		<th>Lender</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+	</tr>
+    <% @borrow_transactions.each do |transaction|%>
+        <% if transaction.isApproved == 2%>
+            <tr>
+                <td><%= transaction.item.name %></td>
+                <td><%= transaction.item.description %></td>
+                <td><%= transaction.lender.username%></td>
+                <td><%= transaction.start_date%></td>
+                <td><%= transaction.end_date%></td>
+            </tr>
+        <% end %>
+    <% end %>
+</table>
+</p>
+
+
 <div>
 <%=link_to 'back to show user', user_path(@user)%>
 </div>
