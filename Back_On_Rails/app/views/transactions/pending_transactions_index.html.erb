@@ -18,8 +18,11 @@
                 <td><%= transaction.borrower.username%></td>
                 <td><%= transaction.start_date%></td>
                 <td><%= transaction.end_date%></td>
-                <td><%= link_to 'accept', user_transaction_path(@user, transaction, transaction: {isApproved: 1}), method: :put %></td>
-                <td><%= link_to 'reject', user_transaction_path(@user, transaction, transaction: {isApproved: 2}), method: :put %></td>
+
+				<% query_params_approved = {isApproved: 1} %>
+				<% query_params_rejected = {isApproved: 2} %>
+                <td><%= link_to 'accept', transaction_path(transaction, transaction: query_params_approved), method: :put %></td>
+                <td><%= link_to 'reject', transaction_path(transaction, transaction: query_params_rejected), method: :put %></td>
             </tr>
         <% end %>
     <% end %>
@@ -45,8 +48,8 @@
                 <td><%= transaction.lender.username%></td>
                 <td><%= transaction.start_date%></td>
                 <td><%= transaction.end_date%></td>
-                <td><%= link_to 'edit', edit_user_transaction_path(@user, transaction) %></td>
-                <td><%= link_to 'delete', user_transaction_path(@user, transaction), method: :delete %></td>
+                <td><%= link_to 'edit', edit_transaction_path(transaction) %></td>
+                <td><%= link_to 'delete', transaction_path(transaction), method: :delete %></td>
 
             </tr>
         <% end %>

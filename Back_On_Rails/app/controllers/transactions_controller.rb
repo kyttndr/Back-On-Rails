@@ -1,11 +1,9 @@
 class TransactionsController < ApplicationController
 
-    before_action :set_item_and_user, only: [:new, :create]
-
+    before_action :set_user
+    before_action :set_item, only: [:new, :create]
 
     def index
-        @user = User.find(params[:user_id])
-
         #collection of borrow transactions
         @borrow_transactions = @user.borrow_transactions
         #collection of lend transactions
@@ -13,8 +11,6 @@ class TransactionsController < ApplicationController
     end
 
     def pending_transactions_index
-        @user = User.find(params[:user_id])
-
         #collection of borrow transactions
         @borrow_transactions = @user.borrow_transactions
         #collection of lend transactions
@@ -36,7 +32,7 @@ class TransactionsController < ApplicationController
         @transaction.isApproved = 0
         isSaved = @transaction.save
         if(isSaved)
-            flash[:notice] = "You have borrowed the item"
+            flash[:notice] = "You have requested to borrow the item"
             redirect_to items_path
         else
             flash[:alert] = "Invalid Form!"
@@ -50,25 +46,27 @@ class TransactionsController < ApplicationController
 
     def edit
         @transaction = Transaction.find(params[:id])
-        @user = User.find(params[:user_id])
     end
 
     def update
-        @user = User.find(params[:user_id])
         @transaction = Transaction.find(params[:id])
         #assign_attributes will only assign to model attributes if it exists in request_params hash
         @transaction.assign_attributes(request_params)
-        @transaction.save
-        redirect_to user_pending_transactions_path(@user)
+        isSaved = @transaction.save
+        if(isSaved)
+            flash[:notice] = "You have updated your borrow request"
+            redirect_to pending_transactions_path
+        else
+            flash[:alert] = "Invalid Form!"
+            render :edit
+        end
     end
 
     def destroy
         @transaction = Transaction.find(params[:id])
-        @user = User.find(params[:user_id])
-
         @transaction.destroy
         flash[:notice] = "Deleted Transaction"
-        redirect_to user_pending_transactions_path(@user)
+        redirect_to pending_transactions_path
     end
 
     private
@@ -82,10 +80,12 @@ class TransactionsController < ApplicationController
                                                 :isApproved)
         end
 
-        def set_item_and_user
-          @item = Item.find(params[:item_id])
-          @user = current_user
+        def set_user
+            @user = current_user
         end
 
+        def set_item
+            @item = Item.find(params[:item_id])
+        end
 
 end

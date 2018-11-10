@@ -4,13 +4,11 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :profiles
+  end
 
-    get 'pending_transactions', to: 'transactions#pending_transactions_index'
-    resources :transactions
-  end
-  resources :items do
-      resources :transactions
-  end
+  get 'pending_transactions', to: 'transactions#pending_transactions_index'
+  resources :transactions
+  resources :items
 
   get 'login', to: 'sessions#new'
 

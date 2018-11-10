@@ -26,8 +26,9 @@
 </table>
 </p>
 
-<%=form_for(:transaction, url: item_transactions_path(@item), method: :post) do |form|%>
-    Start Day: <%=form.date_field :start_date%></br>
-    End Day: <%=form.date_field :end_date%></br>
-    <%=submit_tag("Request to borrow item")%></br>
+<% query_params = {item_id: @item.id} %>
+<%=form_for(:transaction, url: transactions_path(query_params), method: :post) do |form|%>
+    Start Day: <%= form.date_field :start_date %></br>
+    End Day: <%= form.date_field :end_date %></br>
+    <%= submit_tag("Request to borrow item") %></br>
 <%end%>

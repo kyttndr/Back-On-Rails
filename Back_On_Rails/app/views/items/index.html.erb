@@ -23,7 +23,8 @@
 			<% end %>
 
 			<% if item.isBorrowed? == 0 && current_user!=item.user%>
-				<td><%= link_to('Borrow', new_item_transaction_path(item))%></td>
+				<% query_params = {item_id: item.id} %>
+				<td><%= link_to('Request to Borrow', new_transaction_path(query_params))%></td>
 			<% end %>
 
 		</tr>

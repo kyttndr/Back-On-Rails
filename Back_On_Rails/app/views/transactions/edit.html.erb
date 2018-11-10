@@ -26,7 +26,7 @@
 </table>
 </p>
 
-<%=form_for(:transaction, url: user_transaction_path(@user), method: :put) do |form|%>
+<%=form_for(:transaction, url: transaction_path, method: :put) do |form|%>
     Start Day: <%=form.date_field :start_date%></br>
     End Day: <%=form.date_field :end_date%></br>
     <%=submit_tag("Edit request to borrow item")%></br>
