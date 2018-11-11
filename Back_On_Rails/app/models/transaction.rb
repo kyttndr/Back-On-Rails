@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
 
-    #belongs_to :user
+    ## # TODO: DEPENDANCY ON ITEM. WHAT HAPPENS WHEN ITEM IS DELETED?
     belongs_to :item
 
     #borrower is a fk to user_id

@@ -14,7 +14,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				
+
 				<li><%= link_to 'Available Items', items_path %></li>
 				<li><a href="#">Link</a></li>
 				<li class="dropdown">
@@ -37,6 +37,16 @@
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
+				<% if session[:user_id] != nil %>
+					<li>
+						<%= link_to 'Manage Your Borrowed Items', borrow_transactions_path %>
+						<%= link_to 'Manage Your Lent Items', lend_transactions_path %>
+					</li>
+					<li>
+						<%= link_to 'Manage Pending Transactions', pending_transactions_path %>
+					</li>
+				<% end  %>
+
 				<li>
 					<% if session[:user_id] == nil %>
 						<%= link_to 'Log in', login_path %>

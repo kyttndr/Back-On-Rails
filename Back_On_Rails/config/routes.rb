@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :profiles
   end
 
-  get 'pending_transactions', to: 'transactions#pending_transactions_index'
+  get 'borrow_transactions', to: 'transactions#borrow_index'
+  get 'lend_transactions', to: 'transactions#lend_index'
+  get 'pending_transactions', to: 'transactions#pending_index'
   resources :transactions
   resources :items
 

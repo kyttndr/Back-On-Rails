@@ -10,11 +10,27 @@ class TransactionsController < ApplicationController
         @lend_transactions = @user.lend_transactions
     end
 
-    def pending_transactions_index
+    def borrow_index
         #collection of borrow transactions
         @borrow_transactions = @user.borrow_transactions
+        @current_borrow_transactions = getCurrentTransactions(@borrow_transactions)
+        @future_borrow_transactions = getFutureTransactions(@borrow_transactions)
+    end
+
+    def lend_index
         #collection of lend transactions
         @lend_transactions = @user.lend_transactions
+        @current_lend_transactions = getCurrentTransactions(@lend_transactions)
+        @future_lend_transactions = getFutureTransactions(@lend_transactions)
+    end
+
+    def pending_index
+        #collection of pending borrow transactions
+        @borrow_transactions = @user.borrow_transactions
+        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
+        #collection of pending lend transactions
+        @lend_transactions = @user.lend_transactions
+        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
     end
 
     def new
@@ -54,7 +70,7 @@ class TransactionsController < ApplicationController
         @transaction.assign_attributes(request_params)
         isSaved = @transaction.save
         if(isSaved)
-            flash[:notice] = "You have updated your borrow request"
+            flash[:notice] = "You have updated the transaction"
             redirect_to pending_transactions_path
         else
             flash[:alert] = "Invalid Form!"
@@ -86,6 +102,58 @@ class TransactionsController < ApplicationController
 
         def set_item
             @item = Item.find(params[:item_id])
+        end
+
+        # Returns a collection of all current transactions that
+        # 1) is approved
+        # 2) is not returned
+        def getCurrentTransactions(transactions)
+            current_transactions = Array.new
+            transactions.each do |transaction|
+                if(transaction.isApproved==1 && transaction.isReturned==0 &&
+                    Date.current >= transaction.start_date)
+                    current_transactions << transaction
+                end
+            end
+            return current_transactions
+        end
+
+        # Returns a collection of all future transactions that
+        # 1) is approved
+        def getFutureTransactions(transactions)
+            future_transactions = Array.new
+            transactions.each do |transaction|
+                if(transaction.isApproved==1 &&
+                    Date.current < transaction.start_date)
+                    future_transactions << transaction
+                end
+            end
+            return future_transactions
+        end
+
+        # Returns a collection of all transactions that
+        # 1) is approved
+        # 2) is returned
+        def getCompletedTransactions(transactions)
+            completed_transactions = Array.new
+            transactions.each do |transaction|
+                if(transaction.isApproved==1 && transaction.isReturned==1)
+                    completed_transactions << transaction
+                end
+            end
+            return completed_transactions
+        end
+
+        # Returns a collection of all transactions that
+        # 1) is not approved
+        def getPendingTransactions(transactions)
+            pending_transactions = Array.new
+            transactions.each do |transaction|
+                if(transaction.isApproved==0)
+                    pending_transactions << transaction
+                end
+            end
+            return pending_transactions
         end
 
 end
