@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$navbar-default-bg: #08088A;
+$navbar-default-bg: black;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -13,4 +13,27 @@ $navbar-default-bg: #08088A;
 	color: #fff;
 	letter-spacing: -1px;
 	font-weight: bold;
+}
+
+.center{
+	text-align: center;
+}
+
+.jumbotron{
+	
+	height: 550px;
+	
+}
+
+.jumbotron h1{
+	text-align: center;
+	margin-bottom: 30px;
+	letter-spacing: -1px;
+	font-weight: bold;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
 }
