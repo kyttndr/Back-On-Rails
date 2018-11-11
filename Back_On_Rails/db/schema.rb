@@ -15,10 +15,9 @@ ActiveRecord::Schema.define(version: 2018_11_08_225936) do
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.string "name"
     t.string "description"
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|

@@ -1,10 +1,7 @@
-<h1>Back On Rails</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
-<p><%= link_to 'Registration', new_user_path %></p>
 
-<% if session[:user_id] == nil %>
-	<p><%= link_to 'Log in', login_path %></p>
-<% else %>
-	<p><%= link_to 'Log out', logout_path, method: :delete %></p>
-<% end %>
+<%= render 'layouts/navigation' %>
+
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+
 <p><%= link_to 'Available Items', items_path %></p>
