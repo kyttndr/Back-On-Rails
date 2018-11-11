@@ -1,41 +1,82 @@
-<p><%= link_to 'Home', root_path %></p>
+<%= render 'layouts/navigation' %>
 
-<h1>Sign Up</h1>
-<%= form_with model: @user, local: true do |form| %>
+<br/><br/><br/><h1 align = "center">Sign Up</h1>
+
+<div class = "container">
 
   <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class = "row">
+      <div class = "col-xs-8 col-xs-offset-2">
+        <div class = "panel panel-danger">
+          <div class = "panel-heading">
+            <h2 class="panel-title">
+              <%= pluralize(@user.errors.count, "error") %>
+              prohibitied this user to be created:
+            </h2>
+            <div class = "panel-body">
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>  
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <p>
-    <%= form.label :name %>
-    <%= form.text_field :username %>
-  </p>
 
-  <p>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </p>
+  <%= form_with(model: @user, :html => {class:"form-horizontal", role: "form"}, local: true) do |form| %>
+    
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :name %>
+          </div>
+          <div class = "col-sm-8">
+            <%= form.text_field :username, class:"form-control" %>
+          </div>
+        </div>
+        
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :email %>
+          </div>
+          <div class = "col-sm-8">
+            <%= form.text_field :email, class:"form-control" %>
+          </div>
+        </div>
+        
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :password %>
+          </div>
+          <div class = "col-sm-8">
+            <%= form.password_field :password, class:"form-control" %>
+          </div>
+        </div>
 
-  <p>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </p>
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :password_confirmation %>
+          </div>
+          <div class = "col-sm-8">
+            <%= form.password_field :password_confirmation, class:"form-control" %>
+          </div>
+        </div>
 
-  <p>
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </p>
+        
+        <div class = "form-group">
+          <div class = "col-sm-offset-2 col-sm-10">
+            <%= form.submit "Sign Up", class: 'btn btn-primary btn-lg'%>
+          </div>
+        </div>
 
-  <%= form.submit "Sign Up" %>
-
-  <%=link_to "Back to users index page", users_path %>
-
-<% end %>
+      </div>
+    </div>
+  <% end %>
+  
+</div>
