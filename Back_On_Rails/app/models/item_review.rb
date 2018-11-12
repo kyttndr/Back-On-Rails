@@ -1,4 +1,4 @@
-class Review < ApplicationRecord
+class ItemReview < ApplicationRecord
 
     # ASSOCIATIONS
     belongs_to :item
@@ -8,6 +8,7 @@ class Review < ApplicationRecord
     belongs_to :reviewee, class_name: 'User', foreign_key: 'reviewee_id'
 
     enum review_type: {item_review: 0, user_review: 1}
+
 
     # VALIDATIONS
     validates :reviewer, presence: true

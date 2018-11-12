@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_221118) do
+ActiveRecord::Schema.define(version: 2018_11_12_231613) do
 
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -36,21 +36,6 @@ ActiveRecord::Schema.define(version: 2018_11_12_221118) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "reviewer_id"
-    t.integer "reviewee_id"
-    t.integer "review_type"
-    t.integer "rating"
-    t.text "comment"
-    t.date "review_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_reviews_on_item_id"
-    t.index ["reviewee_id"], name: "index_reviews_on_reviewee_id"
-    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
   end
 
   create_table "transactions", force: :cascade do |t|
