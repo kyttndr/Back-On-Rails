@@ -21,6 +21,7 @@ class TransactionsController < ApplicationController
     end
 
     def pending_index
+        @transaction = Transaction.new
         #collection of pending borrow transactions
         @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
         #collection of pending lend transactions
@@ -62,7 +63,7 @@ class TransactionsController < ApplicationController
     end
 
     def show
-        # Not needed for now
+        redirect_to root_path
     end
 
     def edit
@@ -79,7 +80,15 @@ class TransactionsController < ApplicationController
             redirect_to params[:transaction][:redirect]
         else
             flash[:alert] = "Invalid Form!"
-            render :edit
+            if params[:transaction][:render] == 'pending_index'
+                get_borrow_transactions
+                get_lend_transactions
+                @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
+                @pending_lend_transactions = getPendingTransactions(@lend_transactions)
+            end
+            render params[:transaction][:render]
+            #prev = Rails.application.routes.recognize_path(request.referrer)
+            #render prev[:action]
         end
     end
 
