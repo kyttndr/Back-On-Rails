@@ -45,6 +45,11 @@
 					<li>
 						<%= link_to 'Manage Pending Transactions', pending_transactions_path %>
 					</li>
+					<li>
+						<%= link_to 'View Borrow History', borrow_transactions_history_path %>
+						<%= link_to 'View Lend History', lend_transactions_history_path %>
+					</li>
+
 				<% end  %>
 
 				<li>
@@ -56,7 +61,7 @@
 				</li>
 				<li>
 				<% if request.fullpath == "/users/new" %>
-				
+
 				<% elsif session[:user_id] == nil%>
 					<%= link_to 'Sign Up', new_user_path %>
 				<% else %>

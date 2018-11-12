@@ -20,6 +20,8 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= transaction.isReturned%></td>
+			<% params = {isReturned: 1, redirect: lend_transactions_path} %>
+			<td><%= link_to 'Mark Item as Returned', transaction_path(transaction, transaction: params), method: :put %></td>
         </tr>
     <% end %>
 </table>
@@ -45,6 +47,7 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= transaction.isReturned%></td>
+			<td><%= link_to 'cancel transaction', transaction_path(transaction), method: :delete %></td>
         </tr>
     <% end %>
 </table>

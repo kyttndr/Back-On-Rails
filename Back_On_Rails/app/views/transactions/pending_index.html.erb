@@ -18,10 +18,10 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
 
-			<% query_params_approved = {isApproved: 1} %>
-			<% query_params_rejected = {isApproved: 2} %>
-            <td><%= link_to 'accept', transaction_path(transaction, transaction: query_params_approved), method: :put %></td>
-            <td><%= link_to 'reject', transaction_path(transaction, transaction: query_params_rejected), method: :put %></td>
+			<% params_approved = {isApproved: 1, redirect: pending_transactions_path} %>
+			<% params_rejected = {isApproved: 2, redirect: pending_transactions_path} %>
+            <td><%= link_to 'accept', transaction_path(transaction, transaction: params_approved), method: :put %></td>
+            <td><%= link_to 'reject', transaction_path(transaction, transaction: params_rejected), method: :put %></td>
         </tr>
     <% end %>
 </table>

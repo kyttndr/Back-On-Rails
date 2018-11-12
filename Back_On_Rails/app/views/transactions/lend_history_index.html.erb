@@ -1,0 +1,31 @@
+<h1>YOUR LEND HISTORY</h1>
+
+
+<p>
+<div>ITEMS YOU HAVE LENT</div>
+<table>
+	<tr>
+		<th>Item</th>
+		<th>Description</th>
+		<th>Lender</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Is Returned?</th>
+	</tr>
+    <% @completed_lend_transactions.each do |transaction|%>
+        <tr>
+            <td><%= transaction.item.name %></td>
+            <td><%= transaction.item.description %></td>
+            <td><%= transaction.lender.username%></td>
+            <td><%= transaction.start_date%></td>
+            <td><%= transaction.end_date%></td>
+            <td><%= transaction.isReturned%></td>
+        </tr>
+    <% end %>
+</table>
+</p>
+
+
+<div>
+<%=link_to 'home', root_path%>
+</div>

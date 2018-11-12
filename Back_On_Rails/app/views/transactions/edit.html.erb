@@ -27,7 +27,8 @@
 </p>
 
 <%=form_for(:transaction, url: transaction_path, method: :put) do |form|%>
-    Start Day: <%=form.date_field :start_date%></br>
-    End Day: <%=form.date_field :end_date%></br>
+    Start Day: <%= form.date_field :start_date %></br>
+    End Day: <%= form.date_field :end_date %></br>
+    <%= form.hidden_field :redirect, value: pending_transactions_path %>
     <%=submit_tag("Edit request to borrow item")%></br>
 <%end%>

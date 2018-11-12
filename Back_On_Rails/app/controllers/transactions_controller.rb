@@ -2,36 +2,41 @@ class TransactionsController < ApplicationController
 
     before_action :set_user
     before_action :set_item, only: [:new, :create]
+    before_action :get_borrow_transactions, only: [:borrow_index, :pending_index, :borrow_history_index]
+    before_action :get_lend_transactions, only: [:lend_index, :pending_index, :lend_history_index]
 
     def index
-        #collection of borrow transactions
-        @borrow_transactions = @user.borrow_transactions
-        #collection of lend transactions
-        @lend_transactions = @user.lend_transactions
     end
 
     def borrow_index
         #collection of borrow transactions
-        @borrow_transactions = @user.borrow_transactions
         @current_borrow_transactions = getCurrentTransactions(@borrow_transactions)
         @future_borrow_transactions = getFutureTransactions(@borrow_transactions)
     end
 
     def lend_index
         #collection of lend transactions
-        @lend_transactions = @user.lend_transactions
         @current_lend_transactions = getCurrentTransactions(@lend_transactions)
         @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def pending_index
         #collection of pending borrow transactions
-        @borrow_transactions = @user.borrow_transactions
         @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
         #collection of pending lend transactions
-        @lend_transactions = @user.lend_transactions
         @pending_lend_transactions = getPendingTransactions(@lend_transactions)
     end
+
+    def borrow_history_index
+        #collection of completed borrow transactions
+        @completed_borrow_transactions = getCompletedTransactions(@borrow_transactions)
+    end
+
+    def lend_history_index
+        #collection of completed lend transactions
+        @completed_lend_transactions = getCompletedTransactions(@lend_transactions)
+    end
+
 
     def new
         @transaction = Transaction.new
@@ -71,7 +76,7 @@ class TransactionsController < ApplicationController
         isSaved = @transaction.save
         if(isSaved)
             flash[:notice] = "You have updated the transaction"
-            redirect_to pending_transactions_path
+            redirect_to params[:transaction][:redirect] #pending_transactions_path
         else
             flash[:alert] = "Invalid Form!"
             render :edit
@@ -102,6 +107,14 @@ class TransactionsController < ApplicationController
 
         def set_item
             @item = Item.find(params[:item_id])
+        end
+
+        def get_borrow_transactions
+            @borrow_transactions = @user.borrow_transactions
+        end
+
+        def get_lend_transactions
+            @lend_transactions = @user.lend_transactions
         end
 
         # Returns a collection of all current transactions that
