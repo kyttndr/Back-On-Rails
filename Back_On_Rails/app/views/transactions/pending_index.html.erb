@@ -46,7 +46,8 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= link_to 'edit', edit_transaction_path(transaction) %></td>
-            <td><%= link_to 'delete', transaction_path(transaction), method: :delete %></td>
+			<% params = {redirect: pending_transactions_path} %>
+			<td><%= link_to 'cancel transaction', transaction_path(transaction, transaction: params), method: :delete %></td>
         </tr>
     <% end %>
 </table>

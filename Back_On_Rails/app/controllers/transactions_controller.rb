@@ -76,7 +76,7 @@ class TransactionsController < ApplicationController
         isSaved = @transaction.save
         if(isSaved)
             flash[:notice] = "You have updated the transaction"
-            redirect_to params[:transaction][:redirect] #pending_transactions_path
+            redirect_to params[:transaction][:redirect]
         else
             flash[:alert] = "Invalid Form!"
             render :edit
@@ -87,7 +87,7 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.find(params[:id])
         @transaction.destroy
         flash[:notice] = "Deleted Transaction"
-        redirect_to pending_transactions_path
+        redirect_to params[:transaction][:redirect]
     end
 
     private
