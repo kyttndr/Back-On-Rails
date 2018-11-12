@@ -1,5 +1,8 @@
 class Transaction < ApplicationRecord
 
+    #mark_rejected used in a skip validation case
+    attr_accessor :mark_rejected
+
     belongs_to :item
 
     #borrower is a fk to user_id
@@ -19,7 +22,7 @@ class Transaction < ApplicationRecord
     #0 - pending     #1 - approved      #2 - rejected
     validates :isApproved, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1,2]}
 
-    validate :validate_transaction_period
+    validate :validate_transaction_period, unless: :mark_rejected
 
     def validate_transaction_period
 

@@ -74,6 +74,13 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.find(params[:id])
         #assign_attributes will only assign to model attributes if it exists in request_params hash
         @transaction.assign_attributes(request_params)
+
+        #SAVE TRANSACTION but dont validate transaction period if just marking
+        #the transaction as rejected...
+        if(params[:transaction][:isApproved]=='2')
+            @transaction.mark_rejected = true
+        end
+
         isSaved = @transaction.save
         if(isSaved)
             flash[:notice] = "You have updated the transaction"
