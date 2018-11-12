@@ -5,6 +5,7 @@ class Item < ApplicationRecord
     belongs_to :user
 
     has_many :transactions, dependent: :destroy
+    has_many :reviews, dependent: :destroy
 
     validates :name, presence: true, length: { minimum: 3}
     validates :description, presence: true, length: { minimum: 10}
