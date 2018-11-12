@@ -7,16 +7,16 @@
 	<tr>
 		<th>Item</th>
 		<th>Description</th>
-		<th>Lender</th>
+		<th>Borrower</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Is Returned?</th>
 	</tr>
     <% @completed_lend_transactions.each do |transaction|%>
         <tr>
-            <td><%= transaction.item.name %></td>
+			<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
             <td><%= transaction.item.description %></td>
-            <td><%= transaction.lender.username%></td>
+			<td><%= link_to "#{transaction.borrower.username}", user_profile_path(transaction.borrower, transaction.borrower.profile) %></td>
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= transaction.isReturned%></td>
