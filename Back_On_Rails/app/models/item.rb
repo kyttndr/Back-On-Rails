@@ -11,14 +11,14 @@ class Item < ApplicationRecord
     validates :description, presence: true, length: { minimum: 10}
 
     #Check if Item instance is currently being borrowed
-    def isBorrowed?
-        borrow_records = self.transactions
-        borrow_records.each do |transaction|
-            if(transaction.isReturned==0 && transaction.isApproved==1)
-                return 1    #Item is currently borrowed
-            end
-        end
-        return 0    #Item is not currently borrowed
-    end
+    #def isBorrowed?
+    #    borrow_records = self.transactions
+    #    borrow_records.each do |transaction|
+    #        if(transaction.isReturned==0 && transaction.isApproved==1)
+    #            return 1    #Item is currently borrowed
+    #        end
+    #    end
+    #    return 0    #Item is not currently borrowed
+    #end
 
 end

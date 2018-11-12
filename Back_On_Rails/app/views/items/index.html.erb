@@ -22,7 +22,7 @@
 				<td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
 			<% end %>
 
-			<% if item.isBorrowed? == 0 && current_user!=item.user%>
+			<% if current_user!=item.user%>
 				<% query_params = {item_id: item.id} %>
 				<td><%= link_to('Request to Borrow', new_transaction_path(query_params))%></td>
 			<% end %>

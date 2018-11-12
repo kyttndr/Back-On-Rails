@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show, :destroy]
   before_action :require_user, except: [:index, :show]
   before_action :require_same_user, only: [:edit, :update, :destroy]
-  
+
   def index
     @items = Item.all
   end
@@ -46,30 +46,30 @@ class ItemsController < ApplicationController
       flash[:notice] = "Deleted"
       redirect_to items_path
   end
-  
+
   private
-  
+
   def allowed_params
     params.require(:item).permit(:name, :description)
   end
-  
+
   def set_item
     @item = Item.find(params[:id])
   end
-  
+
   def require_user
     if !logged_in?
       flash[:danger] = "you need to log in"
       redirect_to items_path
     end
-    
+
   end
-  
+
   def require_same_user
     if current_user != @item.user
       flash[:danger] = "you can only edit or delete your own items"
       redirect_to items_path
     end
   end
-  
+
 end
