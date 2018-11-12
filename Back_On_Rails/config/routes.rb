@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get 'lend_transactions_history', to: 'transactions#lend_history_index'
   resources :transactions
 
-  resources :items
+  resources :items do
+      resources :item_reviews
+  end
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

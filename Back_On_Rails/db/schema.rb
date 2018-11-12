@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_231613) do
+ActiveRecord::Schema.define(version: 2018_11_12_234238) do
+
+  create_table "item_reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_reviews_on_item_id"
+    t.index ["user_id"], name: "index_item_reviews_on_user_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -49,6 +60,17 @@ ActiveRecord::Schema.define(version: 2018_11_12_231613) do
     t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
     t.index ["item_id"], name: "index_transactions_on_item_id"
     t.index ["lender_id"], name: "index_transactions_on_lender_id"
+  end
+
+  create_table "user_reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reviewee_id"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewee_id"], name: "index_user_reviews_on_reviewee_id"
+    t.index ["user_id"], name: "index_user_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
