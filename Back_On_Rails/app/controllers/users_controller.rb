@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
   
   def search
-  
+    @users = User.search(params[:search_param])
   end
 
   # PRIVATE FUNCTIONS

@@ -46,11 +46,11 @@
 						</ul>
 					</li>
 					<li>
-						<%= link_to 'Pending Transactions', pending_transactions_path %>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transaction History<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transactions<span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							<li><%= link_to 'Pending Transactions', pending_transactions_path %></li>
 							<li><%= link_to 'View Borrow History', borrow_transactions_history_path %></li>
 							<li><%= link_to 'View Lend History', lend_transactions_history_path %></li>
 						</ul>

@@ -24,4 +24,25 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX}
   validates :password, presence: true, length: {minimum: 8}
+  
+  def self.search(param)
+    param.strip!
+    param.downcase!
+    to_send_back = (username_matches(param) + email_matches(param)).uniq
+    return nil unless to_send_back
+    to_send_back
+  end
+  
+  def self.username_matches(param)
+    matches('username', param)
+  end
+  
+  def self.email_matches(param)
+    matches('email', param)
+  end
+  
+  def self.matches(field_name, param)
+    User.where("#{field_name} like ?", "%#{param}%")
+  end
+
 end
