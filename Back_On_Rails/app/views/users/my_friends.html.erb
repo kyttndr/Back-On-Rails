@@ -1,1 +1,52 @@
-<h1>My Friends<h1>
+<div class = "container">
+
+
+<h3>Search for Friends</h3>
+<div id="friend-lookup">
+	<%= form_tag search_friends_path, remote: true, method: :get, id: 'friend-lookup-form' do %>
+		<div class="form-group row no-padding text-center col-md-12">
+			<div class="col-md-10">
+				<%= text_field_tag :search_param, params[:search_param], placeholder: "Enter name or email", autofocus: true, class: "form-control search-box input-lg" %>
+			</div>
+			<div class="col-md-1">
+				<%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+					<i class="fa fa-search"></i> Search
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+
+<% if @friendships.size > 0 %>
+	<table class="table table-striped">
+			<thead>
+				<tr>
+					<th colspan="3" class="page-header">
+						<h2>My Friends</h2>
+					</th>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @friendships.each do |friend| %>
+					<tr>
+						<td><%= friend.username %></td>
+						<td><%= friend.email %></td>
+						<td><%= link_to "Remove Friend", friendship_path(friend), method: :delete,
+								data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+	<table>
+<% else %>
+	<div class = "row col-lg-12">
+		<p>You don't have any friends yet!</p>
+	</div>	
+<%end%>
+</div>
