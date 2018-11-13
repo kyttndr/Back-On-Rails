@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :profiles
+    resources :user_reviews
   end
 
   get 'borrow_transactions', to: 'transactions#borrow_index'

@@ -1,0 +1,19 @@
+<h1><%= @item.name%> Reviews</h1>
+
+<p>
+<table>
+    <tr>
+        <th>User</th>
+        <th>Rating(/5)</th>
+        <th>Comment</th>
+    </tr>
+
+    <% @item.item_reviews.each do |review| %>
+        <tr>
+            <td><%= review.user.username %></td>
+            <td><%= review.rating %></td>
+            <td><%= review.comment %></td>
+        </tr>
+    <% end %>
+</table>
+</p>
