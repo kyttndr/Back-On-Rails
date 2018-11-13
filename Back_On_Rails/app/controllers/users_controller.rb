@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     flash[:notice] = "Deleted"
     redirect_to users_path
   end
+  
+  def my_friends
+    
+  end
 
   # PRIVATE FUNCTIONS
   private

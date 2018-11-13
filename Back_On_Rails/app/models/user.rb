@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :items
+  
+  has_many :friendships
+  has_many :friends, through: :friendships
+  
   has_one :profile, dependent: :destroy
 
   #user has_many borrows through the lender fk in borrow model
