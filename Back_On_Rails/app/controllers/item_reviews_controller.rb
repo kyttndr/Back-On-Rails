@@ -37,6 +37,12 @@ class ItemReviewsController < ApplicationController
     def update
         @item_review = ItemReview.find(params[:id])
         @item_review.assign_attributes(request_params)
+
+        #Used to skip duplicate review validation
+        if(params[:item_review][:is_edit]=='1')
+            @item_review.edit_review = true
+        end
+
         isSaved = @item_review.save
         if isSaved
             flash[:notice] = "You have editted your review"
