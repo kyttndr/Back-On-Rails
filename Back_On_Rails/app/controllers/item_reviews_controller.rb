@@ -1,17 +1,16 @@
 class ItemReviewsController < ApplicationController
 
+    before_action :set_user
+    before_action :set_item
+
     def index
-        @item = Item.find(params[:item_id])
     end
 
     def new
         @item_review = ItemReview.new
-        @item = Item.find(params[:item_id])
     end
 
     def create
-        @item = Item.find(params[:item_id])
-
         @item_review = ItemReview.new
         @item_review.user = current_user
         @item_review.item = @item
@@ -32,12 +31,43 @@ class ItemReviewsController < ApplicationController
     end
 
     def edit
+        @item_review = ItemReview.find(params[:id])
     end
 
     def update
+        @item_review = ItemReview.find(params[:id])
+        @item_review.assign_attributes(request_params)
+        isSaved = @item_review.save
+        if isSaved
+            flash[:notice] = "You have editted your review"
+            redirect_to item_item_reviews_path(@item)
+        else
+            flash[:alert] = "Invalid Form!"
+            render :edit
+        end
     end
 
     def destroy
+        @item_review = ItemReview.find(params[:id])
+        @item_review.destroy
+        flash[:notice] = "Deleted Review"
+        redirect_to item_item_reviews_path(@item)
     end
+
+    private
+        def request_params
+            params.require(:item_review).permit(:user,
+                                                :item,
+                                                :rating,
+                                                :comment)
+        end
+
+        def set_user
+            @user = current_user
+        end
+
+        def set_item
+            @item = Item.find(params[:item_id])
+        end
 
 end

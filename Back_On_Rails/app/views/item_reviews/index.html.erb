@@ -13,7 +13,14 @@
             <td><%= review.user.username %></td>
             <td><%= review.rating %></td>
             <td><%= review.comment %></td>
+            <% if review.user == current_user %>
+                <td><%= link_to 'Edit Review', edit_item_item_review_path(@item, review) %></td>
+                <td><%= link_to 'Delete Review', item_item_review_path(@item, review), method: :delete %></td>
+            <% end %>
         </tr>
     <% end %>
 </table>
+
+<%= link_to 'Back to Item Description', item_path(@item) %>
+
 </p>

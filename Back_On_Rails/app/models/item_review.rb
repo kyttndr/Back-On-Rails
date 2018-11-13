@@ -9,4 +9,8 @@ class ItemReview < ApplicationRecord
     validates :item, presence: true
     validates :rating, presence: true, numericality: {only_integer: true}, inclusion: {in: [1,2,3,4,5]}
 
+    # CANNOT CREATE MORE THAN ONE REVIEW
+
+    # CANNOT REVIEW SOMETHING YOU DID NOT BORROW
+
 end
