@@ -12,7 +12,7 @@ class ItemReviewsController < ApplicationController
 
     def create
         @item_review = ItemReview.new
-        @item_review.user = current_user
+        @item_review.user = @user
         @item_review.item = @item
         @item_review.rating = params[:item_review][:rating]
         @item_review.comment = params[:item_review][:comment]

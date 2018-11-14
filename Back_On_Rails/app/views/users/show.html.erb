@@ -9,5 +9,8 @@
 		<p>Email: <%= @user.email %> </p>
 
     <p><%=link_to "View profile", user_profile_path(@user) %></p>
+	<p><%=link_to "View Reviews of this User", user_user_reviews_path(@user) %></p>
+	<p><%=link_to "Review this User", new_user_user_review_path(@user) %></p>
+
 	</body>
 </html>

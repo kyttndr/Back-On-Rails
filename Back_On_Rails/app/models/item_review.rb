@@ -29,7 +29,7 @@ class ItemReview < ApplicationRecord
             end
         end
 
-        errors.add(:item, "has never been borrowed by you before!")
+        errors.add(:base, "This item has never been borrowed by you before!")
         return 0
     end
 
@@ -40,7 +40,7 @@ class ItemReview < ApplicationRecord
 
         all_reviews_by_user.each do |review|
             if review.item == review_item
-                errors.add(:item, "has already been reviewed by you!")
+                errors.add(:base, "You have already reviewed this item!")
                 return 0
             end
         end
