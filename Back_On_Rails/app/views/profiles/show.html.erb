@@ -16,6 +16,9 @@
     <p>DateOfBirth: <%= @profile.date_of_birth %> </p>
 		<p>PhoneNumber: <%= @profile.phone_number %> </p>
 
+    <% if logged_in? && current_user == @user %>
     <p><%=link_to "Edit profile", edit_user_profile_path(@user) %></p>
+  <% end %>
+
 	</body>
 </html>
