@@ -16,7 +16,7 @@
         <tr>
 			<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
             <td><%= transaction.item.description %></td>
-			<td><%= link_to "#{transaction.lender.username}", user_profile_path(transaction.lender, transaction.lender.profile) %></td>
+			<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= transaction.isReturned%></td>
