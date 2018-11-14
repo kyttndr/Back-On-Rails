@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
     if @user.save
       flash[:notice] = "Thank you for signing up!"
+      session[:user_id] = @user.id
       redirect_to new_user_profile_path(@user)
     else
       render 'new'
