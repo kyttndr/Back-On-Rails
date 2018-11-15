@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_03_210205) do
-
-  create_table "borrows", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "isReturned"
-    t.index ["item_id"], name: "index_borrows_on_item_id"
-    t.index ["user_id"], name: "index_borrows_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2018_11_15_004025) do
 
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -31,21 +21,41 @@ ActiveRecord::Schema.define(version: 2018_11_03_210205) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "places", force: :cascade do |t|
+    t.text "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "profile_id"
+    t.integer "user_id"
+    t.index ["profile_id"], name: "index_places_on_profile_id"
+    t.index ["user_id"], name: "index_places_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "username"
     t.string "first_name"
     t.string "last_name"
-    t.integer "street_number"
-    t.string "street_name"
-    t.string "city"
-    t.string "province"
-    t.string "country"
     t.date "date_of_birth"
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "item_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "isReturned"
+    t.integer "lender_id"
+    t.integer "borrower_id"
+    t.integer "isApproved"
+    t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
+    t.index ["item_id"], name: "index_transactions_on_item_id"
+    t.index ["lender_id"], name: "index_transactions_on_lender_id"
   end
 
   create_table "users", force: :cascade do |t|

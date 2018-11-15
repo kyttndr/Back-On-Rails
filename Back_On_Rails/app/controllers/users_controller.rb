@@ -13,7 +13,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Thank you for signing up!"
       redirect_to new_user_profile_path(@user)
     else
-      flash[:alert] = "Invalid Form!"
       render 'new'
     end
   end

@@ -8,14 +8,9 @@
 	<body>
 		<p>FirstName: <%= @profile.first_name %> </p>
     <p>LastName: <%= @profile.last_name %> </p>
-		<p>StreetNumber: <%= @profile.street_number %> </p>
-    <p>StreetName: <%= @profile.street_name %> </p>
-		<p>City: <%= @profile.city %> </p>
-    <p>Province: <%= @profile.province %> </p>
-		<p>Country: <%= @profile.country %> </p>
     <p>DateOfBirth: <%= @profile.date_of_birth %> </p>
 		<p>PhoneNumber: <%= @profile.phone_number %> </p>
 
     <p><%=link_to "Edit profile", edit_user_profile_path(@user) %></p>
 	</body>
-</h
+</html>

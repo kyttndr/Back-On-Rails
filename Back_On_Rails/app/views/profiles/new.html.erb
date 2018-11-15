@@ -21,24 +21,5 @@
     <%= form.phone_field :phone_number %>
   </p>
 
-  <h3>Address:</h3>
-  <p>
-    <%= form.label :street_number %>
-    <%= form.number_field :street_number %>
-
-    <%= form.label :street_name %>
-    <%= form.text_field :street_name %>
-  </p>
-  <p>
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-
-    <%= form.label :province %>
-    <%= form.text_field :province %>
-
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </p>
-
   <%=form.submit "Save" %>
 <% end %>

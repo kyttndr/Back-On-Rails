@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ $navbar-default-bg: black;
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ html, body {
+   height: 100%;
+ }

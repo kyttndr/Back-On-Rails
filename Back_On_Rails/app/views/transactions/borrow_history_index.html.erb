@@ -1,0 +1,31 @@
+<h1>YOUR BORROW HISTORY</h1>
+
+
+<p>
+<div>ITEMS YOU HAVE BORROWED</div>
+<table>
+	<tr>
+		<th>Item</th>
+		<th>Description</th>
+		<th>Owner</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Is Returned?</th>
+	</tr>
+    <% @completed_borrow_transactions.each do |transaction|%>
+        <tr>
+			<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+            <td><%= transaction.item.description %></td>
+			<td><%= link_to "#{transaction.lender.username}", user_profile_path(transaction.lender, transaction.lender.profile) %></td>
+            <td><%= transaction.start_date%></td>
+            <td><%= transaction.end_date%></td>
+            <td><%= transaction.isReturned%></td>
+        </tr>
+    <% end %>
+</table>
+</p>
+
+
+<div>
+<%=link_to 'home', root_path%>
+</div>
