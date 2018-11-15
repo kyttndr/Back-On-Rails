@@ -3,8 +3,10 @@
 <body>
 	<%= @item.description%>
 </body><br/><br/>
-<%= link_to 'back to items', items_path %>
+<%= link_to 'Review this Item', new_item_item_review_path(@item) %></br>
+<%= link_to 'View Item Reviews', item_item_reviews_path(@item) %></br>
 
+<%= link_to 'back to items', items_path %>
 <% if logged_in? && current_user == @item.user %>
 	<%= link_to 'Edit', edit_item_path(@item) %>
 	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>

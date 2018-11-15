@@ -1,0 +1,24 @@
+<h1>Edit your Review</h1>
+
+<% if @item_review.errors.any? %>
+    <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+            <% @item_review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+
+
+<%= form_for(:item_review, url: item_item_review_path(@item, @item_review), method: :put) do |form| %>
+    <% options = [1, 2, 3, 4, 5] %>
+    Rating: <%= form.select :rating, options %> </br>
+    Comment: <%= form.text_field :comment %> </br>
+
+    <%= form.hidden_field :is_edit, value: '1' %>
+
+    <%= submit_tag("Submit Review") %></br>
+<% end %>

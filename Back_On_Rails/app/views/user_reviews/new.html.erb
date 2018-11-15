@@ -1,0 +1,22 @@
+<h1>Write a Review</h1>
+
+<% if @user_review.errors.any? %>
+    <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+            <% @user_review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+
+
+<%= form_for(:user_review, url: user_user_reviews_path(@reviewee), method: :post) do |form| %>
+    <% options = [1, 2, 3, 4, 5] %>
+    Rating: <%= form.select :rating, options %> </br>
+    Comment: <%= form.text_field :comment %> </br>
+
+    <%= submit_tag("Submit Review") %></br>
+<% end %>

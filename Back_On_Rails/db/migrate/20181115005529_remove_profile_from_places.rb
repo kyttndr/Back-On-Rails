@@ -1,5 +1,5 @@
 class RemoveProfileFromPlaces < ActiveRecord::Migration[5.2]
   def change
-    remove_column :places, :profile, :ferences
+    remove_reference :places, :profile, foreign_key: true
   end
 end

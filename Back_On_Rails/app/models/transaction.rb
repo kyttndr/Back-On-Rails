@@ -49,21 +49,21 @@ class Transaction < ApplicationRecord
                 # Check [..(..]...) type period overlap
                 if(self.start_date >= transaction.start_date &&
                     self.start_date <= transaction.end_date)
-                    errors.add(:start_date, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
 
                 # Check (...[.)..] type period overlap
                 if(self.end_date <= transaction.end_date &&
                     self.end_date >= transaction.start_date)
-                    errors.add(:end_date, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
 
                 # Check (...[...]...) type period overlap
                 if(self.start_date < transaction.start_date &&
                     self.end_date > transaction.end_date)
-                    errors.add(:period, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
             end

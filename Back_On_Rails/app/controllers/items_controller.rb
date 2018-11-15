@@ -9,13 +9,11 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    #user in item will be implemented correctly when session is implemented
     @item.user = current_user
   end
 
   def create
     @item = Item.new(allowed_params)
-    #user in item will be implemented correctly when session is implemented
     @item.user = current_user
     if @item.save
       flash[:notice] = "Thank you for register!"
