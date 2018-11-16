@@ -77,3 +77,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # For User Authentication Peiyuan Sun 2018.10.09
 gem 'bcrypt'
+
+gem 'notifications'
