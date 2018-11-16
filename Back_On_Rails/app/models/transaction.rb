@@ -48,7 +48,7 @@ class Transaction < ApplicationRecord
         transaction_item = self.item
         all_transactions_for_item = transaction_item.transactions
         all_transactions_for_item.each do |transaction|
-            if(transaction.isApproved == 1)
+            if(transaction.isApproved == 1 && transaction.isReturned == 0)
                 # Check [..(..]...) type period overlap
                 if(self.start_date >= transaction.start_date &&
                     self.start_date <= transaction.end_date)
@@ -77,10 +77,10 @@ class Transaction < ApplicationRecord
     def create_request_notifications
         Notification.create do |notification|
             notification.notify_type = 'transaction'
+            notification.tag = 'request'
             notification.actor = self.borrower
             notification.user = self.lender
             notification.target = self
-            notification.second_target_type = 'request'
             notification.second_target = self.item
         end
     end
@@ -88,10 +88,10 @@ class Transaction < ApplicationRecord
     def create_status_notifications
         Notification.create do |notification|
             notification.notify_type = 'transaction'
+            notification.tag = 'update'
             notification.actor = self.lender
             notification.user = self.borrower
             notification.target = self
-            notification.second_target_type = 'update_request'
             notification.second_target = self.item
         end
     end
