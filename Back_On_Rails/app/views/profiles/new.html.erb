@@ -21,5 +21,10 @@
     <%= form.phone_field :phone_number %>
   </p>
 
+  <p>
+    <%= form.label :profile_picture %>
+    <%= form.file_field :profile_picture %>
+  </p>
+
   <%=form.submit "Save" %>
 <% end %>
