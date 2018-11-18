@@ -19,6 +19,15 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+
+.results-block {
+	display: inline-block;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
  html, body {
    height: 100%;
  }
