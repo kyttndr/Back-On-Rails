@@ -1,29 +1,62 @@
-<%= form_with model: [@user, @user.profile], local: true do |form| %>
-  <p>
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </p>
 
-  <p>
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </p>
+<div class = "container">
+  <%= form_with model: [@user, @user.profile], :html => {class:"form-horizontal", role: "form"}, local: true do |form| %>
 
-  <p>
-    <%= form.label :date_of_birth %>
-    <%= form.date_field :date_of_birth %>
-  </p>
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
 
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :first_name %>
+          </div>
+          <div class = "col-sm-3">
+            <%= form.text_field :first_name, class:"form-control" %>
+          </div>
+          <div class = "control-label col-sm-2">
+            <%= form.label :last_name %>
+          </div>
+          <div class = "col-sm-3">
+            <%= form.text_field :last_name, class:"form-control" %>
+          </div>
+        </div>
 
-  <p>
-    <%= form.label :phone_number %>
-    <%= form.phone_field :phone_number %>
-  </p>
+        <br/>
 
-  <p>
-    <%= form.label :profile_picture %>
-    <%= form.file_field :profile_picture %>
-  </p>
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :date_of_birth %>
+          </div>
+          <div class = "col-sm-3">
+            <%= form.date_field :date_of_birth, class:"form-control" %>
+          </div>
+          <div class = "control-label col-sm-2">
+            <%= form.label :phone_number %>
+          </div>
+          <div class = "col-sm-3">
+            <%= form.phone_field :phone_number, class:"form-control" %>
+          </div>
+        </div>
 
-<%=form.submit "Save" %>
-<% end %>
+        <br/>
+
+        <div class = "form-group">
+          <div class = "control-label col-sm-2">
+            <%= form.label :profile_picture %>
+          </div>
+          <div class = "col-sm-5">
+            <%= form.file_field :profile_picture, class:"form-control" %>
+          </div>
+        </div>
+
+        <br/>
+
+        <div class = "form-group">
+          <div class = "col-sm-offset-2 col-sm-10">
+            <%= form.submit "Save", class: 'btn btn-primary btn-lg'%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
