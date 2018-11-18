@@ -21,8 +21,10 @@
   </p>
 
   <p>
+    <%= image_tag(@profile.profile_picture_url) if @profile.profile_picture? %>
     <%= form.label :profile_picture %>
     <%= form.file_field :profile_picture %>
+    <%= form.hidden_field :profile_picture_cache %>
   </p>
 
 <%=form.submit "Save" %>
