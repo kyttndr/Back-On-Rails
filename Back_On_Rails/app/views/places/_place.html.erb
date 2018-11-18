@@ -1,0 +1,4 @@
+<li>
+  <%= link_to place.address, place_path(place) %>
+  <%= link_to 'Delete', place_path(place), method: :delete, data: {confirm: "Are you sure?"} %>
+</li>

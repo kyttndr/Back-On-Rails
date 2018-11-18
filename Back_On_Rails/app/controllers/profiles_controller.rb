@@ -1,26 +1,24 @@
 class ProfilesController < ApplicationController
+  before_action :set_user, only: [:new, :create, :edit, :update, :show]
+  before_action :require_same_user, only: [:edit, :update]
+
   def new
-    @user = User.find(params[:user_id])
     @profile = @user.create_profile
   end
 
   def create
-    @user = User.find(params[:user_id])
     @profile = @user.profile.create(profile_params)
   end
 
   def show
-    @user = User.find(params[:user_id])
     @profile = @user.profile
   end
 
   def edit
-    @user = User.find(params[:user_id])
     @profile = @user.profile
   end
 
   def update
-    @user = User.find(params[:user_id])
     if @user.profile.update(profile_params)
       redirect_to @user
     else
@@ -31,7 +29,18 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :phone_number, :date_of_birth,
-                                    :street_number, :street_name, :city, :province, :country)
+    params.require(:profile).permit(:first_name, :last_name, :phone_number, :date_of_birth, :profile_picture)
   end
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:danger] = "you can only edit or delete your own profile"
+      redirect_to users_path
+    end
+  end
+
 end

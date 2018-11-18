@@ -1,0 +1,26 @@
+<h1><%= @reviewee.username %> Reviews</h1>
+
+<p>
+<table>
+    <tr>
+        <th>Reviewer</th>
+        <th>Rating(/5)</th>
+        <th>Comment</th>
+    </tr>
+
+    <% @reviewee.reviews_of_self.each do |review| %>
+        <tr>
+            <td><%= review.user.username %></td>
+            <td><%= review.rating %></td>
+            <td><%= review.comment %></td>
+            <% if review.user == current_user %>
+                <td><%= link_to 'Edit Review', edit_user_user_review_path(@reviewee, review) %></td>
+                <td><%= link_to 'Delete Review', user_user_review_path(@reviewee, review), method: :delete %></td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+
+<%= link_to 'Back to User', user_path(@reviewee) %>
+
+</p>

@@ -21,8 +21,11 @@ class Transaction < ApplicationRecord
 
     #0 - pending     #1 - approved      #2 - rejected
     validates :isApproved, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1,2]}
-
     validate :validate_transaction_period, unless: :mark_rejected
+
+
+    after_commit :create_request_notifications, on: [:create]
+    after_commit :create_status_notifications, on: [:update]
 
     def validate_transaction_period
 
@@ -45,30 +48,52 @@ class Transaction < ApplicationRecord
         transaction_item = self.item
         all_transactions_for_item = transaction_item.transactions
         all_transactions_for_item.each do |transaction|
-            if(transaction.isApproved == 1)
+            if(transaction.isApproved == 1 && transaction.isReturned == 0)
                 # Check [..(..]...) type period overlap
                 if(self.start_date >= transaction.start_date &&
                     self.start_date <= transaction.end_date)
-                    errors.add(:start_date, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
 
                 # Check (...[.)..] type period overlap
                 if(self.end_date <= transaction.end_date &&
                     self.end_date >= transaction.start_date)
-                    errors.add(:end_date, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
 
                 # Check (...[...]...) type period overlap
                 if(self.start_date < transaction.start_date &&
                     self.end_date > transaction.end_date)
-                    errors.add(:period, "is unavailable")
+                    errors.add(:base, "Your selected borrow period is unavailable")
                     return 0
                 end
             end
         end
         return 1
+    end
+
+    def create_request_notifications
+        Notification.create do |notification|
+            notification.notify_type = 'transaction'
+            notification.tag = 'request'
+            notification.actor = self.borrower
+            notification.user = self.lender
+            notification.target = self
+            notification.second_target = self.item
+        end
+    end
+
+    def create_status_notifications
+        Notification.create do |notification|
+            notification.notify_type = 'transaction'
+            notification.tag = 'update'
+            notification.actor = self.lender
+            notification.user = self.borrower
+            notification.target = self
+            notification.second_target = self.item
+        end
     end
 
 end

@@ -1,0 +1,10 @@
+<%= form_for @place do |f| %>
+
+  <fieldset class="form-group">
+    <%= f.label :address, 'Address' %>
+    <%= f.text_field :address, class: "form-control" %>
+    <small class="text-muted">You can also enter IP. Your IP is <%= request.ip %></small>
+  </fieldset>
+
+  <%= f.submit 'Add!', class: 'btn btn-primary' %>
+<% end %>

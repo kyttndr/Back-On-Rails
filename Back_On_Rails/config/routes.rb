@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Notifications::Engine => "/notifications"
   get 'welcome/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
   get 'my_friends', to: 'users#my_friends'
   get 'search_friends', to: 'users#search'
   
+
+  resources :places #except: [:update, :edit, :destroy]
 
   root "welcome#index"
 

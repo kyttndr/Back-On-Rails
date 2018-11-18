@@ -1,0 +1,10 @@
+<header><h1 class="display-4"><%= @place.address %></h1></header>
+
+<p>Address: <%= @place.address %></p>
+<p>Coordinates: <%= @place.latitude %> <%= @place.longitude %></p>
+<p><%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: "Are you sure?"} %></p>
+
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@place.latitude},#{@place.longitude}&markers=#{@place.latitude},#{@place.longitude}&zoom=13&size=640x400&key=AIzaSyDw0kMkVGzNTppK2U4lsn_65sakVTCR1Mc",
+              class: 'img-fluid img-rounded', alt: "#{@place.address} on the map"%>
+
+<p><%=link_to "Place Index", places_path %></p>

@@ -1,0 +1,15 @@
+<div class="media-heading">
+    <% if notification.tag == 'request' %>
+        <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
+        has requested to borrow your item:
+        <%= link_to notification.second_target.name, main_app.item_path(notification.second_target) %>
+    <% elsif notification.tag == 'update' %>
+        <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
+        <% if notification.target.isApproved == 1 %>
+            has accepted your request to borrow their item:
+        <% elsif notification.target.isApproved == 2 %>
+            has rejected your request to borrow their item:
+        <% end %>
+        <%= link_to notification.second_target.name, main_app.item_path(notification.second_target) %>
+    <% end %>
+</div>
