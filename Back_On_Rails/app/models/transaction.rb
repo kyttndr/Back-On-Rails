@@ -2,6 +2,7 @@ class Transaction < ApplicationRecord
 
     #mark_rejected used in a skip validation case
     attr_accessor :skip_period_validation
+    attr_accessor :skip_notification
 
     belongs_to :item
 
@@ -25,7 +26,7 @@ class Transaction < ApplicationRecord
 
 
     after_commit :create_request_notifications, on: [:create]
-    after_commit :create_status_notifications, on: [:update]
+    after_commit :create_status_notifications, on: [:update], unless: :skip_notification
 
     def validate_transaction_period
 

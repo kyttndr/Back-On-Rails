@@ -75,14 +75,18 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.find(params[:id])
         #assign_attributes will only assign to model attributes if it exists in request_params hash
         @transaction.assign_attributes(request_params)
+        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
+        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
 
         # SKIP PERIOD VALIDATIONS on rejecting transaction and marking item returned
         if(params[:transaction][:isApproved]=='2' ||
             params[:transaction][:isReturned]=='1')
             @transaction.skip_period_validation = true
         end
-        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
+        # SKIP SEND NOTIFICATION on updating requested transaction period
+        if(params[:transaction][:send_notification]=='0')
+            @transaction.skip_notification = true
+        end
 
         isSaved = @transaction.save
         if(isSaved)
