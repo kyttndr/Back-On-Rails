@@ -1,9 +1,10 @@
 class TransactionsController < ApplicationController
 
     before_action :set_user
-    before_action :set_item, only: [:new, :create]
-    before_action :get_borrow_transactions, only: [:borrow_index, :pending_index, :borrow_history_index]
-    before_action :get_lend_transactions, only: [:lend_index, :pending_index, :lend_history_index]
+    before_action :set_item, only: [:new, :create, :edit, :update]
+    before_action :get_borrow_transactions, only: [:borrow_index, :pending_index, :borrow_history_index, :update]
+    before_action :get_lend_transactions, only: [:lend_index, :pending_index, :lend_history_index, :update]
+    before_action :get_ongoing_item_transactions, only: [:new, :create, :edit, :update]
 
     def index
     end
@@ -75,11 +76,13 @@ class TransactionsController < ApplicationController
         #assign_attributes will only assign to model attributes if it exists in request_params hash
         @transaction.assign_attributes(request_params)
 
-        #SAVE TRANSACTION but dont validate transaction period if just marking
-        #the transaction as rejected...
-        if(params[:transaction][:isApproved]=='2')
-            @transaction.mark_rejected = true
+        # SKIP PERIOD VALIDATIONS on rejecting transaction and marking item returned
+        if(params[:transaction][:isApproved]=='2' ||
+            params[:transaction][:isReturned]=='1')
+            @transaction.skip_period_validation = true
         end
+        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
+        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
 
         isSaved = @transaction.save
         if(isSaved)
@@ -87,15 +90,7 @@ class TransactionsController < ApplicationController
             redirect_to params[:transaction][:redirect]
         else
             flash[:alert] = "Invalid Form!"
-            if params[:transaction][:render] == 'pending_index'
-                get_borrow_transactions
-                get_lend_transactions
-                @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-                @pending_lend_transactions = getPendingTransactions(@lend_transactions)
-            end
             render params[:transaction][:render]
-            #prev = Rails.application.routes.recognize_path(request.referrer)
-            #render prev[:action]
         end
     end
 
@@ -131,6 +126,11 @@ class TransactionsController < ApplicationController
 
         def get_lend_transactions
             @lend_transactions = @user.lend_transactions
+        end
+
+        def get_ongoing_item_transactions
+            @item_transactions = @item.transactions
+            @ongoing_item_transactions = getOngoingTransactions(@item_transactions)
         end
 
         # Returns a collection of all current transactions that
@@ -183,6 +183,19 @@ class TransactionsController < ApplicationController
                 end
             end
             return pending_transactions
+        end
+
+        # Returns a collection of all transactions that
+        # 1) is approved
+        # 2) is not returned
+        def getOngoingTransactions(transactions)
+            ongoing_transactions = Array.new
+            transactions.each do |transaction|
+                if(transaction.isApproved==1 && transaction.isReturned==0)
+                    ongoing_transactions << transaction
+                end
+            end
+            return ongoing_transactions
         end
 
 end

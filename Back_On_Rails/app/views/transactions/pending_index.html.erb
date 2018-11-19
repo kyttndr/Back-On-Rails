@@ -31,8 +31,8 @@
 
 			<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: :pending_index} %>
 			<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: :pending_index} %>
-            <td><%= link_to 'accept', transaction_path(transaction, transaction: params_approved), method: :put %></td>
-            <td><%= link_to 'reject', transaction_path(transaction, transaction: params_rejected), method: :put %></td>
+            <td><%= link_to 'accept', transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put %></td>
+            <td><%= link_to 'reject', transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put %></td>
         </tr>
     <% end %>
 </table>
@@ -56,7 +56,8 @@
 			<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
-            <td><%= link_to 'edit', edit_transaction_path(transaction) %></td>
+            <% query_params = {item_id: transaction.item} %>
+            <td><%= link_to 'edit', edit_transaction_path(transaction, query_params) %></td>
 			<% params = {redirect: pending_transactions_path} %>
 			<td><%= link_to 'cancel transaction', transaction_path(transaction, transaction: params), method: :delete %></td>
         </tr>

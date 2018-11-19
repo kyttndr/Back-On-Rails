@@ -26,10 +26,24 @@
 </table>
 </p>
 
-<%=form_for(:transaction, url: transaction_path, method: :put) do |form|%>
+<% query_params = {item_id: @item.id} %>
+<%=form_for(:transaction, url: transaction_path(query_params), method: :put) do |form|%>
     Start Day: <%= form.date_field :start_date %></br>
     End Day: <%= form.date_field :end_date %></br>
     <%= form.hidden_field :redirect, value: pending_transactions_path %>
     <%= form.hidden_field :render, value: :edit %>
     <%=submit_tag("Edit request to borrow item")%></br>
 <%end%>
+
+<p>
+    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
+        <%= date.day %>
+
+        <% transactions.each do |transaction| %>
+            <div>
+                <%= transaction.borrower.username %>
+            </div>
+        <% end %>
+
+    <% end %>
+</p>

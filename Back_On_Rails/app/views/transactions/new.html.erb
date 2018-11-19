@@ -32,3 +32,16 @@
     End Day: <%= form.date_field :end_date %></br>
     <%= submit_tag("Request to borrow item") %></br>
 <%end%>
+
+<p>
+    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
+        <%= date.day %>
+
+        <% transactions.each do |transaction| %>
+            <div>
+                <%= transaction.borrower.username %>
+            </div>
+        <% end %>
+
+    <% end %>
+</p>
