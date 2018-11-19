@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:item).permit(:name, :description)
+    params.require(:item).permit(:name, :description, {item_pictures: []})
   end
 
   def set_item

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_215153) do
+ActiveRecord::Schema.define(version: 2018_11_19_021237) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2018_11_17_215153) do
     t.integer "user_id"
     t.string "name"
     t.string "description"
+    t.string "item_pictures"
   end
 
   create_table "notifications", force: :cascade do |t|

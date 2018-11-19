@@ -20,6 +20,9 @@
 	<%= form.label :description %>
 	<%= form.text_area :description%><br/>
 
+  <%= form.label :item_pictures %>
+  <%= form.file_field :item_pictures, multiple: true %>
+
 	<%= form.submit "Register" %>
 	
 	<%= link_to 'back to items', items_path %>
