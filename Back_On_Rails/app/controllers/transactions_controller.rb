@@ -101,6 +101,62 @@ class TransactionsController < ApplicationController
         redirect_to params[:transaction][:redirect]
     end
 
+# HELPER METHODS ---------------------------------------------------------------
+
+    # Returns a collection of all current transactions that
+    # 1) is approved
+    # 2) is not returned
+    def getCurrentTransactions(transactions)
+        current_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 && transaction.isReturned==0 &&
+                Date.current >= transaction.start_date)
+                current_transactions << transaction
+            end
+        end
+        return current_transactions
+    end
+
+    # Returns a collection of all future transactions that
+    # 1) is approved
+    def getFutureTransactions(transactions)
+        future_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 &&
+                Date.current < transaction.start_date)
+                future_transactions << transaction
+            end
+        end
+        return future_transactions
+    end
+
+    # Returns a collection of all transactions that
+    # 1) is approved
+    # 2) is returned
+    def getCompletedTransactions(transactions)
+        completed_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 && transaction.isReturned==1)
+                completed_transactions << transaction
+            end
+        end
+        return completed_transactions
+    end
+
+    # Returns a collection of all transactions that
+    # 1) is not approved
+    def getPendingTransactions(transactions)
+        pending_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==0)
+                pending_transactions << transaction
+            end
+        end
+        return pending_transactions
+    end
+
+# PRIVATE METHODS ---------------------------------------------------------------
+
     private
         def request_params
             params.require(:transaction).permit(:borrower,
@@ -129,73 +185,7 @@ class TransactionsController < ApplicationController
         end
 
         def get_ongoing_item_transactions
-            @item_transactions = @item.transactions
-            @ongoing_item_transactions = getOngoingTransactions(@item_transactions)
-        end
-
-        # Returns a collection of all current transactions that
-        # 1) is approved
-        # 2) is not returned
-        def getCurrentTransactions(transactions)
-            current_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 && transaction.isReturned==0 &&
-                    Date.current >= transaction.start_date)
-                    current_transactions << transaction
-                end
-            end
-            return current_transactions
-        end
-
-        # Returns a collection of all future transactions that
-        # 1) is approved
-        def getFutureTransactions(transactions)
-            future_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 &&
-                    Date.current < transaction.start_date)
-                    future_transactions << transaction
-                end
-            end
-            return future_transactions
-        end
-
-        # Returns a collection of all transactions that
-        # 1) is approved
-        # 2) is returned
-        def getCompletedTransactions(transactions)
-            completed_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 && transaction.isReturned==1)
-                    completed_transactions << transaction
-                end
-            end
-            return completed_transactions
-        end
-
-        # Returns a collection of all transactions that
-        # 1) is not approved
-        def getPendingTransactions(transactions)
-            pending_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==0)
-                    pending_transactions << transaction
-                end
-            end
-            return pending_transactions
-        end
-
-        # Returns a collection of all transactions that
-        # 1) is approved
-        # 2) is not returned
-        def getOngoingTransactions(transactions)
-            ongoing_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 && transaction.isReturned==0)
-                    ongoing_transactions << transaction
-                end
-            end
-            return ongoing_transactions
+            @ongoing_item_transactions = @item.get_ongoing_transactions
         end
 
 end

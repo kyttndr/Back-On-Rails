@@ -11,3 +11,17 @@
 	<%= link_to 'Edit', edit_item_path(@item) %>
 	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
+
+<p>
+	<div>ITEM SCHEDULE</div>
+    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
+        <%= date.day %>
+
+        <% transactions.each do |transaction| %>
+            <div>
+                <%= transaction.borrower.username %>
+            </div>
+        <% end %>
+
+    <% end %>
+</p>

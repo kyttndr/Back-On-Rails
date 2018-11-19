@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+      @ongoing_item_transactions = @item.get_ongoing_transactions
   end
 
   def edit
