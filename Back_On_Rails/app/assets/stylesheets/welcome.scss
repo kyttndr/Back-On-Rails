@@ -4,9 +4,6 @@
 
 $navbar-default-bg: black;
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
 #logo{
 	float: left;
 	font-size: 1.7em;
@@ -20,9 +17,9 @@ $navbar-default-bg: black;
 }
 
 .jumbotron{
-	
+
 	height: 550px;
-	
+
 }
 
 .jumbotron h1{
