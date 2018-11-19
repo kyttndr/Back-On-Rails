@@ -1,25 +1,19 @@
-<% if params[:action] == 'search' %>
-	<div class="results-block" align = "center">
-		 <%= bootstrap_flash %>
-	</div>
-<% end %>
 
 <% if @users %>
   <div id="friend-lookup-results" class="well results-block col-md-10">
     <table class="search-results-table col-md-12">
-      <tbody>
+      <tboy>
         <% @users.each do |user| %>
           <tr>
             <td><strong>Name:</strong> <%= user.username %></td>
             <td><strong>Email:</strong> <%= user.email %></td>
             <td><strong>Action:</strong> 
               <% if current_user.not_friends_with?(user.id) %>
-                <%= link_to "Add as Friend", add_friend_path(user: current_user, friend: user),
-                 class: "btn btn-xs btn-success", method: :post %>
+                <%= link_to "Add as Friend", add_friend_path(user: current_user, friend: user), class: "btn btn-xs btn-success", method: :post %>
               <% else %>
-                <button class = "btn btn-xs btn-warning">
+                <span class = "label label-primary">
                   Already Added
-                </button>
+                </span>
               <% end %>
             </td>
           </tr>
