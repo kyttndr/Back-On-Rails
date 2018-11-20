@@ -2,9 +2,12 @@
 
   <fieldset class="form-group">
     <%= f.label :address, 'Address' %>
+    <div style="display: flex;">
     <%= f.text_field :address, class: "form-control" %>
-    <small class="text-muted">You can also enter IP. Your IP is <%= request.ip %></small>
+    <%= f.submit 'Add!', class: 'btn btn-primary submit_button' %>
+    </div>
+    <small class="text-muted">You can find your location in the map below. You can also enter IP. Your IP is <%= request.ip %></small>
   </fieldset>
 
-  <%= f.submit 'Add!', class: 'btn btn-primary' %>
+  <div id="form_map"></div>
 <% end %>

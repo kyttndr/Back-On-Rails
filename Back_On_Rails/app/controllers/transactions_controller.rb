@@ -1,40 +1,38 @@
 class TransactionsController < ApplicationController
 
     before_action :set_user
-    before_action :set_item, only: [:new, :create]
-    before_action :get_borrow_transactions, only: [:borrow_index, :pending_index, :borrow_history_index]
-    before_action :get_lend_transactions, only: [:lend_index, :pending_index, :lend_history_index]
+    before_action :set_item, only: [:new, :create, :edit, :update]
+    before_action :get_borrow_transactions, only: [:borrow_index, :pending_index, :borrow_history_index, :update]
+    before_action :get_lend_transactions, only: [:lend_index, :pending_index, :lend_history_index, :update]
+    before_action :get_ongoing_item_transactions, only: [:new, :create, :edit, :update]
 
     def index
     end
 
     def borrow_index
-        #collection of borrow transactions
         @current_borrow_transactions = getCurrentTransactions(@borrow_transactions)
         @future_borrow_transactions = getFutureTransactions(@borrow_transactions)
     end
 
     def lend_index
-        #collection of lend transactions
         @current_lend_transactions = getCurrentTransactions(@lend_transactions)
         @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def pending_index
         @transaction = Transaction.new
-        #collection of pending borrow transactions
         @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-        #collection of pending lend transactions
         @pending_lend_transactions = getPendingTransactions(@lend_transactions)
+        # get current and future lend transactions for the calendar
+        @current_lend_transactions = getCurrentTransactions(@lend_transactions)
+        @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def borrow_history_index
-        #collection of completed borrow transactions
         @completed_borrow_transactions = getCompletedTransactions(@borrow_transactions)
     end
 
     def lend_history_index
-        #collection of completed lend transactions
         @completed_lend_transactions = getCompletedTransactions(@lend_transactions)
     end
 
@@ -57,8 +55,8 @@ class TransactionsController < ApplicationController
             flash[:notice] = "You have requested to borrow the item"
             redirect_to items_path
         else
-            flash[:alert] = "Invalid Form!"
-            render :new
+            flash[:errors] = @transaction.errors.full_messages
+            redirect_to new_transaction_path(@transaction, item_id: @item)
         end
     end
 
@@ -74,11 +72,17 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.find(params[:id])
         #assign_attributes will only assign to model attributes if it exists in request_params hash
         @transaction.assign_attributes(request_params)
+        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
+        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
 
-        #SAVE TRANSACTION but dont validate transaction period if just marking
-        #the transaction as rejected...
-        if(params[:transaction][:isApproved]=='2')
-            @transaction.mark_rejected = true
+        # SKIP PERIOD VALIDATIONS on rejecting transaction and marking item returned
+        if(params[:transaction][:isApproved]=='2' ||
+            params[:transaction][:isReturned]=='1')
+            @transaction.skip_period_validation = true
+        end
+        # SKIP SEND NOTIFICATION on updating requested transaction period or marking returned
+        if(params[:transaction][:send_notification]=='0')
+            @transaction.skip_notification = true
         end
 
         isSaved = @transaction.save
@@ -86,16 +90,8 @@ class TransactionsController < ApplicationController
             flash[:notice] = "You have updated the transaction"
             redirect_to params[:transaction][:redirect]
         else
-            flash[:alert] = "Invalid Form!"
-            if params[:transaction][:render] == 'pending_index'
-                get_borrow_transactions
-                get_lend_transactions
-                @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-                @pending_lend_transactions = getPendingTransactions(@lend_transactions)
-            end
-            render params[:transaction][:render]
-            #prev = Rails.application.routes.recognize_path(request.referrer)
-            #render prev[:action]
+            flash[:errors] = @transaction.errors.full_messages
+            redirect_to params[:transaction][:render]
         end
     end
 
@@ -105,6 +101,62 @@ class TransactionsController < ApplicationController
         flash[:notice] = "Deleted Transaction"
         redirect_to params[:transaction][:redirect]
     end
+
+# HELPER METHODS ---------------------------------------------------------------
+
+    # Returns a collection of all current transactions that
+    # 1) is approved
+    # 2) is not returned
+    def getCurrentTransactions(transactions)
+        current_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 && transaction.isReturned==0 &&
+                Date.current >= transaction.start_date)
+                current_transactions << transaction
+            end
+        end
+        return current_transactions
+    end
+
+    # Returns a collection of all future transactions that
+    # 1) is approved
+    def getFutureTransactions(transactions)
+        future_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 &&
+                Date.current < transaction.start_date)
+                future_transactions << transaction
+            end
+        end
+        return future_transactions
+    end
+
+    # Returns a collection of all transactions that
+    # 1) is approved
+    # 2) is returned
+    def getCompletedTransactions(transactions)
+        completed_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==1 && transaction.isReturned==1)
+                completed_transactions << transaction
+            end
+        end
+        return completed_transactions
+    end
+
+    # Returns a collection of all transactions that
+    # 1) is not approved
+    def getPendingTransactions(transactions)
+        pending_transactions = Array.new
+        transactions.each do |transaction|
+            if(transaction.isApproved==0)
+                pending_transactions << transaction
+            end
+        end
+        return pending_transactions
+    end
+
+# PRIVATE METHODS ---------------------------------------------------------------
 
     private
         def request_params
@@ -133,56 +185,8 @@ class TransactionsController < ApplicationController
             @lend_transactions = @user.lend_transactions
         end
 
-        # Returns a collection of all current transactions that
-        # 1) is approved
-        # 2) is not returned
-        def getCurrentTransactions(transactions)
-            current_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 && transaction.isReturned==0 &&
-                    Date.current >= transaction.start_date)
-                    current_transactions << transaction
-                end
-            end
-            return current_transactions
-        end
-
-        # Returns a collection of all future transactions that
-        # 1) is approved
-        def getFutureTransactions(transactions)
-            future_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 &&
-                    Date.current < transaction.start_date)
-                    future_transactions << transaction
-                end
-            end
-            return future_transactions
-        end
-
-        # Returns a collection of all transactions that
-        # 1) is approved
-        # 2) is returned
-        def getCompletedTransactions(transactions)
-            completed_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==1 && transaction.isReturned==1)
-                    completed_transactions << transaction
-                end
-            end
-            return completed_transactions
-        end
-
-        # Returns a collection of all transactions that
-        # 1) is not approved
-        def getPendingTransactions(transactions)
-            pending_transactions = Array.new
-            transactions.each do |transaction|
-                if(transaction.isApproved==0)
-                    pending_transactions << transaction
-                end
-            end
-            return pending_transactions
+        def get_ongoing_item_transactions
+            @ongoing_item_transactions = @item.get_ongoing_transactions
         end
 
 end

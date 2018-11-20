@@ -20,4 +20,15 @@ class Item < ApplicationRecord
         end
     end
 
+    def get_ongoing_transactions
+        item_transactions = self.transactions
+        ongoing_transactions = Array.new
+        item_transactions.each do |transaction|
+            if(transaction.isApproved==1 && transaction.isReturned==0)
+                ongoing_transactions << transaction
+            end
+        end
+        return ongoing_transactions
+    end
+
 end

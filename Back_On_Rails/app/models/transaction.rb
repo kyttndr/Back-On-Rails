@@ -1,7 +1,8 @@
 class Transaction < ApplicationRecord
 
     #mark_rejected used in a skip validation case
-    attr_accessor :mark_rejected
+    attr_accessor :skip_period_validation
+    attr_accessor :skip_notification
 
     belongs_to :item
 
@@ -21,11 +22,11 @@ class Transaction < ApplicationRecord
 
     #0 - pending     #1 - approved      #2 - rejected
     validates :isApproved, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1,2]}
-    validate :validate_transaction_period, unless: :mark_rejected
+    validate :validate_transaction_period, unless: :skip_period_validation
 
 
     after_commit :create_request_notifications, on: [:create]
-    after_commit :create_status_notifications, on: [:update]
+    after_commit :create_status_notifications, on: [:update], unless: :skip_notification
 
     def validate_transaction_period
 
@@ -86,6 +87,7 @@ class Transaction < ApplicationRecord
     end
 
     def create_status_notifications
+        # TODO do not send notification on some updates. ex. self-edits
         Notification.create do |notification|
             notification.notify_type = 'transaction'
             notification.tag = 'update'

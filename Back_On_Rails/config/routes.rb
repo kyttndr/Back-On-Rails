@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       resources :item_reviews
   end
 
+  #item search
+  get 'search_items', to: 'items#search'
+
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'

@@ -40,12 +40,16 @@
 
         <div class = "form-group">
           <div class = "control-label col-sm-2">
-          	<%= image_tag(@profile.profile_picture_url) if @profile.profile_picture? %>
             <%= form.label :profile_picture %>
           </div>
           <div class = "col-sm-5">
-            <%= form.file_field :profile_picture, class:"form-control" %>
+            <%= form.file_field :profile_picture, class:"form-control photo_upload" %>
             <%= form.hidden_field :profile_picture_cache %>
+          </div>
+          <br/>
+          <div class="col-sm-5">
+            <%= image_tag(@profile.profile_picture_url, class: 'current_pic profile_picture') if @profile.profile_picture? %>
+            <%= image_tag '', class: 'hidden image_to_upload profile_picture' %>
           </div>
         </div>
 

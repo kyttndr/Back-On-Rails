@@ -17,5 +17,7 @@ module BackOnRails
     # the framework and any gems in your application.
     config.time_zone = "Eastern Time (US & Canada)"
 
+    config.beginning_of_week = :sunday
+
   end
 end

@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+      @ongoing_item_transactions = @item.get_ongoing_transactions
   end
 
   def edit
@@ -43,6 +44,21 @@ class ItemsController < ApplicationController
       @item.destroy
       flash[:notice] = "Deleted"
       redirect_to items_path
+  end
+
+
+  def search_items
+
+  end
+
+  def search
+    if params[:search_item]
+      @item_by_name = Item.where('name LIKE ?', "%#{params[:search_item]}%")
+      @item_by_description = Item.where('description LIKE ?', "%#{params[:search_item]}%")
+      @items = (@item_by_name + @item_by_description).uniq
+    else
+    end
+    render 'search_items'
   end
 
   private
