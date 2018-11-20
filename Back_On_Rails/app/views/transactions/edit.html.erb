@@ -11,6 +11,16 @@
     </div>
 <% end %>
 
+<% if flash[:errors] %>
+    <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+            <% flash[:errors].each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
 
 <table>
 	<tr>
@@ -31,7 +41,7 @@
     Start Day: <%= form.date_field :start_date %></br>
     End Day: <%= form.date_field :end_date %></br>
     <%= form.hidden_field :redirect, value: pending_transactions_path %>
-    <%= form.hidden_field :render, value: :edit %>
+    <%= form.hidden_field :render, value: edit_transaction_path(@transaction, item_id: @item) %>
     <%= form.hidden_field :send_notification, value: 0 %>
     <%=submit_tag("Edit request to borrow item")%></br>
 <%end%>

@@ -11,6 +11,18 @@
     </div>
 <% end %>
 
+<% if flash[:errors] %>
+    <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+            <% flash[:errors].each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+
 <p>
 <div>ACCEPT OR REJECT APPLICATIONS TO BORROW YOUR ITEMS</div>
 <table>
@@ -29,8 +41,8 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
 
-			<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: :pending_index} %>
-			<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: :pending_index} %>
+			<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path} %>
+			<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path} %>
             <td><%= link_to 'accept', transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put %></td>
             <td><%= link_to 'reject', transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put %></td>
         </tr>

@@ -58,8 +58,8 @@ class TransactionsController < ApplicationController
             flash[:notice] = "You have requested to borrow the item"
             redirect_to items_path
         else
-            flash[:alert] = "Invalid Form!"
-            render :new
+            flash[:errors] = @transaction.errors.full_messages
+            redirect_to new_transaction_path(@transaction, item_id: @item)
         end
     end
 
@@ -93,8 +93,8 @@ class TransactionsController < ApplicationController
             flash[:notice] = "You have updated the transaction"
             redirect_to params[:transaction][:redirect]
         else
-            flash[:alert] = "Invalid Form!"
-            render params[:transaction][:render]
+            flash[:errors] = @transaction.errors.full_messages
+            redirect_to params[:transaction][:render]
         end
     end
 
