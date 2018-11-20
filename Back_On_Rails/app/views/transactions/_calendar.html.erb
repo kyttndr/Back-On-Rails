@@ -7,7 +7,7 @@
                 <% if show == 'borrowers' %>
                     <%= transaction.borrower.username %>
                 <% elsif show == 'borrowers&items' %>
-                    <%= transaction.borrower.username %>: <%= transaction.item.name %>
+                    <%= transaction.item.name %>: <%= transaction.borrower.username %>
                 <% elsif show == 'items' %>
                     <%= transaction.item.name %>
                 <% end %>

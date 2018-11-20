@@ -10,32 +10,29 @@ class TransactionsController < ApplicationController
     end
 
     def borrow_index
-        #collection of borrow transactions
         @current_borrow_transactions = getCurrentTransactions(@borrow_transactions)
         @future_borrow_transactions = getFutureTransactions(@borrow_transactions)
     end
 
     def lend_index
-        #collection of lend transactions
         @current_lend_transactions = getCurrentTransactions(@lend_transactions)
         @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def pending_index
         @transaction = Transaction.new
-        #collection of pending borrow transactions
         @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-        #collection of pending lend transactions
         @pending_lend_transactions = getPendingTransactions(@lend_transactions)
+        # get current and future lend transactions for the calendar
+        @current_lend_transactions = getCurrentTransactions(@lend_transactions)
+        @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def borrow_history_index
-        #collection of completed borrow transactions
         @completed_borrow_transactions = getCompletedTransactions(@borrow_transactions)
     end
 
     def lend_history_index
-        #collection of completed lend transactions
         @completed_lend_transactions = getCompletedTransactions(@lend_transactions)
     end
 
