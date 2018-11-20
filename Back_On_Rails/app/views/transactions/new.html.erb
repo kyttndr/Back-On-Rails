@@ -23,4 +23,4 @@
     <%= submit_tag("Request to borrow item") %></br>
 <%end%>
 
-<%= render 'calendar' %>
+<%= render 'calendar', list_transactions: @ongoing_item_transactions, show: 'borrowers' %>
