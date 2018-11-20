@@ -25,6 +25,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX}
   validates :password, presence: true, length: {minimum: 8}
 
+  #after_commit :create_follow_notifications, on: [:add_friend]
+
   def self.search(param)
     param.strip!
     param.downcase!
@@ -52,4 +54,15 @@ class User < ApplicationRecord
   def not_friends_with?(friend_id)
     friendships.where(friend_id: friend_id).count < 1
   end
+
+	def create_follow_notifications
+        Notification.create do |notification|
+            notification.notify_type = 'friendship'
+            notification.tag = 'follow'
+            notification.actor = self.user
+            notification.user = self.friend
+            notification.target = self
+            notification.second_target = self.item
+        end
+    end
 end
