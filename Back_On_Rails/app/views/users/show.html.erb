@@ -4,16 +4,52 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
+  <br/><br/><br/><br/><br/>
 	<body>
-		<p>Username: <%= @user.username %> </p>
-		<p>Email: <%= @user.email %> </p>
-    <% if logged_in? && current_user == @user %>
-      <%= link_to 'Edit', edit_user_path(@user) %>
-    <% end %>
+    <div class = "container">
+      <%= form_with(model: @user, :html => {class:"form-horizontal", role: "form"}, url: login_path) do |form| %>
 
-    <p><%=link_to "View profile", user_profile_path(@user) %></p>
-    <p><%=link_to "View Reviews of this User", user_user_reviews_path(@user) %></p>
-    <p><%=link_to "Review this User", new_user_user_review_path(@user) %></p>
+        <div class = 'row'>
+          <div class = 'col-xs-12'>
 
+            <div class = "form-group">
+              <div class = "control-label col-sm-2">
+                <%= form.label :username %>:
+              </div>
+              <div class = "col-sm-2">
+                <div class = "control-label col-sm-2">
+                  <%= @user.username %>
+                </div>
+              </div>
+            </div>
+            <div class = "form-group">
+              <div class = "control-label col-sm-2">
+                <%= form.label :email %>:
+              </div>
+              <div class = "col-sm-2">
+                <div class = "control-label col-sm-2">
+                  <%= @user.email %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <br/>
+
+      <div class= "user-show-actions">
+        <div class = "control-label col-sm-7 col-xs-offset-1">
+        <p><%=link_to "View profile", user_profile_path(@user), class: "btn btn-xl btn-primary"%></p>
+        <p><%=link_to "View Reviews of this User", user_user_reviews_path(@user), class: "btn btn-xl btn-primary" %></p>
+        <p><%=link_to "Review this User", new_user_user_review_path(@user), class: "btn btn-xl btn-primary" %></p>
+        </div>
+      </div>
+
+      <% if logged_in? && current_user == @user %>
+          <%= link_to 'Edit', edit_user_path(@user),  class: "btn btn-xl btn-success"%>
+        </div>
+      <% end %>
+    </div>
 	</body>
 </html>
