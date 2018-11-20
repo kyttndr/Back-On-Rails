@@ -3,7 +3,7 @@
 	<div class = "">
 		<div class="col-xs-6">
 			<div>ITEMS YOU ARE CURRENTLY BORROWING</div>
-			<table class="table text-left">
+			<table class="table text-left table-hover">
 				<thead>
 			   		<tr>
 			      		<th class="col-xs-1">Item</th>
@@ -15,7 +15,7 @@
 			  	</thead>
 				<tbody>
 					<% @current_borrow_transactions.each do |transaction|%>
-				        <tr>
+				        <tr class="success">
 							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 				            <td><%= transaction.item.description %></td>
 							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
@@ -29,7 +29,7 @@
 
 		<!--<div class="col-xs-7">-->
 			<div>ITEMS YOU WILL BORROW IN THE FUTURE</div>
-			<table class="table text-left">
+			<table class="table text-left table-hover">
 				<thead>
 					<tr>
 						<th class="col-xs-2">Item</th>
@@ -41,14 +41,14 @@
 				</thead>
 				<tbody>
 					<% @future_borrow_transactions.each do |transaction|%>
-				        <tr>
+				        <tr class="info">
 							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 				            <td><%= transaction.item.description %></td>
 							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
 				            <td><%= transaction.start_date%></td>
 				            <td><%= transaction.end_date%></td>
 							<% params = {redirect: borrow_transactions_path} %>
-							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete %></td>
+							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"} %></td>
 				        </tr>
 				    <% end %>
 				</tbody>
