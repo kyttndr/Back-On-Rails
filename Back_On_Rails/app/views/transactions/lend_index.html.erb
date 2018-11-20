@@ -20,7 +20,7 @@
             <td><%= transaction.start_date%></td>
             <td><%= transaction.end_date%></td>
             <td><%= transaction.isReturned%></td>
-			<% params = {isReturned: 1, redirect: lend_transactions_path} %>
+			<% params = {isReturned: 1, redirect: lend_transactions_path, send_notification: 0} %>
 			<td><%= link_to 'Mark Item as Returned', transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put %></td>
         </tr>
     <% end %>

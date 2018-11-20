@@ -83,7 +83,7 @@ class TransactionsController < ApplicationController
             params[:transaction][:isReturned]=='1')
             @transaction.skip_period_validation = true
         end
-        # SKIP SEND NOTIFICATION on updating requested transaction period
+        # SKIP SEND NOTIFICATION on updating requested transaction period or marking returned
         if(params[:transaction][:send_notification]=='0')
             @transaction.skip_notification = true
         end
