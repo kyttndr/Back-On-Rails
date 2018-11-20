@@ -1,26 +1,6 @@
 <h1>Borrow Item</h1>
 
-<% if @transaction.errors.any? %>
-    <div class="error_messages">
-        <h2>Form is invalid</h2>
-        <ul>
-            <% @transaction.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-
-<% if flash[:errors] %>
-    <div class="error_messages">
-        <h2>Form is invalid</h2>
-        <ul>
-            <% flash[:errors].each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
+<%= render 'error_messages' %>
 
 <table>
 	<tr>
@@ -43,15 +23,4 @@
     <%= submit_tag("Request to borrow item") %></br>
 <%end%>
 
-<p>
-    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
-        <%= date.day %>
-
-        <% transactions.each do |transaction| %>
-            <div>
-                <%= transaction.borrower.username %>
-            </div>
-        <% end %>
-
-    <% end %>
-</p>
+<%= render 'calendar' %>

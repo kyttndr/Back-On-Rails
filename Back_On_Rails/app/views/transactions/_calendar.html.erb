@@ -1,0 +1,12 @@
+<p>
+    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
+        <%= date.day %>
+
+        <% transactions.each do |transaction| %>
+            <div>
+                <%= transaction.borrower.username %>
+            </div>
+        <% end %>
+
+    <% end %>
+</p>
