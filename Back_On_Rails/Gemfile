@@ -26,6 +26,9 @@ gem 'geocoder'
 # for passing variable from controllers to views
 gem 'gon'
 
+#for third party login
+gem 'devise'
+
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
