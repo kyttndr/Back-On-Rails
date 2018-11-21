@@ -1,26 +1,38 @@
-<h1>Borrow Item</h1>
+<div class = "center">
+	<div class="col-xs-6">
+		<h1>BORROW ITEM</h1>
+		<%= render 'error_messages' %>
 
-<%= render 'error_messages' %>
+		<% query_params = {item_id: @item.id} %>
+		<%=form_for(:transaction, url: transactions_path(query_params), method: :post) do |form|%>
+			<table class="table text-left table-hover">
+				<thead>
+				   	<tr>
+				      	<th class="col-xs-2">Item</th>
+						<th class="col-xs-4">Description</th>
+						<th class="col-xs-2">Owner</th>
+						<th class="col-xs-1.5">Start Date</th>
+						<th class="col-xs-1.5">End Date</th>
+			    	</tr>
+			  	</thead>
+				<tbody>
+					<tr class="success">
+						<td><%= link_to "#{@item.name}", item_path(@item) %></td>
+						<td><%= @item.description %></td>
+						<td><%= link_to "#{@item.user.username}", user_path(@item.user) %></td>
+						<td><%= form.date_field :start_date %></td>
+						<td><%= form.date_field :end_date %></td>
+					</tr>
+			  	</tbody>
+			</table>
+			<div><%= form.submit "Request to borrow item", class: "btn btn-primary" %></div>
+		<% end %>
+	</div>
 
-<table>
-	<tr>
-		<th>Item</th>
-		<th>Description</th>
-		<th>Owner</th>
-	</tr>
-	<tr>
-		<td><%= @item.name %></td>
-		<td><%= @item.description %></td>
-		<td><%= @item.user.username %></td>
-	</tr>
-</table>
-</p>
-
-<% query_params = {item_id: @item.id} %>
-<%=form_for(:transaction, url: transactions_path(query_params), method: :post) do |form|%>
-    Start Day: <%= form.date_field :start_date %></br>
-    End Day: <%= form.date_field :end_date %></br>
-    <%= submit_tag("Request to borrow item") %></br>
-<%end%>
-
-<%= render 'calendar', list_transactions: @ongoing_item_transactions, show: 'borrowers' %>
+	<div class="col-xs-6">
+		<%= render 'calendar', list_transactions: @ongoing_item_transactions, show: 'borrowers' %>
+	</div>
+	<div>
+		<%=link_to 'home', root_path, class: "btn btn-default"%>
+	</div>
+</div>

@@ -28,6 +28,8 @@
 	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
 
+<!--
+	PROBABLY DONT NEED THIS BC THERE ALREADY THE CALENDAR EVERYWHERE ELSE
 <p>
 	<div>ITEM SCHEDULE</div>
     <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
@@ -41,3 +43,4 @@
 
     <% end %>
 </p>
+-->
