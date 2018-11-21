@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   resources :places #except: [:update, :edit, :destroy]
 
+  get 'show_items', to: 'items#show_items'
+
   root "welcome#index"
 
 end

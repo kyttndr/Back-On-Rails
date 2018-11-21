@@ -1,0 +1,33 @@
+<div class = "container">
+<% if @items.size > 0 %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th colspan="3" class="page-header">
+					<h2>Items</h2>
+				</th>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @items.each do |item| %>
+				<tr>
+                    <td>
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        <%= friend.description %>
+                    </td>
+				</tr>
+			<% end %>
+		</tbody>
+	<table>
+<% else %>
+	<div align = "center">
+		<h2>This user does not have any item!</h2>
+	</div>	
+<%end%>
+</div>

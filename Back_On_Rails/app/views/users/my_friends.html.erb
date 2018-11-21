@@ -19,11 +19,20 @@
 		<tbody>
 			<% current_user.friends.each do |friend| %>
 				<tr>
-					<td><%= friend.username %></td>
-					<td><%= friend.email %></td>
-					<td> <%= link_to "Unfollow", friendship_path(friend), method: :delete,
-              			data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
-          			</td>
+          <td>
+            <%= friend.username %>
+          </td>
+          <td>
+            <%= friend.email %>
+          </td>
+					<td>                 
+            <%= link_to "Profile", user_path(friend), class: "btn btn-xs btn-primary" %> 
+
+            <%= link_to "Items", show_items_path(id_param: friend.id), class: "btn btn-xs btn-success" %>
+                
+            <%= link_to "Unfollow", friendship_path(friend), method: :delete,
+              data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger" %>
+					</td>  
 				</tr>
 			<% end %>
 		</tbody>

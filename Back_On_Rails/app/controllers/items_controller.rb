@@ -61,6 +61,10 @@ class ItemsController < ApplicationController
     render 'search_items'
   end
 
+  def show_items
+    @items = User.find(params[:id_param]).items
+  end
+
   private
 
   def allowed_params
