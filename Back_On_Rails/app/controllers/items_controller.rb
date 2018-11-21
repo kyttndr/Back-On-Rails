@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-      @ongoing_item_transactions = @item.get_ongoing_transactions
+      get_all_item_borrowers
   end
 
   def edit
@@ -88,5 +88,17 @@ class ItemsController < ApplicationController
       redirect_to items_path
     end
   end
+
+    # Returns a list of every user_id that has borrowed the item
+    def get_all_item_borrowers
+        @all_item_borrowers = Array.new
+        item_transactions = @item.transactions
+        item_transactions.each do |transaction|
+            if(transaction.isApproved == 1 && transaction.isReturned == 1)
+                @all_item_borrowers << transaction.borrower
+            end
+        end
+        return @all_item_borrowers
+    end
 
 end

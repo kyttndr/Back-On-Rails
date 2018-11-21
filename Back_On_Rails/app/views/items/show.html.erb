@@ -19,7 +19,9 @@
 
 <%= link_to 'back to items', items_path %></br>
 <% if current_user != @item.user %>
-	<%= link_to 'Review this Item', new_item_item_review_path(@item) %></br>
+	<% if @all_item_borrowers.include?(current_user)%>
+		<%= link_to 'Review this Item', new_item_item_review_path(@item) %></br>
+	<% end %>
 	<% query_params = {item_id: @item.id} %>
 	<%= link_to 'Request to Borrow', new_transaction_path(query_params) %></br>
 <% end %>
@@ -27,20 +29,3 @@
 	<%= link_to 'Edit', edit_item_path(@item) %>
 	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
-
-<!--
-	PROBABLY DONT NEED THIS BC THERE ALREADY THE CALENDAR EVERYWHERE ELSE
-<p>
-	<div>ITEM SCHEDULE</div>
-    <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: @ongoing_item_transactions do |date, transactions| %>
-        <%= date.day %>
-
-        <% transactions.each do |transaction| %>
-            <div>
-                <%= transaction.borrower.username %>
-            </div>
-        <% end %>
-
-    <% end %>
-</p>
--->
