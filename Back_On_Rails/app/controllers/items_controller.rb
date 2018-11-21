@@ -90,8 +90,8 @@ class ItemsController < ApplicationController
         @all_item_borrowers = Array.new
         item_transactions = @item.transactions
         item_transactions.each do |transaction|
-            if transaction.isApproved == 1 && transaction.isReturned == 1
-                @all_item_borrowers << transaction.borrower.id
+            if(transaction.isApproved == 1 && transaction.isReturned == 1)
+                @all_item_borrowers << transaction.borrower
             end
         end
         return @all_item_borrowers
