@@ -12,24 +12,25 @@ class UserReview < ApplicationRecord
     validates :reviewee, presence: true
     validates :rating, presence: true, numericality: {only_integer: true}, inclusion: {in: [1,2,3,4,5]}
 
-    validate :user_has_lent_to_reviewee
+    validate :user_has_past_transaction_with_reviewee
     validate :user_cannot_have_multiple_reviews_of_same_reviewee, unless: :edit_review
 
-    def user_has_lent_to_reviewee
+    def user_has_past_transaction_with_reviewee
         user = self.user
         reviewee = self.reviewee
-        lend_transactions = user.lend_transactions
 
-        lend_transactions.each do |transaction|
-            if transaction.isApproved == 1 && transaction.isReturned == 1
-                if transaction.borrower == reviewee
-                    return 1
-                end
-            end
+        transactions = Transaction.find_by(borrower: user, lender: reviewee, isApproved: 1)
+        if transactions
+            return true
         end
 
-        errors.add(:base, "You have never lent items to this user before!")
-        return 0
+        transactions = Transaction.find_by(borrower: reviewee, lender: user, isApproved: 1)
+        if transactions
+            return true
+        end
+
+        errors.add(:base, "You have never borrowed or lent anything from this user before!")
+        return nil
     end
 
     def user_cannot_have_multiple_reviews_of_same_reviewee
@@ -40,10 +41,10 @@ class UserReview < ApplicationRecord
         user_reviews.each do |review|
             if review.reviewee == reviewee
                 errors.add(:base, "You have already reviewed this user!")
-                return 0
+                return true
             end
         end
-        return 1
+        return nil
     end
 
 end
