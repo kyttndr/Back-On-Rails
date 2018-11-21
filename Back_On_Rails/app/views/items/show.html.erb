@@ -9,7 +9,7 @@
   </div>
 <div>
   <%= 0.upto @item.item_pictures.length-1 do |index|%>
-    <%= image_tag @item.item_pictures_urls[index] %>
+    <%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
   <% end %>
 </div>
 
