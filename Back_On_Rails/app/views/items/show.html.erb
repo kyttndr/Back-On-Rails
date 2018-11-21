@@ -2,6 +2,18 @@
 
 <body>
 	<%= @item.description%>
+<br/>
+
+  <div>
+    <%=@item.item_pictures.length %>
+  </div>
+<div>
+  <%= 0.upto @item.item_pictures.length-1 do |index|%>
+    <%= image_tag @item.item_pictures_urls[index] %>
+  <% end %>
+</div>
+
+
 </body><br/><br/>
 <%= link_to 'View Item Reviews', item_item_reviews_path(@item) %></br>
 
