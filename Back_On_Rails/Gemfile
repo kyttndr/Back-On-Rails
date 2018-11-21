@@ -86,3 +86,5 @@ gem 'bcrypt'
 gem 'notifications'
 
 gem "simple_calendar", "~> 2.0"
+
+gem 'data-confirm-modal'

@@ -15,4 +15,5 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
+//= require data-confirm-modal
 //= require_tree .
