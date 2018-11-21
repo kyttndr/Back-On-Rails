@@ -1,62 +1,69 @@
-<h1>MANAGE YOUR LENT ITEMS</h1>
+<div class = "center">
+	<h1>MANAGE YOUR LENT ITEMS</h1>
+	<div class = "">
+		<div class="col-xs-6">
+			<div>ITEMS YOU ARE CURRENTLY LENDING</div>
+			<table class="table text-left table-hover">
+				<thead>
+			   		<tr>
+			      		<th class="col-xs-2">Item</th>
+			      		<th class="col-xs-4">Description</th>
+			      		<th class="col-xs-2">Borrower</th>
+			      		<th class="col-xs-1.5">Start Date</th>
+						<th class="col-xs-1.5">End Date</th>
+			    	</tr>
+			  	</thead>
+				<tbody>
+					<% @current_lend_transactions.each do |transaction|%>
+						<tr class="success">
+							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+							<td><%= transaction.item.description %></td>
+							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
+							<td><%= transaction.start_date%></td>
+							<td><%= transaction.end_date%></td>
+							<% params = {isReturned: 1, redirect: lend_transactions_path, send_notification: 0} %>
+							<td><%= link_to 'y', transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put,
+								'data-toggle': 'tooltip', title: 'Mark Item as Returned', 'data-placement': 'right' %></td>
+						</tr>
+					<% end %>
+			  	</tbody>
+			</table>
 
 
-<p>
-<div>ITEMS YOU ARE CURRENTLY LENDING</div>
-<table>
-	<tr>
-		<th>Item</th>
-		<th>Description</th>
-		<th>Borrower</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Is Returned?</th>
-	</tr>
-    <% @current_lend_transactions.each do |transaction|%>
-        <tr>
-			<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-            <td><%= transaction.item.description %></td>
-			<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
-            <td><%= transaction.start_date%></td>
-            <td><%= transaction.end_date%></td>
-            <td><%= transaction.isReturned%></td>
-			<% params = {isReturned: 1, redirect: lend_transactions_path, send_notification: 0} %>
-			<td><%= link_to 'Mark Item as Returned', transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put %></td>
-        </tr>
-    <% end %>
-</table>
-</p>
+			<div>ITEMS YOU WILL LEND IN THE FUTURE</div>
+			<table class="table text-left table-hover">
+				<thead>
+					<tr>
+						<th class="col-xs-2">Item</th>
+						<th class="col-xs-4">Description</th>
+						<th class="col-xs-2">Borrower</th>
+						<th class="col-xs-1.5">Start Date</th>
+						<th class="col-xs-1.5">End Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @future_lend_transactions.each do |transaction|%>
+						<tr class="info">
+							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+							<td><%= transaction.item.description %></td>
+							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
+							<td><%= transaction.start_date%></td>
+							<td><%= transaction.end_date%></td>
+							<% params = {redirect: lend_transactions_path} %>
+							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete,
+								data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
+								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right' %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 
-
-<p>
-<div>ITEMS YOU WILL LEND IN THE FUTURE</div>
-<table>
-	<tr>
-		<th>Item</th>
-		<th>Description</th>
-		<th>Borrower</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Is Returned?</th>
-	</tr>
-    <% @future_lend_transactions.each do |transaction|%>
-        <tr>
-			<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-            <td><%= transaction.item.description %></td>
-			<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
-            <td><%= transaction.start_date%></td>
-            <td><%= transaction.end_date%></td>
-            <td><%= transaction.isReturned%></td>
-			<% params = {redirect: lend_transactions_path} %>
-			<td><%= link_to 'cancel transaction', transaction_path(transaction, transaction: params), method: :delete %></td>
-        </tr>
-    <% end %>
-</table>
-</p>
-
-<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'borrowers&items' %>
-
-
-<div>
-<%=link_to 'home', root_path%>
+		<div class="col-xs-6">
+			<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'borrowers&items' %>
+		</div>
+	</div>
+	<div>
+		<%=link_to 'home', root_path%>
+	</div>
 </div>
