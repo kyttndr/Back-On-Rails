@@ -31,4 +31,18 @@ class Item < ApplicationRecord
         return ongoing_transactions
     end
 
+    def get_average_rating
+        total_ratings = 0
+        n = 0
+        all_reviews = self.item_reviews
+        all_reviews.each do |review|
+            n = n + 1
+            total_ratings = total_ratings + review.rating
+        end
+        if n==0
+            n=1
+        end
+        return total_ratings.to_f/n
+    end
+
 end
