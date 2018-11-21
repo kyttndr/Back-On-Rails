@@ -1,6 +1,6 @@
-
 <% if @users %>
-  <div id="friend-lookup-results" class="well results-block col-md-10">
+<% if @users.size > 0 %>
+  <div id="friend-lookup-results" class="well results-block col-md-12">
     <table class="search-results-table col-md-12">
       <tboy>
         <% @users.each do |user| %>
@@ -9,10 +9,10 @@
             <td><strong>Email:</strong> <%= user.email %></td>
             <td><strong>Action:</strong> 
               <% if current_user.not_friends_with?(user.id) %>
-                <%= link_to "Add as Friend", add_friend_path(user: current_user, friend: user), class: "btn btn-xs btn-success", method: :post %>
+                <%= link_to "Follow", add_friend_path(user: current_user, friend: user), class: "btn btn-xs btn-success", method: :post %>
               <% else %>
                 <span class = "label label-primary">
-                  Already Added
+                  Already Followed
                 </span>
               <% end %>
             </td>
@@ -21,4 +21,9 @@
       </tbody>
     </table>
   </div>
+<% elsif @users.size == 0 %>
+  <div id="friend-lookup-results" class="well results-block col-md-12"> 
+    <p align = "center">No User Match This Searching Criteria</p>
+  </div>
+<% end %>
 <% end %>

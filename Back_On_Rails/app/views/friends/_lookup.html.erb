@@ -2,11 +2,11 @@
 <br/>
 
 <br/>
-<h3>Search For Friends</h3>
+<h3 align = "center"><font size="10">Search For Users</font></h3>
 <div id="friend-lookup">
 	<%= form_tag search_friends_path, method: :get, id: 'friend-lookup-form' do %>
 		<div class="form-group row no-padding text-center col-md-12">
-			<div class="col-md-10">
+			<div class="col-md-11">
 				<%= text_field_tag :search_param, params[:search_param], placeholder: "Enter name or email", autofocus: true, class: "form-control search-box input-lg" %>
 			</div>
 			<div class="col-md-1">

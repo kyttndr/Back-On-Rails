@@ -16,6 +16,11 @@ $navbar-default-bg: black;
 	text-align: center;
 }
 
+#line{
+	color: #fff;
+	font-weight: bold;
+}
+
 .jumbotron{
 
 	height: 550px;
@@ -34,3 +39,5 @@ $navbar-default-bg: black;
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 }
+
+

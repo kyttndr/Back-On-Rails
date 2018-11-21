@@ -6,11 +6,11 @@
 			<table class="table text-left table-hover">
 				<thead>
 			   		<tr>
-			      		<th class="col-xs-1">Item</th>
-			      		<th class="col-xs-2">Description</th>
-			      		<th class="col-xs-1">Owner</th>
-			      		<th class="col-xs-1">Start Date</th>
-						<th class="col-xs-1">End Date</th>
+			      		<th class="col-xs-2">Item</th>
+			      		<th class="col-xs-4">Description</th>
+			      		<th class="col-xs-2">Owner</th>
+			      		<th class="col-xs-2">Start Date</th>
+						<th class="col-xs-2">End Date</th>
 			    	</tr>
 			  	</thead>
 				<tbody>
@@ -25,16 +25,15 @@
 				    <% end %>
 			  	</tbody>
 			</table>
-		<!--</div>-->
 
-		<!--<div class="col-xs-7">-->
+
 			<div>ITEMS YOU WILL BORROW IN THE FUTURE</div>
 			<table class="table text-left table-hover">
 				<thead>
 					<tr>
 						<th class="col-xs-2">Item</th>
 						<th class="col-xs-4">Description</th>
-						<th class="col-xs-1.5">Owner</th>
+						<th class="col-xs-2">Owner</th>
 						<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
 					</tr>
@@ -48,7 +47,8 @@
 				            <td><%= transaction.start_date%></td>
 				            <td><%= transaction.end_date%></td>
 							<% params = {redirect: borrow_transactions_path} %>
-							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"} %></td>
+							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
+								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right' %></td>
 				        </tr>
 				    <% end %>
 				</tbody>
