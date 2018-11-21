@@ -16,7 +16,7 @@
 
     <tbody>
       <% date_range.each_slice(7) do |week| %>
-        <tr style="height: 80px;">
+        <tr>
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
