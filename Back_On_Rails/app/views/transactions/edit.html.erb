@@ -4,7 +4,7 @@
 		<%= render 'error_messages' %>
 
 		<% query_params = {item_id: @item.id} %>
-		<%=form_for(:transaction, url: transactions_path(query_params), method: :post) do |form|%>
+		<%=form_for(:transaction, url: transaction_path(query_params), method: :put) do |form|%>
 			<table class="table text-left table-hover">
 				<thead>
 				   	<tr>
@@ -29,7 +29,7 @@
 			<%= form.hidden_field :redirect, value: pending_transactions_path %>
 			<%= form.hidden_field :render, value: edit_transaction_path(@transaction, item_id: @item) %>
 			<%= form.hidden_field :send_notification, value: 0 %>
-			<div><%= form.submit "Request to borrow item", class: "btn btn-primary" %></div>
+			<div><%= form.submit "Edit your borrow request", class: "btn btn-primary" %></div>
 		<% end %>
 	</div>
 
