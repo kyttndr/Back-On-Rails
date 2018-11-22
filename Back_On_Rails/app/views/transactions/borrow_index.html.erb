@@ -1,62 +1,80 @@
 <div class = "center">
-	<h1>MANAGE YOUR BORROWED ITEMS</h1>
-	<div class = "">
+	<div>
 		<div class="col-xs-6">
-			<div>ITEMS YOU ARE CURRENTLY BORROWING</div>
-			<table class="table text-left table-hover">
-				<thead>
-			   		<tr>
-			      		<th class="col-xs-2">Item</th>
-			      		<th class="col-xs-4">Description</th>
-			      		<th class="col-xs-2">Owner</th>
-			      		<th class="col-xs-2">Start Date</th>
-						<th class="col-xs-2">End Date</th>
-			    	</tr>
-			  	</thead>
-				<tbody>
-					<% @current_borrow_transactions.each do |transaction|%>
-				        <tr class="success">
-							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-				            <td><%= transaction.item.description %></td>
-							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
-				            <td><%= transaction.start_date%></td>
-				            <td><%= transaction.end_date%></td>
-				        </tr>
-				    <% end %>
-			  	</tbody>
-			</table>
+			<h2>BORROWED ITEMS</h2>
+			<p class="lead" style="font-size: 18px;">
+				Here you can manage all the items that you are currently borrowing <br>
+				 or plan to borrow in the future
+			</p>
+			<hr>
 
+			<% if @current_borrow_transactions.any? %>
+				<div class="h4" style="text-align:left">Currently Borrowing</div>
+				<table class="table text-left table-hover">
+					<thead>
+				   		<tr>
+				      		<th class="col-xs-2">Item</th>
+				      		<th class="col-xs-4">Description</th>
+				      		<th class="col-xs-2">Owner</th>
+				      		<th class="col-xs-2">Start Date</th>
+							<th class="col-xs-2">End Date</th>
+				    	</tr>
+				  	</thead>
+					<tbody>
+						<% @current_borrow_transactions.each do |transaction|%>
+					        <tr class="success">
+								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+					            <td><%= transaction.item.description %></td>
+								<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
+					            <td><%= transaction.start_date%></td>
+					            <td><%= transaction.end_date%></td>
+					        </tr>
+					    <% end %>
+				  	</tbody>
+				</table>
+				<hr>
+			<% end %>
 
-			<div>ITEMS YOU WILL BORROW IN THE FUTURE</div>
-			<table class="table text-left table-hover">
-				<thead>
-					<tr>
-						<th class="col-xs-2">Item</th>
-						<th class="col-xs-4">Description</th>
-						<th class="col-xs-2.5">Owner</th>
-						<th class="col-xs-1.5">Start Date</th>
-						<th class="col-xs-1.5">End Date</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @future_borrow_transactions.each do |transaction|%>
-				        <tr class="info">
-							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-				            <td><%= transaction.item.description %></td>
-							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
-				            <td><%= transaction.start_date%></td>
-				            <td><%= transaction.end_date%></td>
-							<% params = {redirect: borrow_transactions_path, type: 'borrower_cancel'} %>
-							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
-								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
-								class: "btn btn-danger" do %>
-									<small><span class="glyphicon glyphicon-remove"></span></small>
-								<% end %>
-							</td>
-				        </tr>
-				    <% end %>
-				</tbody>
-			</table>
+			<% if @future_borrow_transactions.any? %>
+				<div class="h4" style="text-align:left">Plan to Borrow</div>
+				<table class="table text-left table-hover">
+					<thead>
+						<tr>
+							<th class="col-xs-2">Item</th>
+							<th class="col-xs-4">Description</th>
+							<th class="col-xs-2.5">Owner</th>
+							<th class="col-xs-1.5">Start Date</th>
+							<th class="col-xs-1.5">End Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @future_borrow_transactions.each do |transaction|%>
+					        <tr class="info">
+								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+					            <td><%= transaction.item.description %></td>
+								<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
+					            <td><%= transaction.start_date%></td>
+					            <td><%= transaction.end_date%></td>
+								<% params = {redirect: borrow_transactions_path, type: 'borrower_cancel'} %>
+								<td><%= link_to transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
+									'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
+									class: "btn btn-danger" do %>
+										<small><span class="glyphicon glyphicon-remove"></span></small>
+									<% end %>
+								</td>
+					        </tr>
+					    <% end %>
+					</tbody>
+				</table>
+			<% end %>
+
+			<% if @current_borrow_transactions.empty? && @future_borrow_transactions.empty? %>
+				<div><p>
+					Oh no! Looks like you aren't borrowing any items :'( <br>
+					visit our items page to start browsing!
+				</p></div>
+			<% end %>
+
 		</div>
 
 		<div class="col-xs-6">

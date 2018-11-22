@@ -1,28 +1,40 @@
 <div class = "center">
 	<div class="col-xs-6">
-		<h1>YOUR LEND HISTORY</h1>
-		<table class="table text-left table-hover">
-			<thead>
-			   	<tr>
-			      	<th class="col-xs-2">Item</th>
-					<th class="col-xs-4">Description</th>
-					<th class="col-xs-2">Borrower</th>
-					<th class="col-xs-1.5">Start Date</th>
-					<th class="col-xs-1.5">End Date</th>
-		    	</tr>
-		  	</thead>
-			<tbody>
-				<% @completed_lend_transactions.each do |transaction|%>
-					<tr class="success">
-						<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-			            <td><%= transaction.item.description %></td>
-						<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
-			            <td><%= transaction.start_date%></td>
-			            <td><%= transaction.end_date%></td>
-					</tr>
-				<% end %>
-		  	</tbody>
-		</table>
+		<h2>YOUR LEND HISTORY</h2>
+		<p class="lead" style="font-size: 18px;">
+			Here you can view all your past lend transactions
+		</p>
+		<hr>
+
+		<% if @completed_lend_transactions.any? %>
+			<table class="table text-left table-hover">
+				<thead>
+				   	<tr>
+				      	<th class="col-xs-2">Item</th>
+						<th class="col-xs-4">Description</th>
+						<th class="col-xs-2">Borrower</th>
+						<th class="col-xs-1.5">Start Date</th>
+						<th class="col-xs-1.5">End Date</th>
+			    	</tr>
+			  	</thead>
+				<tbody>
+					<% @completed_lend_transactions.each do |transaction|%>
+						<tr class="success">
+							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+				            <td><%= transaction.item.description %></td>
+							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
+				            <td><%= transaction.start_date%></td>
+				            <td><%= transaction.end_date%></td>
+						</tr>
+					<% end %>
+			  	</tbody>
+			</table>
+		<% else %>
+			<div><p>
+				Oh no! Looks like you haven't lent any items before :'( <br>
+				register a new item to start lending!
+			</p></div>
+		<% end %>
 	</div>
 
 	<div class="col-xs-6">

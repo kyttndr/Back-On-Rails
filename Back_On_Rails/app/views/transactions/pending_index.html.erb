@@ -1,90 +1,107 @@
 <div class = "center">
-	<h1>PENDING TRANSACTIONS</h1>
-
-	<div class = "">
+	<div>
 		<div class="col-xs-6">
+			<h2>PENDING TRANSACTIONS</h2>
+			<p class="lead" style="font-size: 18px;">
+				Here you can manage all requests to borrow your items <br>
+				as well as your own requests to borrow others' items
+			</p>
+			<hr>
+
 			<%= render 'error_messages' %>
 
-			<div>ACCEPT OR REJECT APPLICATIONS TO BORROW YOUR ITEMS</div>
-			<table class="table text-left table-hover">
-				<thead>
-			   		<tr>
-			      		<th class="col-xs-2">Item</th>
-			      		<th class="col-xs-3">Description</th>
-			      		<th class="col-xs-2">Borrower</th>
-			      		<th class="col-xs-1.5">Start Date</th>
-						<th class="col-xs-1.5">End Date</th>
-			    	</tr>
-			  	</thead>
-				<tbody>
-					<% @pending_lend_transactions.each do |transaction|%>
-						<tr class="info">
-							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-							<td><%= transaction.item.description %></td>
-							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
-							<td><%= transaction.start_date%></td>
-							<td><%= transaction.end_date%></td>
+			<% if @pending_lend_transactions.any? %>
+				<div class="h4" style="text-align:left">Your Items</div>
+				<table class="table text-left table-hover">
+					<thead>
+				   		<tr>
+				      		<th class="col-xs-2">Item</th>
+				      		<th class="col-xs-3">Description</th>
+				      		<th class="col-xs-2">Borrower</th>
+				      		<th class="col-xs-1.5">Start Date</th>
+							<th class="col-xs-1.5">End Date</th>
+				    	</tr>
+				  	</thead>
+					<tbody>
+						<% @pending_lend_transactions.each do |transaction|%>
+							<tr class="info">
+								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+								<td><%= transaction.item.description %></td>
+								<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
+								<td><%= transaction.start_date%></td>
+								<td><%= transaction.end_date%></td>
 
-							<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path, type: 'accept'} %>
-							<td><%= link_to transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put,
-								data: {confirm: "Are you sure you want to approve this transaction?"},
-								'data-toggle': 'tooltip', title: 'Approve this transaction', 'data-placement': 'right',
-								class: "btn btn-success" do %>
-									<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
-								<% end %>
-							</td>
-							<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path, type: 'reject'} %>
-							<td><%= link_to transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put,
-								data: {confirm: "Are you sure you want to reject this transaction?"},
-								'data-toggle': 'tooltip', title: 'Reject this transaction', 'data-placement': 'right',
-								class: "btn btn-danger" do %>
-									<small><span class="glyphicon glyphicon-thumbs-down"></span></small>
-								<% end %>
-							</td>
+								<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path, type: 'accept'} %>
+								<td><%= link_to transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put,
+									data: {confirm: "Are you sure you want to approve this transaction?"},
+									'data-toggle': 'tooltip', title: 'Approve this transaction', 'data-placement': 'right',
+									class: "btn btn-success" do %>
+										<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
+									<% end %>
+								</td>
+								<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path, type: 'reject'} %>
+								<td><%= link_to transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put,
+									data: {confirm: "Are you sure you want to reject this transaction?"},
+									'data-toggle': 'tooltip', title: 'Reject this transaction', 'data-placement': 'right',
+									class: "btn btn-danger" do %>
+										<small><span class="glyphicon glyphicon-thumbs-down"></span></small>
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+				  	</tbody>
+				</table>
+				<hr>
+			<% end %>
+
+			<% if @pending_borrow_transactions.any? %>
+				<div class="h4" style="text-align:left">Your Requests</div>
+				<table class="table text-left table-hover">
+					<thead>
+						<tr>
+							<th class="col-xs-2">Item</th>
+							<th class="col-xs-3">Description</th>
+							<th class="col-xs-2">Owner</th>
+							<th class="col-xs-1.5">Start Date</th>
+							<th class="col-xs-1.5">End Date</th>
 						</tr>
-					<% end %>
-			  	</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<% @pending_borrow_transactions.each do |transaction|%>
+							<tr class="danger">
+								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
+								<td><%= transaction.item.description %></td>
+								<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
+								<td><%= transaction.start_date%></td>
+								<td><%= transaction.end_date%></td>
+								<% query_params = {item_id: transaction.item} %>
+								<td><%= link_to edit_transaction_path(transaction, query_params),
+									'data-toggle': 'tooltip', title: 'Edit this transaction', 'data-placement': 'right',
+									class: "btn btn-warning" do %>
+										<small><span class="glyphicon glyphicon-pencil"></span></small>
+									<% end %>
+								</td>
+								<% params = {redirect: pending_transactions_path} %>
+								<td><%= link_to transaction_path(transaction, transaction: params), method: :delete,
+									data: {confirm: "Are you sure you want to cancel your transaction request?"},
+									'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
+									class: "btn btn-danger" do %>
+										<small><span class="glyphicon glyphicon-trash"></span></small>
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			<% end %>
 
+			<% if @pending_lend_transactions.empty? && @pending_borrow_transactions.empty? %>
+				<div><p>
+					Oh no! Looks like you don't have any pending transactions :'( <br>
+					visit our items page to start browsing!
+				</p></div>
+			<% end %>
 
-			<div>YOUR PENDING BORROW REQUESTS that have not been accepted yet</div>
-			<table class="table text-left table-hover">
-				<thead>
-					<tr>
-						<th class="col-xs-2">Item</th>
-						<th class="col-xs-3">Description</th>
-						<th class="col-xs-2">Owner</th>
-						<th class="col-xs-1.5">Start Date</th>
-						<th class="col-xs-1.5">End Date</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @pending_borrow_transactions.each do |transaction|%>
-						<tr class="danger">
-							<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
-							<td><%= transaction.item.description %></td>
-							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
-							<td><%= transaction.start_date%></td>
-							<td><%= transaction.end_date%></td>
-							<% query_params = {item_id: transaction.item} %>
-							<td><%= link_to edit_transaction_path(transaction, query_params),
-								'data-toggle': 'tooltip', title: 'Edit this transaction', 'data-placement': 'right',
-								class: "btn btn-warning" do %>
-									<small><span class="glyphicon glyphicon-pencil"></span></small>
-								<% end %>
-							</td>
-							<% params = {redirect: pending_transactions_path} %>
-							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete,
-								data: {confirm: "Are you sure you want to cancel your transaction request?"},
-								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
-								class: "btn btn-danger" do %>
-									<small><span class="glyphicon glyphicon-trash"></span></small>
-								<% end %>
-							</td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
 		</div>
 
 		<div class="col-xs-6">
