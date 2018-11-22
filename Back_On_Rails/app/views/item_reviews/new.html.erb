@@ -1,5 +1,53 @@
-<h1>Write a Review</h1>
+<div class="container">
+    <div class="row">
+    <h2>Review</h2>
+    <%= render 'error_messages' %>
+    <table width="100%" border="0">
+        <div class="col-md-9 col-md-offset-0">
+            <tr>
+                <%= form_for(:item_review, url: item_item_reviews_path(@item), method: :post) do |form| %>
+                    <td width="77%">
+                        <div class="form-horizontal">
 
+                            <!-- Rating -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="message">Your rating</label>
+                                <div class="col-md-9">
+                                    <% options = [1, 2, 3, 4, 5] %>
+                                    <%= form.select :rating, options %>
+                                </div>
+                            </div>
+
+                            <!-- Message body -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="message">Your message</label>
+                                <div class="col-md-9">
+                                    <%= form.text_area :comment, class: "form-control", rows: "5", placeholder: "Please enter your feedback here..."%>
+                                    <hr>
+                                    <%= form.submit "Submit Review", class: "btn btn-primary btn-md" %>
+                                    <%= link_to 'Home', root_path, class: "btn btn-default btn-md" %>
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td align="center" valign="top" width="23%">
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <img src="http://www.gohacking.com/wp-content/uploads/2010/06/captcha-300x171.jpg" height="140px" width="270px"/><br/>
+                            </div>
+                        </div>
+                    </td>
+
+                <% end %>
+            </tr>
+        </div>
+    </table>
+</div>
+
+
+<!--
 <%= render 'error_messages' %>
 
 <%= form_for(:item_review, url: item_item_reviews_path(@item), method: :post) do |form| %>
@@ -9,3 +57,4 @@
 
     <%= submit_tag("Submit Review") %></br>
 <% end %>
+-->
