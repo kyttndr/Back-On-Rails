@@ -4,9 +4,9 @@
 		<p class="lead" style="font-size: 18px;">
 			Here you can view all your past lend transactions
 		</p>
-		<hr>
 
 		<% if @completed_lend_transactions.any? %>
+			<hr>
 			<table class="table text-left table-hover">
 				<thead>
 				   	<tr>
@@ -30,17 +30,20 @@
 			  	</tbody>
 			</table>
 		<% else %>
+			<hr>
 			<div><p>
 				Oh no! Looks like you haven't lent any items before :'( <br>
 				register a new item to start lending!
 			</p></div>
 		<% end %>
+
+		<div>
+			<hr>
+			<%=link_to 'home', root_path, class: "btn btn-default"%>
+		</div>
 	</div>
 
 	<div class="col-xs-6">
 		<%= render 'calendar', list_transactions: @completed_lend_transactions, show: 'borrowers&items' %>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>

@@ -27,12 +27,14 @@
 			</table>
 			<div><%= form.submit "Request to borrow item", class: "btn btn-primary" %></div>
 		<% end %>
+
+		<div>
+			<hr>
+			<%=link_to 'home', root_path, class: "btn btn-default"%>
+		</div>
 	</div>
 
 	<div class="col-xs-6">
 		<%= render 'calendar', list_transactions: @ongoing_item_transactions, show: 'borrowers' %>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>

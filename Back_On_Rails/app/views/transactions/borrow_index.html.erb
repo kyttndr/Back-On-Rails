@@ -6,9 +6,9 @@
 				Here you can manage all the items that you are currently borrowing <br>
 				 or plan to borrow in the future
 			</p>
-			<hr>
 
 			<% if @current_borrow_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Currently Borrowing</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -32,10 +32,10 @@
 					    <% end %>
 				  	</tbody>
 				</table>
-				<hr>
 			<% end %>
 
 			<% if @future_borrow_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Plan to Borrow</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -69,19 +69,21 @@
 			<% end %>
 
 			<% if @current_borrow_transactions.empty? && @future_borrow_transactions.empty? %>
+				<hr>
 				<div><p>
 					Oh no! Looks like you aren't borrowing any items :'( <br>
 					visit our items page to start browsing!
 				</p></div>
 			<% end %>
 
+			<div>
+				<hr>
+				<%=link_to 'home', root_path, class: "btn btn-default"%>
+			</div>
 		</div>
 
 		<div class="col-xs-6">
 			<%= render 'calendar', list_transactions: [*@current_borrow_transactions, *@future_borrow_transactions], show: 'items' %>
 		</div>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>

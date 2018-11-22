@@ -6,11 +6,11 @@
 				Here you can manage all requests to borrow your items <br>
 				as well as your own requests to borrow others' items
 			</p>
-			<hr>
 
 			<%= render 'error_messages' %>
 
 			<% if @pending_lend_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Your Items</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -51,10 +51,10 @@
 						<% end %>
 				  	</tbody>
 				</table>
-				<hr>
 			<% end %>
 
 			<% if @pending_borrow_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Your Requests</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -96,19 +96,20 @@
 			<% end %>
 
 			<% if @pending_lend_transactions.empty? && @pending_borrow_transactions.empty? %>
+				<hr>
 				<div><p>
 					Oh no! Looks like you don't have any pending transactions :'( <br>
 					visit our items page to start browsing!
 				</p></div>
 			<% end %>
 
+			<div>
+				<%=link_to 'home', root_path, class: "btn btn-default"%>
+			</div>
 		</div>
 
 		<div class="col-xs-6">
 			<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'borrowers&items' %>
 		</div>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>

@@ -27,7 +27,8 @@
     					</div>
     					<div class="pull-left" style="width:180px;">
     						<div class="progress" style="height:9px; margin:8px 0;">
-                              <% rating_ratio = 100 * @item.get_rating_breakdown[i] / (@item.get_rating_breakdown[1] + @item.get_rating_breakdown[2] + @item.get_rating_breakdown[3] + @item.get_rating_breakdown[4] + @item.get_rating_breakdown[5])%>
+                              <% total_ratings = @item.get_rating_breakdown[1] + @item.get_rating_breakdown[2] + @item.get_rating_breakdown[3] + @item.get_rating_breakdown[4] + @item.get_rating_breakdown[5]%>
+                              <% rating_ratio = 100 * @item.get_rating_breakdown[i] / [total_ratings, 1].max%>
                               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: <%= rating_ratio %>%"></div>
     						</div>
     					</div>

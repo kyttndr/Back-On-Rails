@@ -30,12 +30,14 @@
 			<%= form.hidden_field :render, value: edit_transaction_path(@transaction, item_id: @item) %>
 			<div><%= form.submit "Edit your borrow request", class: "btn btn-primary" %></div>
 		<% end %>
+
+		<div>
+			<hr>
+			<%=link_to 'back', pending_transactions_path, class: "btn btn-default"%>
+		</div>
 	</div>
 
 	<div class="col-xs-6">
 		<%= render 'calendar', list_transactions: @ongoing_item_transactions, show: 'borrowers' %>
-	</div>
-	<div>
-		<%=link_to 'back', pending_transactions_path, class: "btn btn-default"%>
 	</div>
 </div>

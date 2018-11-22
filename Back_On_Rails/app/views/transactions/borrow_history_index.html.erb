@@ -4,9 +4,9 @@
 		<p class="lead" style="font-size: 18px;">
 			Here you can view all your past borrow transactions
 		</p>
-		<hr>
 
 		<% if @completed_borrow_transactions.any? %>
+			<hr>
 			<table class="table text-left table-hover">
 				<thead>
 				   	<tr>
@@ -35,12 +35,14 @@
 			visit our items page to start browsing!
 		</p></div>
 		<% end %>
+
+		<div>
+			<hr>
+			<%=link_to 'home', root_path, class: "btn btn-default"%>
+		</div>
 	</div>
 
 	<div class="col-xs-6">
 		<%= render 'calendar', list_transactions: @completed_borrow_transactions, show: 'items' %>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>

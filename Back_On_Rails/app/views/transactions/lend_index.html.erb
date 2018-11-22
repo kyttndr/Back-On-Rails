@@ -6,9 +6,9 @@
 				Here you can manage all the items that you are currently lending <br>
 				 or plan to lend in the future
 			</p>
-			<hr>
 
 			<% if @current_lend_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Currently Lending</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -40,10 +40,10 @@
 						<% end %>
 				  	</tbody>
 				</table>
-				<hr>
 			<% end %>
 
 			<% if @future_lend_transactions.any? %>
+				<hr>
 				<div class="h4" style="text-align:left">Plan to Lend</div>
 				<table class="table text-left table-hover">
 					<thead>
@@ -78,19 +78,21 @@
 			<% end %>
 
 			<% if @current_lend_transactions.empty? && @future_lend_transactions.empty? %>
+				<hr>
 				<div><p>
 					Oh no! Looks like you aren't lending any items :'( <br>
 					register a new item to start lending!
 				</p></div>
 			<% end %>
 
+			<div>
+				<hr>
+				<%=link_to 'home', root_path, class: "btn btn-default"%>
+			</div>
 		</div>
 
 		<div class="col-xs-6">
 			<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'borrowers&items' %>
 		</div>
-	</div>
-	<div>
-		<%=link_to 'home', root_path, class: "btn btn-default"%>
 	</div>
 </div>
