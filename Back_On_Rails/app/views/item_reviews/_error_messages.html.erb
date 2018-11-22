@@ -1,10 +1,16 @@
 <% if @item_review.errors.any? %>
-    <div class="error_messages">
-        <h2>Form is invalid</h2>
-        <ul>
-            <% @item_review.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
+    <div class="modal-dialog col-xs-4">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Invalid Form</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <% @item_review.errors.full_messages.each do |message| %>
+                        <div align="left"><%= message %></div>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
     </div>
 <% end %>
