@@ -28,6 +28,7 @@ gem 'gon'
 
 #for third party login
 gem 'devise'
+gem 'omniauth-facebook'
 
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

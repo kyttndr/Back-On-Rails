@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_021237) do
+ActiveRecord::Schema.define(version: 2018_11_22_025820) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -35,11 +35,10 @@ ActiveRecord::Schema.define(version: 2018_11_19_021237) do
   create_table "items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.string "name"
     t.string "description"
-    t.integer "user_id"
     t.string "item_pictures"
-    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -113,6 +112,9 @@ ActiveRecord::Schema.define(version: 2018_11_19_021237) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.text "image"
   end
 
 end

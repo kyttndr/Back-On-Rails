@@ -20,6 +20,9 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  #for facebook login
+  devise :omniauthable, :omniauth_providers => [:facebook]
+
   validates :username, presence: true, uniqueness: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX}
@@ -53,6 +56,23 @@ class User < ApplicationRecord
 
   def not_friends_with?(friend_id)
     friendships.where(friend_id: friend_id).count < 1
+  end
+
+  #def self.new_with_session(params, session)
+    #super.tap do |user|
+      #if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        #user.email = data["email"] if user.email.blank?
+      #end
+    #end
+  #end
+  
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = "11111111"
+      user.username = auth.info.name
+      user.image = auth.info.image
+    end
   end
 
 	def create_follow_notifications
