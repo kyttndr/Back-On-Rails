@@ -20,7 +20,7 @@ class ItemReviewsController < ApplicationController
         isSaved = @item_review.save
         if isSaved
             flash[:notice] = "You have submitted your review"
-            redirect_to item_path(@item)
+            redirect_to item_item_reviews_path(@item)
         else
             flash[:alert] = "Invalid Form!"
             render :new

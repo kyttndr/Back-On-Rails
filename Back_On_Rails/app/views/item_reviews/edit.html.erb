@@ -1,3 +1,74 @@
+<div class="container">
+    <div class="row">
+    <h2>Edit your review</h2>
+    <%= render 'error_messages' %>
+    <%= form_for(:item_review, url: item_item_review_path(@item, @item_review), method: :put) do |form| %>
+
+    <table width="100%" border="0">
+        <div class="col-md-9 col-md-offset-0">
+            <tr>
+                <td width="77%">
+                    <div class="form-horizontal">
+
+                        <!-- Rating -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Your rating</label>
+                            <div class="col-md-9">
+
+                                <span class="rating">
+                                    <%= form.radio_button :rating, 5, class: "rating-input", id: :star5 %>
+                                    <%= label_tag :star5, '5', class: "rating-star" %>
+
+                                    <%= form.radio_button :rating, 4, class: "rating-input", id: :star4 %>
+                                    <%= label_tag :star4, '4', class: "rating-star" %>
+
+                                    <%= form.radio_button :rating, 3, class: "rating-input", id: :star3 %>
+                                    <%= label_tag :star3, '3', class: "rating-star" %>
+
+                                    <%= form.radio_button :rating, 2, class: "rating-input", id: :star2 %>
+                                    <%= label_tag :star2, '2', class: "rating-star" %>
+
+                                    <%= form.radio_button :rating, 1, class: "rating-input", id: :star1 %>
+                                    <%= label_tag :star1, '1', class: "rating-star" %>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Message body -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Your message</label>
+                            <div class="col-md-9">
+                                <%= form.text_area :comment, class: "form-control", rows: "5", placeholder: "Please enter your feedback here..."%>
+                                <hr>
+                                <%= form.hidden_field :is_edit, value: '1' %>
+                                <%= form.submit "Submit Review", class: "btn btn-primary btn-md" %>
+                                <%= link_to 'Home', root_path, class: "btn btn-default btn-md" %>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+
+                <td align="center" valign="top" width="23%">
+                    <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            <!--
+                            <img src="http://www.gohacking.com/wp-content/uploads/2010/06/captcha-300x171.jpg" height="140px" width="270px"/><br/>
+                            -->
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        </div>
+    </table>
+    <% end %>
+
+</div>
+
+
+
+<!--
 <h1>Edit your Review</h1>
 
 <%= render 'error_messages' %>
@@ -11,3 +82,4 @@
 
     <%= submit_tag("Submit Review") %></br>
 <% end %>
+-->
