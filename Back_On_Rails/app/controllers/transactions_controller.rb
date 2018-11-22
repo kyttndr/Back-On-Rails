@@ -108,8 +108,6 @@ class TransactionsController < ApplicationController
 
         # SEND NOTIFICATIONS
         if params[:transaction][:type]
-
-
             if params[:transaction][:type] == 'lender_cancel'
                 send_notification('transaction', 'lender_cancel', @user, @transaction.borrower, @transaction.item, @transaction)
             end
