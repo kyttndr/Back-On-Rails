@@ -21,7 +21,7 @@
 							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
-							<% params = {isReturned: 1, redirect: lend_transactions_path, type: 'item_returned'} %>
+							<% params = {isReturned: 1, redirect: lend_transactions_path, type: 'item_returned', end_date: Date.current} %>
 							<td><%= link_to transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure this item is returned?"},
 								'data-toggle': 'tooltip', title: 'Mark Item as Returned', 'data-placement': 'right',

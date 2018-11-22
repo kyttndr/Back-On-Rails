@@ -1,7 +1,7 @@
 <p>
     <%= month_calendar attribute: :start_date, end_attribute: :end_date, events: list_transactions do |date, transactions| %>
         <%= date.day %>
-
+ 
         <% transactions.each do |transaction| %>
             <div class="day_format">
                 <% if show == 'borrowers' %>

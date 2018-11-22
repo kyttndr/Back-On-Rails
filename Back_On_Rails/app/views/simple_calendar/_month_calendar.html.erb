@@ -1,15 +1,19 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+    <%= link_to calendar.url_for_previous_view, class: "btn btn-default" do %>
+            <small><span class="glyphicon glyphicon-triangle-left"></span></small>
+        <% end %>
+    <span class="calendar-title h4"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+    <%= link_to calendar.url_for_next_view, class: "btn btn-default" do %>
+            <small><span class="glyphicon glyphicon-triangle-right"></span></small>
+        <% end %>
   </div>
 
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
-          <th width="14.3%"><%= t('date.abbr_day_names')[day.wday] %></th>
+          <th width="14.3%" style="border-bottom: 2px solid grey;"><%= t('date.abbr_day_names')[day.wday] %></th>
         <% end %>
       </tr>
     </thead>

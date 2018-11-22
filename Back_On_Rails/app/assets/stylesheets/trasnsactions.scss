@@ -1,4 +1,18 @@
 .simple-calendar {
+
+    .calendar-heading {
+        padding-bottom: 7px;
+
+        .calendar-title {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    .table {
+        border: 2px solid grey;
+    }
+
     .day {
         background-color: lightyellow;
         height: 80px;
@@ -14,7 +28,7 @@
     .wday-6 {}
 
     .today {
-        color: darkblue;
+        border: 2px dashed grey;
     }
     .past {}
     .future {}
