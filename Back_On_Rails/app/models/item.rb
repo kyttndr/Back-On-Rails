@@ -45,4 +45,23 @@ class Item < ApplicationRecord
         return total_ratings.to_f/n
     end
 
+    def get_rating_breakdown
+        rating_hash = Hash.new { |hash, key| hash[key] = 0 }
+        all_reviews = self.item_reviews
+        all_reviews.each do |review|
+            if review.rating == 1
+                rating_hash[1] = rating_hash[1] + 1
+            elsif review.rating == 2
+                rating_hash[2] = rating_hash[2] + 1
+            elsif review.rating == 3
+                rating_hash[3] = rating_hash[3] + 1
+            elsif review.rating == 4
+                rating_hash[4] = rating_hash[4] + 1
+            elsif review.rating == 5
+                rating_hash[5] = rating_hash[5] + 1
+            end
+        end
+        return rating_hash
+    end
+
 end
