@@ -57,7 +57,8 @@
 							<li><%= link_to 'View Lend History', main_app.lend_transactions_history_path %></li>
 						</ul>
 					</li>
-					<li><%= link_to pluralize(Notification.unread_count(current_user), 'Notification'), main_app.notifications_path %></li>
+					<li><%= link_to Notification.unread_count(current_user), main_app.notifications_path, class: "glyphicon glyphicon-bell", style: "font-size: 120%;" %></li>
+					<input type="hidden" id="unread_count" value="<%= Notification.unread_count(current_user) %>">
 
 				<% end  %>
 

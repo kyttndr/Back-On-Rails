@@ -28,7 +28,6 @@
 
 			<%= form.hidden_field :redirect, value: pending_transactions_path %>
 			<%= form.hidden_field :render, value: edit_transaction_path(@transaction, item_id: @item) %>
-			<%= form.hidden_field :send_notification, value: 0 %>
 			<div><%= form.submit "Edit your borrow request", class: "btn btn-primary" %></div>
 		<% end %>
 	</div>

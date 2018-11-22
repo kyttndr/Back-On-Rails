@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
         @transaction.isApproved = 0
         isSaved = @transaction.save
         if(isSaved)
-            flash[:notice] = "You have requested to borrow the item"
+            send_notification('transaction', 'request', @user, @item.user, @item, @transaction)
             redirect_to items_path
         else
             flash[:errors] = @transaction.errors.full_messages
@@ -80,14 +80,22 @@ class TransactionsController < ApplicationController
             params[:transaction][:isReturned]=='1')
             @transaction.skip_period_validation = true
         end
-        # SKIP SEND NOTIFICATION on updating requested transaction period or marking returned
-        if(params[:transaction][:send_notification]=='0')
-            @transaction.skip_notification = true
-        end
 
         isSaved = @transaction.save
         if(isSaved)
-            flash[:notice] = "You have updated the transaction"
+
+            # SEND NOTIFICATIONS
+            if params[:transaction][:type]
+                if params[:transaction][:type] == 'accept'
+                    send_notification('transaction', 'accept', @user, @transaction.borrower, @item, @transaction)
+                end
+                if params[:transaction][:type] == 'reject'
+                    send_notification('transaction', 'reject', @user, @transaction.borrower, @item, @transaction)
+                end
+                if params[:transaction][:type] == 'item_returned'
+                    send_notification('transaction', 'item_returned', @user, @transaction.borrower, @item, @transaction)
+                end
+            end
             redirect_to params[:transaction][:redirect]
         else
             flash[:errors] = @transaction.errors.full_messages
@@ -97,8 +105,18 @@ class TransactionsController < ApplicationController
 
     def destroy
         @transaction = Transaction.find(params[:id])
+
+        # SEND NOTIFICATIONS
+        if params[:transaction][:type]
+            if params[:transaction][:type] == 'lender_cancel'
+                send_notification('transaction', 'lender_cancel', @user, @transaction.borrower, @transaction.item, @transaction)
+            end
+            if params[:transaction][:type] == 'borrower_cancel'
+                send_notification('transaction', 'borrower_cancel', @user, @transaction.lender, @transaction.item, @transaction)
+            end
+        end
+
         @transaction.destroy
-        flash[:notice] = "Deleted Transaction"
         redirect_to params[:transaction][:redirect]
     end
 

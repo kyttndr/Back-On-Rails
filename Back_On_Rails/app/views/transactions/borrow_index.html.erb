@@ -33,7 +33,7 @@
 					<tr>
 						<th class="col-xs-2">Item</th>
 						<th class="col-xs-4">Description</th>
-						<th class="col-xs-2">Owner</th>
+						<th class="col-xs-2.5">Owner</th>
 						<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
 					</tr>
@@ -46,9 +46,13 @@
 							<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
 				            <td><%= transaction.start_date%></td>
 				            <td><%= transaction.end_date%></td>
-							<% params = {redirect: borrow_transactions_path} %>
-							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
-								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right' %></td>
+							<% params = {redirect: borrow_transactions_path, type: 'borrower_cancel'} %>
+							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete, data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
+								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
+								class: "btn btn-danger" do %>
+									<small><span class="glyphicon glyphicon-remove"></span></small>
+								<% end %>
+							</td>
 				        </tr>
 				    <% end %>
 				</tbody>
