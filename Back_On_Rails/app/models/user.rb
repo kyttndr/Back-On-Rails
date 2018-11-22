@@ -65,4 +65,39 @@ class User < ApplicationRecord
             notification.second_target = self.item
         end
     end
+
+
+    def get_average_rating
+        total_ratings = 0
+        n = 0
+        all_reviews = self.reviews_of_self
+        all_reviews.each do |review|
+            n = n + 1
+            total_ratings = total_ratings + review.rating
+        end
+        if n==0
+            n=1
+        end
+        return total_ratings.to_f/n
+    end
+
+    def get_rating_breakdown
+        rating_hash = Hash.new { |hash, key| hash[key] = 0 }
+        all_reviews = self.reviews_of_self
+        all_reviews.each do |review|
+            if review.rating == 1
+                rating_hash[1] = rating_hash[1] + 1
+            elsif review.rating == 2
+                rating_hash[2] = rating_hash[2] + 1
+            elsif review.rating == 3
+                rating_hash[3] = rating_hash[3] + 1
+            elsif review.rating == 4
+                rating_hash[4] = rating_hash[4] + 1
+            elsif review.rating == 5
+                rating_hash[5] = rating_hash[5] + 1
+            end
+        end
+        return rating_hash
+    end
+
 end
