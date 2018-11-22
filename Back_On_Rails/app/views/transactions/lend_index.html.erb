@@ -21,7 +21,7 @@
 							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
-							<% params = {isReturned: 1, redirect: lend_transactions_path, send_notification: 0} %>
+							<% params = {isReturned: 1, redirect: lend_transactions_path, type: 'item_returned'} %>
 							<td><%= link_to transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure this item is returned?"},
 								'data-toggle': 'tooltip', title: 'Mark Item as Returned', 'data-placement': 'right',
@@ -54,7 +54,7 @@
 							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
-							<% params = {redirect: lend_transactions_path} %>
+							<% params = {redirect: lend_transactions_path, type: 'lender_cancel'} %>
 							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete,
 								data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
 								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',

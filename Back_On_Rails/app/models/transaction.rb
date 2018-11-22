@@ -2,7 +2,6 @@ class Transaction < ApplicationRecord
 
     #mark_rejected used in a skip validation case
     attr_accessor :skip_period_validation
-    attr_accessor :skip_notification
 
     belongs_to :item
 
@@ -24,25 +23,21 @@ class Transaction < ApplicationRecord
     validates :isApproved, presence: true, numericality: {only_integer: true}, inclusion: {in: [0,1,2]}
     validate :validate_transaction_period, unless: :skip_period_validation
 
-
-    after_commit :create_request_notifications, on: [:create]
-    after_commit :create_status_notifications, on: [:update], unless: :skip_notification
-
     def validate_transaction_period
 
         # CHECK BASIC PERIOD ENDPOINTS
         if(self.start_date.nil? || self.end_date.nil?)
-            return 0
+            return nil
         end
         if(self.start_date < Date.current)
             # Invalid Period
             errors.add(:start_date, "cannot be in the past")
-            return 0
+            return nil
         end
         if(self.start_date > self.end_date)
             # Invalid Period
             errors.add(:start_date, "cannot be after end date")
-            return 0
+            return nil
         end
 
         # CHECK FOR TRANSACTION PERIOD OVERLAPS
@@ -54,48 +49,24 @@ class Transaction < ApplicationRecord
                 if(self.start_date >= transaction.start_date &&
                     self.start_date <= transaction.end_date)
                     errors.add(:base, "Your selected borrow period is unavailable")
-                    return 0
+                    return nil
                 end
 
                 # Check (...[.)..] type period overlap
                 if(self.end_date <= transaction.end_date &&
                     self.end_date >= transaction.start_date)
                     errors.add(:base, "Your selected borrow period is unavailable")
-                    return 0
+                    return nil
                 end
 
                 # Check (...[...]...) type period overlap
                 if(self.start_date < transaction.start_date &&
                     self.end_date > transaction.end_date)
                     errors.add(:base, "Your selected borrow period is unavailable")
-                    return 0
+                    return nil
                 end
             end
         end
-        return 1
+        return true
     end
-
-    def create_request_notifications
-        Notification.create do |notification|
-            notification.notify_type = 'transaction'
-            notification.tag = 'request'
-            notification.actor = self.borrower
-            notification.user = self.lender
-            notification.target = self
-            notification.second_target = self.item
-        end
-    end
-
-    def create_status_notifications
-        # TODO do not send notification on some updates. ex. self-edits
-        Notification.create do |notification|
-            notification.notify_type = 'transaction'
-            notification.tag = 'update'
-            notification.actor = self.lender
-            notification.user = self.borrower
-            notification.target = self
-            notification.second_target = self.item
-        end
-    end
-
 end

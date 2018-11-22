@@ -25,8 +25,7 @@
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
 
-							<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path} %>
-							<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path} %>
+							<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path, type: 'accept'} %>
 							<td><%= link_to transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure you want to approve this transaction?"},
 								'data-toggle': 'tooltip', title: 'Approve this transaction', 'data-placement': 'right',
@@ -34,6 +33,7 @@
 									<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
 								<% end %>
 							</td>
+							<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path, type: 'reject'} %>
 							<td><%= link_to transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure you want to reject this transaction?"},
 								'data-toggle': 'tooltip', title: 'Reject this transaction', 'data-placement': 'right',
