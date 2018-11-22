@@ -8,7 +8,7 @@
 			   		<tr>
 			      		<th class="col-xs-2">Item</th>
 			      		<th class="col-xs-4">Description</th>
-			      		<th class="col-xs-2">Borrower</th>
+			      		<th class="col-xs-2.5">Borrower</th>
 			      		<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
 			    	</tr>
@@ -22,8 +22,13 @@
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
 							<% params = {isReturned: 1, redirect: lend_transactions_path, send_notification: 0} %>
-							<td><%= link_to 'y', transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put,
-								'data-toggle': 'tooltip', title: 'Mark Item as Returned', 'data-placement': 'right' %></td>
+							<td><%= link_to transaction_path(transaction, transaction: params, item_id: transaction.item), method: :put,
+								data: {confirm: "Are you sure this item is returned?"},
+								'data-toggle': 'tooltip', title: 'Mark Item as Returned', 'data-placement': 'right',
+								class: "btn btn-success" do %>
+									<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 			  	</tbody>
@@ -36,7 +41,7 @@
 					<tr>
 						<th class="col-xs-2">Item</th>
 						<th class="col-xs-4">Description</th>
-						<th class="col-xs-2">Borrower</th>
+						<th class="col-xs-2.5">Borrower</th>
 						<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
 					</tr>
@@ -50,9 +55,13 @@
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
 							<% params = {redirect: lend_transactions_path} %>
-							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete,
+							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete,
 								data: {confirm: "Are you sure you want to cancel this upcoming transaction?"},
-								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right' %></td>
+								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
+								class: "btn btn-danger" do %>
+									<small><span class="glyphicon glyphicon-remove"></span></small>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>

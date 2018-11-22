@@ -10,7 +10,7 @@
 				<thead>
 			   		<tr>
 			      		<th class="col-xs-2">Item</th>
-			      		<th class="col-xs-4">Description</th>
+			      		<th class="col-xs-3">Description</th>
 			      		<th class="col-xs-2">Borrower</th>
 			      		<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
@@ -27,12 +27,20 @@
 
 							<% params_approved = {isApproved: 1, redirect: pending_transactions_path, render: pending_transactions_path} %>
 							<% params_rejected = {isApproved: 2, redirect: pending_transactions_path, render: pending_transactions_path} %>
-							<td><%= link_to 'y', transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put,
+							<td><%= link_to transaction_path(transaction, transaction: params_approved, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure you want to approve this transaction?"},
-								'data-toggle': 'tooltip', title: 'Approve this transaction', 'data-placement': 'right' %></td>
-							<td><%= link_to 'n', transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put,
+								'data-toggle': 'tooltip', title: 'Approve this transaction', 'data-placement': 'right',
+								class: "btn btn-success" do %>
+									<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
+								<% end %>
+							</td>
+							<td><%= link_to transaction_path(transaction, transaction: params_rejected, item_id: transaction.item), method: :put,
 								data: {confirm: "Are you sure you want to reject this transaction?"},
-								'data-toggle': 'tooltip', title: 'Reject this transaction', 'data-placement': 'right' %></td>
+								'data-toggle': 'tooltip', title: 'Reject this transaction', 'data-placement': 'right',
+								class: "btn btn-danger" do %>
+									<small><span class="glyphicon glyphicon-thumbs-down"></span></small>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 			  	</tbody>
@@ -44,7 +52,7 @@
 				<thead>
 					<tr>
 						<th class="col-xs-2">Item</th>
-						<th class="col-xs-4">Description</th>
+						<th class="col-xs-3">Description</th>
 						<th class="col-xs-2">Owner</th>
 						<th class="col-xs-1.5">Start Date</th>
 						<th class="col-xs-1.5">End Date</th>
@@ -59,12 +67,20 @@
 							<td><%= transaction.start_date%></td>
 							<td><%= transaction.end_date%></td>
 							<% query_params = {item_id: transaction.item} %>
-							<td><%= link_to '?', edit_transaction_path(transaction, query_params),
-								'data-toggle': 'tooltip', title: 'Edit this transaction', 'data-placement': 'right' %></td>
+							<td><%= link_to edit_transaction_path(transaction, query_params),
+								'data-toggle': 'tooltip', title: 'Edit this transaction', 'data-placement': 'right',
+								class: "btn btn-warning" do %>
+									<small><span class="glyphicon glyphicon-pencil"></span></small>
+								<% end %>
+							</td>
 							<% params = {redirect: pending_transactions_path} %>
-							<td><%= link_to 'x', transaction_path(transaction, transaction: params), method: :delete,
+							<td><%= link_to transaction_path(transaction, transaction: params), method: :delete,
 								data: {confirm: "Are you sure you want to cancel your transaction request?"},
-								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right' %></td>
+								'data-toggle': 'tooltip', title: 'Cancel this transaction', 'data-placement': 'right',
+								class: "btn btn-danger" do %>
+									<small><span class="glyphicon glyphicon-trash"></span></small>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>
