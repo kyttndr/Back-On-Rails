@@ -29,8 +29,10 @@ Rails.application.routes.draw do
   #For friends
   resources :friendships
   get 'my_friends', to: 'users#my_friends'
+  get 'my_followers', to: 'users#my_followers'
   get 'search_friends', to: 'users#search'
   post 'add_friend', to: 'users#add_friend'
+  post 'add_follower', to: 'users#add_follower'
   
 
   resources :places #except: [:update, :edit, :destroy]

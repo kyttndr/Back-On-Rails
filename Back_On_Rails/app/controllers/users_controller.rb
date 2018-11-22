@@ -46,6 +46,10 @@ class UsersController < ApplicationController
   def my_friends
     @friendships = current_user.friends
   end
+
+  def my_followers
+    @followers = Friendship.where(:friend_id => current_user.id).all
+  end
   
   def search
     if params[:search_param].blank?
@@ -69,6 +73,19 @@ class UsersController < ApplicationController
       flash[:danger] = "Friend was failed to be added"
     end
     redirect_to my_friends_path
+  end
+
+  def add_follower
+    @friend = User.find(params[:friend])
+    #current_user.friendships.build(friend_id: @friend.id)
+
+    #if current_user.save
+    if current_user.friends << @friend
+      flash[:notice] = "Friend was successfully added"
+    else
+      flash[:danger] = "Friend was failed to be added"
+    end
+    redirect_to my_followers_path
   end
 
   # PRIVATE FUNCTIONS

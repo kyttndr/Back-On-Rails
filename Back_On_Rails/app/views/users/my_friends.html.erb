@@ -39,7 +39,13 @@
 	<table>
 <% else %>
 	<div class = "row col-lg-12">
-		<p>You don't have any friends yet!</p>
+		<h2>You don't have any friends yet!</h2>
 	</div>	
 <%end%>
+
+<% if current_user.provider == "facebook" %>
+  <div class = "row col-lg-12">
+    <h2>You Facebook Friends that also use this website</h2>
+  </div>
+<% end %>
 </div>
