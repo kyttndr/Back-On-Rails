@@ -1,6 +1,6 @@
 <div class = "center">
 	<div>
-		<div class="col-xs-6">
+		<div class="col-xs-6 manage_index">
 			<h2>LENT ITEMS</h2>
 			<p class="lead" style="font-size: 18px;">
 				Here you can manage all the items that you are currently lending <br>
@@ -22,7 +22,7 @@
 				  	</thead>
 					<tbody>
 						<% @current_lend_transactions.each do |transaction|%>
-							<tr class="success">
+							<tr class="success" id="tr_table_1">
 								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 								<td><%= transaction.item.description %></td>
 								<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
@@ -36,6 +36,7 @@
 										<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
 									<% end %>
 								</td>
+								<input type="hidden" value="<%=transaction.item.id%>">
 							</tr>
 						<% end %>
 				  	</tbody>
@@ -57,7 +58,7 @@
 					</thead>
 					<tbody>
 						<% @future_lend_transactions.each do |transaction|%>
-							<tr class="info">
+							<tr class="info" id="tr_table_2">
 								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 								<td><%= transaction.item.description %></td>
 								<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
@@ -71,6 +72,7 @@
 										<small><span class="glyphicon glyphicon-remove"></span></small>
 									<% end %>
 								</td>
+								<input type="hidden" value="<%=transaction.item.id%>">
 							</tr>
 						<% end %>
 					</tbody>
@@ -92,7 +94,7 @@
 		</div>
 
 		<div class="col-xs-6">
-			<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'borrowers&items' %>
+			<%= render 'calendar', list_transactions: [*@current_lend_transactions, *@future_lend_transactions], show: 'items' %>
 		</div>
 	</div>
 </div>
