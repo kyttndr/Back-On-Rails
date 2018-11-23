@@ -22,7 +22,7 @@
 				  	</thead>
 					<tbody>
 						<% @current_borrow_transactions.each do |transaction|%>
-					        <tr class="success" id="tr_table_1">
+					        <tr class="success tr_table_1">
 								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 					            <td><%= transaction.item.description %></td>
 								<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
@@ -51,7 +51,7 @@
 					</thead>
 					<tbody>
 						<% @future_borrow_transactions.each do |transaction|%>
-					        <tr class="info" id="tr_table_2">
+					        <tr class="info tr_table_2">
 								<td><%= link_to "#{transaction.item.name}", item_path(transaction.item) %></td>
 					            <td><%= transaction.item.description %></td>
 								<td><%= link_to "#{transaction.lender.username}", user_path(transaction.lender) %></td>
