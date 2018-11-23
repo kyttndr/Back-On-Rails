@@ -4,8 +4,9 @@ $(document).on('turbolinks:load', function(){
     $('[data-toggle="table"]').table();
 });
 
-$(document).ready(function(){
-    var events_bg_color = '#E0FFFF';
+/*
+$(document).on('ready turbolinks:load', function(){
+    var events_bg_color = $('.has-events').css('background-color');
     var table1_class = $('.manage_index .tr_table_1').attr("class");
     var table2_class = $('.manage_index .tr_table_2').attr("class");
 
@@ -68,7 +69,7 @@ function highlightItems(item_id, start_date){
 
     var item_rows = $('.manage_index tr');
     item_rows.each(function(i, row){
-        jquery_row = $(this);
+        var jquery_row = $(this);
 
         var row_item_id = jquery_row.find('.item-id').val();
         var row_start_date = jquery_row.find('.start-date').val();
@@ -87,9 +88,10 @@ function highlightCalendar(item_id, start_date){
         var day_start_date = $(this).find('#start_date').val();
 
         if(item_id==day_item_id && start_date==day_start_date){
-            borrowing_day = $(this).closest('.has-events');
+            var borrowing_day = $(this).closest('.has-events');
             borrowing_day.attr('style', 'background-color: yellow');
         }
     });
 
 }
+*/
