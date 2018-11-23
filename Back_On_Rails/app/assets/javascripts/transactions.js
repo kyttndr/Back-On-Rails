@@ -15,14 +15,13 @@ $(document).ready(function(){
 
         $(this).css("background-color", "yellow");
 
-        var tst = $(this).find(".day_format input");
-        tst.each(function(i, item){
-            // item is DOM object.
-            // Can be referred to as item OR $(this) - JQUERY obj of item
-            jquery_item = $(this);
+        var all_items = $(this).find(".item_format");
+        all_items.each(function(i, item){
+            var item_id = $(this).find('#item_id');
+            var start_date = $(this).find('#start_date');
 
-            //highlightItems(item.value);    --- JS way
-            highlightItems(jquery_item.val());
+            //highlightItems(data.value);    --- JS way
+            highlightItems(item_id.val(), start_date.val());
         });
 
     }, function(){
@@ -41,17 +40,21 @@ $(document).ready(function(){
 
 
 
-function highlightItems(item_id){
-    var item_rows = $('.manage_index tr input');
-    item_rows.each(function(i, input){
-        jquery_input = $(this);
+function highlightItems(item_id, start_date){
 
-        var row_item_id = jquery_input.val();
-        if(row_item_id == item_id){
+    var item_rows = $('.manage_index tr');
+    item_rows.each(function(i, row){
+        jquery_row = $(this);
 
-            var row = jquery_input.closest("tr");
-            row.attr('class', '');
-            row.attr('style', 'background-color: yellow');
+        var row_item_id = jquery_row.find('.item-id').val();
+        var row_start_date = jquery_row.find('.start-date').val();
+
+        //var row_item_id = jquery_input.val();
+        if(row_item_id == item_id && row_start_date == start_date){
+
+            //var row = jquery_input.closest("tr");
+            jquery_row.attr('class', '');
+            jquery_row.attr('style', 'background-color: yellow');
         }
     });
 }

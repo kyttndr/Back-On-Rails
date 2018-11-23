@@ -36,7 +36,8 @@
 										<small><span class="glyphicon glyphicon-thumbs-up"></span></small>
 									<% end %>
 								</td>
-								<input type="hidden" value="<%=transaction.item.id%>">
+								<input class="item-id" type="hidden" value="<%=transaction.item.id%>">
+								<input class="start-date" type="hidden" value="<%=transaction.start_date%>">
 							</tr>
 						<% end %>
 				  	</tbody>
@@ -72,7 +73,8 @@
 										<small><span class="glyphicon glyphicon-remove"></span></small>
 									<% end %>
 								</td>
-								<input type="hidden" value="<%=transaction.item.id%>">
+								<input class="item-id" type="hidden" value="<%=transaction.item.id%>">
+								<input class="start-date" type="hidden" value="<%=transaction.start_date%>">
 							</tr>
 						<% end %>
 					</tbody>

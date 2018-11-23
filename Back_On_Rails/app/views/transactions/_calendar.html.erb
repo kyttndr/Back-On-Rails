@@ -4,15 +4,18 @@
 
         <div class="day_format">
             <% transactions.each do |transaction| %>
-                <% if show == 'borrowers' %>
-                    <%= transaction.borrower.username %>
-                <% elsif show == 'borrowers&items' %>
-                    <%= transaction.item.name %>-<%= transaction.borrower.username %>
-                <% elsif show == 'items' %>
-                    <%= transaction.item.name %>
-                <% end %>
-                <br>
-                <input type="hidden" value="<%=transaction.item.id%>">
+                <div class="item_format">
+                    <% if show == 'borrowers' %>
+                        <%= transaction.borrower.username %>
+                    <% elsif show == 'borrowers&items' %>
+                        <%= transaction.item.name %>-<%= transaction.borrower.username %>
+                    <% elsif show == 'items' %>
+                        <%= transaction.item.name %>
+                    <% end %>
+                    <br>
+                    <input id="item_id" type="hidden" value="<%=transaction.item.id%>">
+                    <input id="start_date" type="hidden" value="<%=transaction.start_date%>">
+                </div>
             <% end %>
         </div>
     <% end %>
