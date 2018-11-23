@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount Notifications::Engine => "/notifications"
   get 'welcome/index'
+  get 'welcome/about', to: 'welcome#about'
+  get 'welcome/privacy_policy', to: 'welcome#privacy_policy'
+  get 'welcome/faq', to: 'welcome#faq'
+  get 'welcome/contact_us', to: 'welcome#contact_us'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :users do

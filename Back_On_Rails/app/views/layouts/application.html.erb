@@ -11,8 +11,10 @@
     <%= include_gon %>
   </head>
 
+  <%= render 'layouts/navigation' %>
   <body>
-    <%= render 'layouts/navigation' %>
     <%= yield %>
   </body>
+  <%= render 'layouts/footer' %>
+  
 </html>
