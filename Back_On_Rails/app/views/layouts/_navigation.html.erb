@@ -74,7 +74,7 @@
 								<li align = "center"><%= link_to "Using Facebook", user_facebook_omniauth_authorize_path %></li>
 							</ul>
 						</li>
-						
+
 					<% else %>
 
 					<% end %>
@@ -84,7 +84,7 @@
 				<% if request.fullpath == "/users/new" %>
 
 				<% elsif session[:user_id] == nil%>
-					
+
 				<% else %>
 
 					<li class="dropdown">
@@ -96,7 +96,9 @@
 							<li align = "center"><%= link_to current_user.friends.count.to_s + ' Following', main_app.my_friends_path %></li>
               <li role="separator" class="divider"></li>
               <li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
-              <li role="separator" class="divider"></li>
+							<li role="separator" class="divider"></li>
+							<li align = "center"><%= link_to 'My addresses', main_app.my_places_path %></li>
+							<li role="separator" class="divider"></li>
 							<li align = "center"><%= link_to 'Log out', main_app.logout_path, method: :delete %></li>
 						</ul>
 					</li>

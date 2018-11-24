@@ -1,20 +1,17 @@
 <h1><%= @item.name%></h1>
 
-<body>
-	<%= @item.description%>
-<br/>
-
+<div>
+	<%= @item.description %><br/>
   <div>
     <%=@item.item_pictures.length %>
   </div>
-<div>
-  <%= 0.upto @item.item_pictures.length-1 do |index|%>
-    <%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
-  <% end %>
-</div>
+	<div>
+	  <%= 0.upto @item.item_pictures.length-1 do |index| %>
+	    <%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
+	  <% end %>
+	</div>
+</div><br/><br/>
 
-
-</body><br/><br/>
 <div>Average Rating: <%= sprintf('%.2f', @item.get_average_rating) %>/5</div>
 <%= link_to 'View Item Reviews', item_item_reviews_path(@item) %></br>
 

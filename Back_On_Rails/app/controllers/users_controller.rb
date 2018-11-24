@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     flash[:notice] = "Deleted"
     redirect_to users_path
   end
-  
+
   def my_friends
     @friendships = current_user.friends
   end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   def my_followers
     @followers = Friendship.where(:friend_id => current_user.id).all
   end
-  
+
   def search
     if params[:search_param].blank?
       flash[:notice] = "You have entered an empty search string"
@@ -86,6 +86,10 @@ class UsersController < ApplicationController
       flash[:danger] = "Friend was failed to be added"
     end
     redirect_to my_followers_path
+  end
+
+  def my_places
+    @places = Place.where(user: current_user).order('created_at DESC')
   end
 
   # PRIVATE FUNCTIONS

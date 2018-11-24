@@ -3,6 +3,7 @@ class Item < ApplicationRecord
     # WILL NEED TO USE ANOTHER MIGRATION TO ADD
     # ITEM ATTRIBUTES/COLUMNS
     belongs_to :user
+    belongs_to :place, optional: true
 
     has_many :transactions, dependent: :destroy
     has_many :item_reviews, dependent: :destroy

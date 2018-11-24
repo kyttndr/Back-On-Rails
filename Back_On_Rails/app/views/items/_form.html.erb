@@ -20,7 +20,10 @@
   <%= form.text_area :description%><br/>
 
   <%= form.label :item_pictures %>
-  <%= form.file_field :item_pictures, multiple: true%>4
+  <%= form.file_field :item_pictures, multiple: true%>
+
+  <%= form.label :place_id %><br/>
+  <%= form.select :place_id, options_for_select(Place.select{|p| p.user = current_user}.map{|s| [s.address, s.id]}) %>
 
   <output id="list"></output>
 

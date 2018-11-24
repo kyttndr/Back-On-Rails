@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  
+
   #For friends
   resources :friendships
   get 'my_friends', to: 'users#my_friends'
@@ -37,9 +37,10 @@ Rails.application.routes.draw do
   get 'search_friends', to: 'users#search'
   post 'add_friend', to: 'users#add_friend'
   post 'add_follower', to: 'users#add_follower'
-  
+
 
   resources :places #except: [:update, :edit, :destroy]
+  get 'my_places', to: 'users#my_places'
 
   get 'show_items', to: 'items#show_items'
 

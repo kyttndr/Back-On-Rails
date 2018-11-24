@@ -49,4 +49,20 @@ jQuery ->
           return
         return
 
+    else
+      map = new (google.maps.Map)(document.getElementById('show_map'),
+        center:
+          lat: gon.place.latitude
+          lng: gon.place.longitude
+        zoom: 13)
+
+      marker = new (google.maps.Marker)(
+        position:
+          lat: gon.place.latitude
+          lng: gon.place.longitude
+        title: gon.place.address
+        map: map
+        animation: google.maps.Animation.DROP
+        url: '/places/' + gon.place.id)
+
     return
