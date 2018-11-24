@@ -10,30 +10,30 @@ class TransactionsController < ApplicationController
     end
 
     def borrow_index
-        @current_borrow_transactions = getCurrentTransactions(@borrow_transactions)
-        @future_borrow_transactions = getFutureTransactions(@borrow_transactions)
+        @current_borrow_transactions = getCurrentTransactions(@borrow_transactions).sort_by { |transaction| transaction.end_date }
+        @future_borrow_transactions = getFutureTransactions(@borrow_transactions).sort_by { |transaction| transaction.start_date }
     end
 
     def lend_index
-        @current_lend_transactions = getCurrentTransactions(@lend_transactions)
-        @future_lend_transactions = getFutureTransactions(@lend_transactions)
+        @current_lend_transactions = getCurrentTransactions(@lend_transactions).sort_by { |transaction| transaction.end_date }
+        @future_lend_transactions = getFutureTransactions(@lend_transactions).sort_by { |transaction| transaction.start_date }
     end
 
     def pending_index
         @transaction = Transaction.new
-        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions)
-        @pending_lend_transactions = getPendingTransactions(@lend_transactions)
+        @pending_borrow_transactions = getPendingTransactions(@borrow_transactions).sort_by { |transaction| transaction.start_date }
+        @pending_lend_transactions = getPendingTransactions(@lend_transactions).sort_by { |transaction| transaction.start_date }
         # get current and future lend transactions for the calendar
         @current_lend_transactions = getCurrentTransactions(@lend_transactions)
         @future_lend_transactions = getFutureTransactions(@lend_transactions)
     end
 
     def borrow_history_index
-        @completed_borrow_transactions = getCompletedTransactions(@borrow_transactions)
+        @completed_borrow_transactions = getCompletedTransactions(@borrow_transactions).sort_by { |transaction| transaction.end_date }
     end
 
     def lend_history_index
-        @completed_lend_transactions = getCompletedTransactions(@lend_transactions)
+        @completed_lend_transactions = getCompletedTransactions(@lend_transactions).sort_by { |transaction| transaction.end_date }
     end
 
 
