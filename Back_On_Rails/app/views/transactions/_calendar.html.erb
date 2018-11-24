@@ -3,6 +3,7 @@
         <div><b><%= date.day %></b></div>
 
         <div class="day_format">
+            <input class="calendar_date" type="hidden" value="<%= date %>">
             <% transactions.each do |transaction| %>
                 <div class="item_format">
                     <% if show == 'borrowers' %>
@@ -14,6 +15,7 @@
                     <% end %>
                     <br>
                     <input class="transaction_id" type="hidden" value="<%=transaction.id%>">
+                    <input class="item_id" type="hidden" value="<%=transaction.item.id%>">
                 </div>
             <% end %>
         </div>
