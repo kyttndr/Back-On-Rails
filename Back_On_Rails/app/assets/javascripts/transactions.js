@@ -1,28 +1,27 @@
 
 $(document).on('turbolinks:load', function(){
+    //INITIALIZE TOOLTIP AND BOOTSTRAP SIMPLE TABLE
     $('[data-toggle="tooltip"]').tooltip();
-    $('[data-toggle="table"]').table();
+    //$('[data-toggle="table"]').table();
 });
 
-/*
 $(document).on('ready turbolinks:load', function(){
-    var events_bg_color = $('.has-events').css('background-color');
+
+    // IMPLEMENTING CALENDAR/TABLE HIGHLIGHTING
+    var events_bg_color = $('.current-month.has-events').css('background-color');
     var table1_class = $('.manage_index .tr_table_1').attr("class");
     var table2_class = $('.manage_index .tr_table_2').attr("class");
 
     // HOVER OVER CALENDAR
-    $('.has-events').hover(function(){
+    $('.current-month.has-events').hover(function(){
+        //events_bg_color = $(this).css('background-color');
+
         $(this).css("background-color", "yellow");
 
-        var all_items = $(this).find(".item_format");
-        all_items.each(function(i, item){
-            var item_id = $(this).find('#item_id').val();
-            var start_date = $(this).find('#start_date').val();
-
-            //highlightItems(data.value);    --- JS way
-            highlightItems(item_id, start_date);
+        $(this).find('.transaction_id').each(function(){
+            var transaction_id = $(this).val();
+            highlightItems(transaction_id);
         });
-
     }, function(){
         $(this).css("background-color", events_bg_color);
         $('.manage_index .tr_table_1').each(function(){
@@ -36,16 +35,13 @@ $(document).on('ready turbolinks:load', function(){
     });
 
 
-    // HOVER OVER 1st MANAGE TABLE ROWS
+    // HOVER OVER MANAGE TABLE ROWS
     $('.tr_table_1, .tr_table_2').hover(function(){
-
         $(this).removeClass('info success danger');
         $(this).attr('style', 'background-color: yellow');
 
-        var item_id = $(this).find('.item-id').val();
-        var start_date = $(this).find('.start-date').val();
-
-        highlightCalendar(item_id, start_date);
+        var transaction_id = $(this).find('.row_transaction_id').val();
+        highlightCalendar(transaction_id);
 
     }, function(){
         if($(this).attr('class')=='tr_table_1'){
@@ -56,7 +52,7 @@ $(document).on('ready turbolinks:load', function(){
         }
         $(this).attr('style', '');
 
-        $('.has-events').each(function(){
+        $('.current-month.has-events').each(function(){
             $(this).css("background-color", events_bg_color);
         });
     });
@@ -64,34 +60,25 @@ $(document).on('ready turbolinks:load', function(){
 });
 
 
+function highlightItems(transaction_id){
+    $('.manage_index .row_transaction_id').each(function(){
+        var row_transaction_id = $(this).val();
 
-function highlightItems(item_id, start_date){
-
-    var item_rows = $('.manage_index tr');
-    item_rows.each(function(i, row){
-        var jquery_row = $(this);
-
-        var row_item_id = jquery_row.find('.item-id').val();
-        var row_start_date = jquery_row.find('.start-date').val();
-
-        if(row_item_id == item_id && row_start_date == start_date){
-            jquery_row.removeClass('info success danger');
-            jquery_row.attr('style', 'background-color: yellow');
+        if(row_transaction_id == transaction_id){
+            var table_row = $(this).closest('tr');
+            table_row.removeClass('info success danger');
+            table_row.attr('style', 'background-color: yellow');
         }
     });
 }
 
-function highlightCalendar(item_id, start_date){
+function highlightCalendar(transaction_id){
+    $('.current-month.has-events .item_format').each(function(){
+        var day_transaction_id = $(this).find('.transaction_id').val();
 
-    $('.has-events .item_format').each(function(){
-        var day_item_id = $(this).find('#item_id').val();
-        var day_start_date = $(this).find('#start_date').val();
-
-        if(item_id==day_item_id && start_date==day_start_date){
+        if(day_transaction_id == transaction_id){
             var borrowing_day = $(this).closest('.has-events');
             borrowing_day.attr('style', 'background-color: yellow');
         }
     });
-
 }
-*/

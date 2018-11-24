@@ -25,8 +25,7 @@
 							<td><%= link_to "#{transaction.borrower.username}", user_path(transaction.borrower) %></td>
 				            <td><%= transaction.start_date%></td>
 				            <td><%= transaction.end_date%></td>
-							<input class="item-id" type="hidden" value="<%=transaction.item.id%>">
-							<input class="start-date" type="hidden" value="<%=transaction.start_date%>">
+							<input class="row_transaction_id" type="hidden" value="<%=transaction.id%>">
 						</tr>
 					<% end %>
 			  	</tbody>
