@@ -7,10 +7,9 @@
 				as well as your own requests to borrow others' items
 			</p>
 
-			<%= render 'error_messages' %>
-
 			<% if @pending_lend_transactions.any? %>
 				<hr>
+				<div class="col-xs-12"><%= render 'error_messages' %></div>
 				<div class="h4" style="text-align:left">Your Items</div>
 				<table class="table text-left table-hover">
 					<thead>

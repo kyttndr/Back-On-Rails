@@ -53,6 +53,7 @@ class TransactionsController < ApplicationController
         isSaved = @transaction.save
         if(isSaved)
             send_notification('transaction', 'request', @user, @item.user, @item, @transaction)
+            UserMailer.new_borrow_request(@transaction).deliver
             redirect_to items_path
         else
             flash[:errors] = @transaction.errors.full_messages
@@ -110,9 +111,11 @@ class TransactionsController < ApplicationController
         if params[:transaction][:type]
             if params[:transaction][:type] == 'lender_cancel'
                 send_notification('transaction', 'lender_cancel', @user, @transaction.borrower, @transaction.item, @transaction)
+                UserMailer.cancelled_request(@transaction.borrower, @transaction.lender, @transaction).deliver
             end
             if params[:transaction][:type] == 'borrower_cancel'
                 send_notification('transaction', 'borrower_cancel', @user, @transaction.lender, @transaction.item, @transaction)
+                UserMailer.cancelled_request(@transaction.lender, @transaction.borrower, @transaction).deliver
             end
         end
 
