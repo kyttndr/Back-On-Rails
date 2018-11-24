@@ -16,6 +16,9 @@ class ItemsController < ApplicationController
     @item = Item.new(allowed_params)
     @item.user = current_user
     if @item.save
+      if params[:tag_ids]
+        @item.tags << Tag.find(params[:tag_ids])
+      end
       flash[:notice] = "Thank you for register!"
       redirect_to item_path(@item)
     else
@@ -33,6 +36,12 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(allowed_params)
+      if @item.tags.any?
+        @item.tags.delete(@item.tags)
+      end
+      if params[:tag_ids]
+        @item.tags << Tag.find(params[:tag_ids])
+      end
       flash[:notice] = "Successfully updated"
       redirect_to item_path(@item)
     else
@@ -68,7 +77,7 @@ class ItemsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:item).permit(:name, :description, {item_pictures: []}, :place_id)
+    params.require(:item).permit(:name, :description, {item_pictures: []}, :place_id, tag_ids: [])
   end
 
   def set_item

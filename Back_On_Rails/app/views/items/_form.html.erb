@@ -1,4 +1,6 @@
-<%= form_with model: @item, local: true do |form| %>
+<div class = "container">
+
+
 
   <% if @item.errors.any? %>
     <div class="error_messages">
@@ -11,22 +13,73 @@
     </div>
   <% end %>
 
-  <%= @item.user.username%><br/>
+  <%= form_with model: @item, :html => {class:"form-horizontal", role: "form"}, local: true do |form| %>
 
-  <%= form.label :name %>
-  <%= form.text_field :name%><br/>
+  <div class = 'row'>
+    <div class = 'col-xs-12'>
 
-  <%= form.label :description %>
-  <%= form.text_area :description%><br/>
+      <div class = "form-group">
+        <div class = "control-label col-sm-2">
+          <%= form.label :name %>
+        </div>
+        <div class = "col-sm-8">
+          <%= form.text_field :name, class:"form-control" %>
+        </div>
+      </div>
 
-  <%= form.label :item_pictures %>
-  <%= form.file_field :item_pictures, multiple: true%>
+      <div class = "form-group">
+        <div class = "control-label col-sm-2">
+          <%= form.label :description %>
+        </div>
+        <div class = "col-sm-8">
+          <%= form.text_area :description, class:"form-control" %>
+        </div>
+      </div>
 
-  <%= form.label :place_id %><br/>
-  <%= form.select :place_id, options_for_select(Place.select{|p| p.user = current_user}.map{|s| [s.address, s.id]}) %>
+      <div class = "form-group">
+        <div class = "control-label col-sm-2">
+          <%= form.label :item_pictures %>
+        </div>
+        <div class = "col-sm-8">
+          <%= form.file_field :item_pictures, multiple: true, class:"form-control" %>
+        </div>
+      </div>
 
-  <output id="list"></output>
+      <div class = "form-group">
+        <div class = "control-label col-sm-2">
+          <%= form.label :place_id %>
+        </div>
+        <div class = "col-sm-8">
+          <%= form.select :place_id, options_for_select(Place.select{|p| p.user = current_user}.map{|s| [s.address, s.id]}), class:"form-control" %>
+        </div>
+      </div>
 
 
-  <%= form.submit "Register" %>
-<%end %>
+      <div class = "form-group">
+        <div class="row">
+          <div class = "col-sm-offset-2 col-sm-10">
+            <%  Tag.all.each do |role| %>
+              <li>
+                <%= check_box_tag 'tag_ids[]', role.id %>
+                <%= role.name %>
+              </li>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class = "form-group">
+        <div class = "col-sm-offset-2 col-sm-10">
+          <%= form.submit "Register", class: 'btn btn-primary btn-lg'%>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+<% end %>
+
+</div>

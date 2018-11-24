@@ -23,6 +23,17 @@
 	<% query_params = {item_id: @item.id} %>
 	<%= link_to 'Request to Borrow', new_transaction_path(query_params) %></br>
 <% end %>
+<% if @item.tags.any? %>
+  <th>Tags:</th>
+  <% @item.tags.each do |tag| %>
+    <tr>
+      <td>
+        <%= link_to tag.name, tag_path(tag) %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+<br/>
 <% if logged_in? && current_user == @item.user %>
 	<%= link_to 'Edit', edit_item_path(@item) %>
 	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>

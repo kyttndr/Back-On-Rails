@@ -10,7 +10,8 @@ class Item < ApplicationRecord
 
     mount_uploaders :item_pictures, ItemPicturesUploader
     serialize :item_pictures, JSON
-
+    has_many :item_tags
+    has_many :tags, through: :item_tags
     validates :name, presence: true, length: { minimum: 3}
     validates :description, presence: true, length: { minimum: 10}
     validate :item_pictures_number

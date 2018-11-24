@@ -44,6 +44,8 @@ Rails.application.routes.draw do
 
   get 'show_items', to: 'items#show_items'
 
+  resources :tags, except: [:destroy]
+
   root "welcome#index"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

@@ -17,7 +17,7 @@
 	<% @items.each do |item| %>
 		<tr>
 			<td><%= item.name %></td>
-			<td><%= item.description %></td>
+			<td><%= truncate(item.description, length: 10) %></td>
 			<td><%= item.user.username%></td>
 			<td><%= link_to 'Show', item_path(item) %></td>
 			<% if logged_in? && current_user == item.user %>
