@@ -1,5 +1,6 @@
 <h1 align="center">Listing All Tags</h1>
 <div align="center">
+  <div align = "center"><%= will_paginate %></div>
   <% @tags.each do |tag| %>
     <ul class="listing">
       <div class="row">
@@ -13,4 +14,5 @@
     </ul>
   <% end %>
   <%= link_to "new tag", new_tag_path %>
+  <div align = "center"><%= will_paginate %></div>
 </div>

@@ -15,11 +15,11 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.all
+    @tags = Tag.paginate(page: params[:page], per_page: 5)
   end
 
   def show
-
+    @tag_items = @tag.items.paginate(page: params[:page], per_page: 5)
   end
 
   def edit

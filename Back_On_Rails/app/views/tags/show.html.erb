@@ -1,14 +1,10 @@
 <div class="container">
-
   <h1 align="center"><%= "Category: " + @tag.name %></h1>
-
-    <div class="row">
-
-      <%= link_to "Edit Category Name", edit_tag_path(@tag) %></span>
-
-    </div>
-
-  <% @tag.items.each do |item|%>
+  <div class="row">
+    <%= link_to "Edit Category Name", edit_tag_path(@tag) %></span>
+  </div>
+  <div align = "center"><%= will_paginate @tag_items %></div>
+  <% @tag_items.each do |item|%>
     <tr>
       <td><%= item.name %></td>
       <td><%= truncate(item.description, length: 10) %></td>
@@ -27,4 +23,5 @@
     <br/>
 
   <% end %>
+  <div align = "center"><%= will_paginate @tag_items %></div>
 </div>
