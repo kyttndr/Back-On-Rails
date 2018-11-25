@@ -1,0 +1,22 @@
+I"˜(function() {
+  var root;
+
+  jQuery(function() {
+    return window.initMap = function() {
+      var map;
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 8
+      });
+    };
+  });
+
+  root = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  root.initMap = initMap;
+
+}).call(this);
+:ET

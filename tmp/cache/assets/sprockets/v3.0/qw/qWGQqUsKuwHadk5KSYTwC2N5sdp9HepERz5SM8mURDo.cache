@@ -1,0 +1,85 @@
+I"	(function() {
+  $(window).load(function() {
+    return window.initMap();
+  });
+
+  $(document).on('turbolinks:load', function() {
+    return window.initMap();
+  });
+
+  window.initMap = function() {
+    var geocoder, i, last_url, map, marker, reg, url_array;
+    url_array = window.location.href.split('/');
+    last_url = url_array.pop();
+    if (last_url === '') {
+      last_url = url_array.pop();
+    }
+    reg = new RegExp('^\\d+$');
+    if (last_url === 'new') {
+      map = new google.maps.Map(document.getElementById('form_map'), {
+        center: {
+          lat: 43.66090860000001,
+          lng: -79.39595179999999
+        },
+        zoom: 13
+      });
+      geocoder = new google.maps.Geocoder;
+      google.maps.event.addListener(map, 'click', function(event) {
+        geocoder.geocode({
+          'latLng': event.latLng
+        }, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              $('#place_address').val(results[0].formatted_address);
+            }
+          }
+        });
+      });
+    } else if (reg.test(last_url)) {
+      map = new google.maps.Map(document.getElementById('show_map'), {
+        center: {
+          lat: gon.place.latitude,
+          lng: gon.place.longitude
+        },
+        zoom: 13
+      });
+      marker = new google.maps.Marker({
+        position: {
+          lat: gon.place.latitude,
+          lng: gon.place.longitude
+        },
+        title: gon.place.address,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        url: '/places/' + gon.place.id
+      });
+    } else {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: 43.66090860000001,
+          lng: -79.39595179999999
+        },
+        zoom: 13
+      });
+      i = 0;
+      while (i < gon.places.length) {
+        marker = new google.maps.Marker({
+          position: {
+            lat: gon.places[i].latitude,
+            lng: gon.places[i].longitude
+          },
+          title: gon.places[i].address,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          url: '/places/' + gon.places[i].id
+        });
+        marker.addListener('click', function() {
+          window.location.href = this.url;
+        });
+        i++;
+      }
+    }
+  };
+
+}).call(this);
+:ET

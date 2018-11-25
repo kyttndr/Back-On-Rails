@@ -1,0 +1,15 @@
+I"4(function() {
+  var initMap;
+
+  initMap = function(lat, lng) {
+    var map, mapOptions, myCoords;
+    myCoords = new google.maps.LatLng(lat, lng);
+    mapOptions = {
+      center: myCoords,
+      zoom: 14
+    };
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  };
+
+}).call(this);
+:ET

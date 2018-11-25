@@ -1,0 +1,26 @@
+I"R(function() {
+  window.initMap = function() {
+    var location, map, map_element, marker;
+    if (document.getElementById('map1')) {
+      map_element = $('#map');
+      location = {
+        lat: map_element.data('lat'),
+        lng: map_element.data('lng')
+      };
+      map = new google.maps.Map(document.getElementById('map1'), {
+        zoom: 16,
+        center: location
+      });
+      return marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+  };
+
+  $(document).on("turbolinks:load", function() {
+    return initMap();
+  });
+
+}).call(this);
+:ET
