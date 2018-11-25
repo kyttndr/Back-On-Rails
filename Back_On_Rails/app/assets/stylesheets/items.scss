@@ -16,3 +16,26 @@
   margin: 10px 5px 5px 5px;
 }
 
+.picture-in-index {
+  position: relative;
+  float: left;
+  height: 130px;
+  width: 130px;
+  border: 1px solid #000;
+  margin: 5px 5px 5px 5px;
+}
+
+
+.item-name {
+  left: 200px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.item-description {
+  border-top: 1px solid #eaeaea;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
