@@ -19533,3 +19533,1168 @@ Processing by PlacesController#show as HTML
 Completed 200 OK in 82ms (Views: 78.5ms | ActiveRecord: 1.1ms)
 
 
+  [1m[35m (55.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (47.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181009230255)
+  [1m[35m (46.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181009230255_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (45.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181009230255"]]
+  ↳ bin/rails:9
+  [1m[35m (35.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateItems (20181010221622)
+  [1m[35m (36.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (41.9ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181010221622_create_items.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (43.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181010221622"]]
+  ↳ bin/rails:9
+  [1m[35m (38.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateProfiles (20181026105400)
+  [1m[35m (44.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.8ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "username" character varying, "first_name" character varying, "last_name" character varying, "street_number" integer, "street_name" character varying, "city" character varying, "province" character varying, "country" character varying, "date_of_birth" date, "phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181026105400_create_profiles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (42.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026105400"]]
+  ↳ bin/rails:9
+  [1m[35m (38.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddNameAndDescriptionToItems (20181026151647)
+  [1m[35m (47.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.1ms)[0m  [1m[35mALTER TABLE "items" ADD "name" character varying[0m
+  ↳ db/migrate/20181026151647_add_name_and_description_to_items.rb:3
+  [1m[35m (42.9ms)[0m  [1m[35mALTER TABLE "items" ADD "description" character varying[0m
+  ↳ db/migrate/20181026151647_add_name_and_description_to_items.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (44.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026151647"]]
+  ↳ bin/rails:9
+  [1m[35m (49.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddUserToProfiles (20181026182344)
+  [1m[35m (39.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (43.6ms)[0m  [1m[35mALTER TABLE "profiles" ADD "user_id" bigint[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:3
+  [1m[35m (39.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_profiles_on_user_id" ON "profiles"  ("user_id")[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:3
+  [1m[35m (42.9ms)[0m  [1m[35mALTER TABLE "profiles" ADD CONSTRAINT "fk_rails_e424190865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (41.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026182344"]]
+  ↳ bin/rails:9
+  [1m[35m (41.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateBorrows (20181103181634)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE TABLE "borrows" ("id" bigserial primary key, "user_id" bigint, "item_id" bigint, "start_date" date, "end_date" date, "isReturned" boolean, CONSTRAINT "fk_rails_4de2f604db"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_3ea8bf6ed5"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+)[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[35m (41.6ms)[0m  [1m[35mCREATE  INDEX  "index_borrows_on_user_id" ON "borrows"  ("user_id")[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE  INDEX  "index_borrows_on_item_id" ON "borrows"  ("item_id")[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (42.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181103181634"]]
+  ↳ bin/rails:9
+  [1m[35m (45.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.9ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (48.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (37.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (36.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (52.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (37.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.2ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (40.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (38.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (36.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (46.5ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (43.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (39.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (37.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (36.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.2ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (43.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (50.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (30.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (55.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (42.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (46.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (41.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (39.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (55.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (38.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (51.7ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (42.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (57.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (52.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (37.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (51.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (55.3ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (41.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125075905)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer NOT NULL PRIMARY KEY, "item_id" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, "isReturned" integer DEFAULT NULL, "lender_id" integer DEFAULT NULL, "borrower_id" integer DEFAULT NULL, "isApproved" integer DEFAULT NULL)[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_lender_id" ON "atransactions" ("lender_id")[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_borrower_id" ON "atransactions" ("borrower_id")[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_item_id" ON "atransactions" ("item_id")[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","item_id","start_date","end_date","isReturned","lender_id","borrower_id","isApproved")
+                     SELECT "id","item_id","start_date","end_date","isReturned","lender_id","borrower_id","isApproved" FROM "transactions"[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer NOT NULL PRIMARY KEY, "item_id" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, "isReturned" integer USING CAST(isReturned AS integer) DEFAULT NULL, "lender_id" integer DEFAULT NULL, "borrower_id" integer DEFAULT NULL, "isApproved" integer DEFAULT NULL)[0m
+  ↳ db/migrate/20181125075905_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (38.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (36.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.9ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (40.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mUser Load (35.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (38.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (43.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (45.9ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (44.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (49.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (50.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (46.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.1ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (36.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (37.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (37.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (42.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (47.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (37.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (47.4ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (44.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (35.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (37.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (35.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (46.7ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (39.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (45.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (56.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (39.6ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (52.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (51.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (47.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.9ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (51.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Destroy (7.7ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = ?[0m  [["id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (39.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (40.8ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (40.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+DEPRECATION WARNING: Passing the environment's name as a regular argument is deprecated and will be removed in the next Rails version. Please, use the -e option instead. (called from <main> at /Users/KytTndr/Desktop/CSC444 Project/Back-On-Rails/bin/rails:9)
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (42.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (46.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (48.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (46.9ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (63.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (44.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (245.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.8ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (42.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (87.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (46.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (50.5ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (40.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (38.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (36.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (41.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.7ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (43.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (44.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (57.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (56.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (47.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to RemoveIsreturnedFromTransaction (20181125083313)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer NOT NULL PRIMARY KEY, "item_id" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, "isReturned" integer DEFAULT NULL, "lender_id" integer DEFAULT NULL, "borrower_id" integer DEFAULT NULL, "isApproved" integer DEFAULT NULL)[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_lender_id" ON "atransactions" ("lender_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_borrower_id" ON "atransactions" ("borrower_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_atransactions_on_item_id" ON "atransactions" ("item_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","item_id","start_date","end_date","isReturned","lender_id","borrower_id","isApproved")
+                     SELECT "id","item_id","start_date","end_date","isReturned","lender_id","borrower_id","isApproved" FROM "transactions"[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer NOT NULL PRIMARY KEY, "item_id" integer DEFAULT NULL, "start_date" date DEFAULT NULL, "end_date" date DEFAULT NULL, "lender_id" integer DEFAULT NULL, "borrower_id" integer DEFAULT NULL, "isApproved" integer DEFAULT NULL)[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_transactions_on_item_id" ON "transactions" ("item_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_transactions_on_borrower_id" ON "transactions" ("borrower_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_transactions_on_lender_id" ON "transactions" ("lender_id")[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","item_id","start_date","end_date","lender_id","borrower_id","isApproved")
+                     SELECT "id","item_id","start_date","end_date","lender_id","borrower_id","isApproved" FROM "atransactions"[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  ↳ db/migrate/20181125083313_remove_isreturned_from_transaction.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181125083313"]]
+  ↳ bin/rails:9
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (42.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (36.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.2ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (38.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (41.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (39.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (35.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (40.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (37.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddIsreturnedToTransaction (20181125083519)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ADD "isReturned" integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125083519_add_isreturned_to_transaction.rb:3
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddIsreturnedToTransaction (20181125083519)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "transactions" ADD "isReturned" integer[0m
+  ↳ db/migrate/20181125083519_add_isreturned_to_transaction.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181125083519"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (39.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (39.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.8ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (37.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (42.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (50.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (38.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (37.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.1ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (42.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (34.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (35.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (45.7ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (42.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (35.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (46.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (46.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (48.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (38.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (42.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (39.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (39.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (46.0ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (39.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (33.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (44.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (39.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-25 08:53:00.602970"], ["updated_at", "2018-11-25 08:53:00.602970"]]
+  ↳ bin/rails:9
+  [1m[35m (48.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (39.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (66.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (52.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (145.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "backonrails_development"[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (141.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "backonrails_test"[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (834.8ms)[0m  [1m[35mCREATE DATABASE "backonrails_development" ENCODING = 'unicode'[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (278.6ms)[0m  [1m[35mCREATE DATABASE "backonrails_test" ENCODING = 'unicode'[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (54.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  ↳ db/schema.rb:15
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "user_id" integer, "friend_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (57.4ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_friend_id" ON "friendships"  ("friend_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (39.9ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_user_id" ON "friendships"  ("user_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (49.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "item_reviews" CASCADE[0m
+  ↳ db/schema.rb:24
+  [1m[35m (62.2ms)[0m  [1m[35mCREATE TABLE "item_reviews" ("id" bigserial primary key, "user_id" integer, "item_id" integer, "rating" integer, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:24
+  [1m[35m (71.3ms)[0m  [1m[35mCREATE  INDEX  "index_item_reviews_on_item_id" ON "item_reviews"  ("item_id")[0m
+  ↳ db/schema.rb:24
+  [1m[35m (91.9ms)[0m  [1m[35mCREATE  INDEX  "index_item_reviews_on_user_id" ON "item_reviews"  ("user_id")[0m
+  ↳ db/schema.rb:24
+  [1m[35m (67.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "item_tags" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE TABLE "item_tags" ("id" bigserial primary key, "item_id" integer, "tag_id" integer)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (41.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "items" CASCADE[0m
+  ↳ db/schema.rb:40
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "description" character varying, "user_id" integer, "item_pictures" character varying, "place_id" integer)[0m
+  ↳ db/schema.rb:40
+  [1m[35m (40.0ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_place_id" ON "items"  ("place_id")[0m
+  ↳ db/schema.rb:40
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  ↳ db/schema.rb:40
+  [1m[35m (43.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "notifications" CASCADE[0m
+  ↳ db/schema.rb:52
+  [1m[35m (48.4ms)[0m  [1m[35mCREATE TABLE "notifications" ("id" bigserial primary key, "user_id" integer NOT NULL, "actor_id" integer, "notify_type" character varying NOT NULL, "target_type" character varying, "target_id" integer, "second_target_type" character varying, "second_target_id" integer, "third_target_type" character varying, "third_target_id" integer, "read_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "tag" character varying)[0m
+  ↳ db/schema.rb:52
+  [1m[35m (80.0ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id_and_notify_type" ON "notifications"  ("user_id", "notify_type")[0m
+  ↳ db/schema.rb:52
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id" ON "notifications"  ("user_id")[0m
+  ↳ db/schema.rb:52
+  [1m[35m (45.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "places" CASCADE[0m
+  ↳ db/schema.rb:70
+  [1m[35m (58.8ms)[0m  [1m[35mCREATE TABLE "places" ("id" bigserial primary key, "address" text, "latitude" float, "longitude" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "user_id" integer)[0m
+  ↳ db/schema.rb:70
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE  INDEX  "index_places_on_user_id" ON "places"  ("user_id")[0m
+  ↳ db/schema.rb:70
+  [1m[35m (42.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "profiles" CASCADE[0m
+  ↳ db/schema.rb:80
+  [1m[35m (72.5ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "username" character varying, "first_name" character varying, "last_name" character varying, "date_of_birth" date, "phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "user_id" integer, "profile_picture" character varying)[0m
+  ↳ db/schema.rb:80
+  [1m[35m (60.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_profiles_on_user_id" ON "profiles"  ("user_id")[0m
+  ↳ db/schema.rb:80
+  [1m[35m (65.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "tags" CASCADE[0m
+  ↳ db/schema.rb:93
+  [1m[35m (51.5ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:93
+  [1m[35m (46.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  ↳ db/schema.rb:99
+  [1m[35m (45.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "item_id" integer, "start_date" date, "end_date" date, "lender_id" integer, "borrower_id" integer, "isApproved" integer, "isReturned" integer)[0m
+  ↳ db/schema.rb:99
+  [1m[35m (46.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_borrower_id" ON "transactions"  ("borrower_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (41.8ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_item_id" ON "transactions"  ("item_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_lender_id" ON "transactions"  ("lender_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (43.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_reviews" CASCADE[0m
+  ↳ db/schema.rb:112
+  [1m[35m (91.0ms)[0m  [1m[35mCREATE TABLE "user_reviews" ("id" bigserial primary key, "user_id" integer, "reviewee_id" integer, "rating" integer, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:112
+  [1m[35m (49.5ms)[0m  [1m[35mCREATE  INDEX  "index_user_reviews_on_reviewee_id" ON "user_reviews"  ("reviewee_id")[0m
+  ↳ db/schema.rb:112
+  [1m[35m (46.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_reviews_on_user_id" ON "user_reviews"  ("user_id")[0m
+  ↳ db/schema.rb:112
+  [1m[35m (53.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:123
+  [1m[35m (53.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "provider" character varying, "uid" character varying, "image" text)[0m
+  ↳ db/schema.rb:123
+  [1m[35m (50.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (63.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (44.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20181125083519)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (40.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20181108191031),
+(20181124165005),
+(20181124005911),
+(20181026182344),
+(20181115002905),
+(20181117215153),
+(20181026105400),
+(20181112231613),
+(20181010221622),
+(20181116033231),
+(20181125083313),
+(20181113231148),
+(20181009230255),
+(20181108225936),
+(20181112223911),
+(20181119021237),
+(20181108183937),
+(20181113231739),
+(20181026151647),
+(20181112221118),
+(20181103210205),
+(20181113203244),
+(20181112232238),
+(20181115004025),
+(20181108193416),
+(20181115005529),
+(20181116045847),
+(20181122025820),
+(20181112234238),
+(20181115001632),
+(20181120174015),
+(20181103181634);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (49.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (44.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (37.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (63.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-25 08:53:15.464277"], ["updated_at", "2018-11-25 08:53:15.464277"]]
+  ↳ db/schema.rb:13
+  [1m[35m (42.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (42.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (46.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (37.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships" CASCADE[0m
+  ↳ db/schema.rb:15
+  [1m[35m (87.7ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" bigserial primary key, "user_id" integer, "friend_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:15
+  [1m[35m (44.7ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_friend_id" ON "friendships"  ("friend_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (53.2ms)[0m  [1m[35mCREATE  INDEX  "index_friendships_on_user_id" ON "friendships"  ("user_id")[0m
+  ↳ db/schema.rb:15
+  [1m[35m (50.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "item_reviews" CASCADE[0m
+  ↳ db/schema.rb:24
+  [1m[35m (48.5ms)[0m  [1m[35mCREATE TABLE "item_reviews" ("id" bigserial primary key, "user_id" integer, "item_id" integer, "rating" integer, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:24
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE  INDEX  "index_item_reviews_on_item_id" ON "item_reviews"  ("item_id")[0m
+  ↳ db/schema.rb:24
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE  INDEX  "index_item_reviews_on_user_id" ON "item_reviews"  ("user_id")[0m
+  ↳ db/schema.rb:24
+  [1m[35m (42.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "item_tags" CASCADE[0m
+  ↳ db/schema.rb:35
+  [1m[35m (46.5ms)[0m  [1m[35mCREATE TABLE "item_tags" ("id" bigserial primary key, "item_id" integer, "tag_id" integer)[0m
+  ↳ db/schema.rb:35
+  [1m[35m (41.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "items" CASCADE[0m
+  ↳ db/schema.rb:40
+  [1m[35m (51.2ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "name" character varying, "description" character varying, "user_id" integer, "item_pictures" character varying, "place_id" integer)[0m
+  ↳ db/schema.rb:40
+  [1m[35m (87.8ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_place_id" ON "items"  ("place_id")[0m
+  ↳ db/schema.rb:40
+  [1m[35m (43.1ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  ↳ db/schema.rb:40
+  [1m[35m (42.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "notifications" CASCADE[0m
+  ↳ db/schema.rb:52
+  [1m[35m (72.4ms)[0m  [1m[35mCREATE TABLE "notifications" ("id" bigserial primary key, "user_id" integer NOT NULL, "actor_id" integer, "notify_type" character varying NOT NULL, "target_type" character varying, "target_id" integer, "second_target_type" character varying, "second_target_id" integer, "third_target_type" character varying, "third_target_id" integer, "read_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "tag" character varying)[0m
+  ↳ db/schema.rb:52
+  [1m[35m (75.6ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id_and_notify_type" ON "notifications"  ("user_id", "notify_type")[0m
+  ↳ db/schema.rb:52
+  [1m[35m (49.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id" ON "notifications"  ("user_id")[0m
+  ↳ db/schema.rb:52
+  [1m[35m (43.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "places" CASCADE[0m
+  ↳ db/schema.rb:70
+  [1m[35m (51.8ms)[0m  [1m[35mCREATE TABLE "places" ("id" bigserial primary key, "address" text, "latitude" float, "longitude" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "user_id" integer)[0m
+  ↳ db/schema.rb:70
+  [1m[35m (42.8ms)[0m  [1m[35mCREATE  INDEX  "index_places_on_user_id" ON "places"  ("user_id")[0m
+  ↳ db/schema.rb:70
+  [1m[35m (42.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "profiles" CASCADE[0m
+  ↳ db/schema.rb:80
+  [1m[35m (52.2ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "username" character varying, "first_name" character varying, "last_name" character varying, "date_of_birth" date, "phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "user_id" integer, "profile_picture" character varying)[0m
+  ↳ db/schema.rb:80
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_profiles_on_user_id" ON "profiles"  ("user_id")[0m
+  ↳ db/schema.rb:80
+  [1m[35m (46.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "tags" CASCADE[0m
+  ↳ db/schema.rb:93
+  [1m[35m (51.8ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:93
+  [1m[35m (45.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  ↳ db/schema.rb:99
+  [1m[35m (51.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "item_id" integer, "start_date" date, "end_date" date, "lender_id" integer, "borrower_id" integer, "isApproved" integer, "isReturned" integer)[0m
+  ↳ db/schema.rb:99
+  [1m[35m (44.7ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_borrower_id" ON "transactions"  ("borrower_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (48.5ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_item_id" ON "transactions"  ("item_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (49.2ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_lender_id" ON "transactions"  ("lender_id")[0m
+  ↳ db/schema.rb:99
+  [1m[35m (44.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "user_reviews" CASCADE[0m
+  ↳ db/schema.rb:112
+  [1m[35m (49.0ms)[0m  [1m[35mCREATE TABLE "user_reviews" ("id" bigserial primary key, "user_id" integer, "reviewee_id" integer, "rating" integer, "comment" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:112
+  [1m[35m (57.1ms)[0m  [1m[35mCREATE  INDEX  "index_user_reviews_on_reviewee_id" ON "user_reviews"  ("reviewee_id")[0m
+  ↳ db/schema.rb:112
+  [1m[35m (41.8ms)[0m  [1m[35mCREATE  INDEX  "index_user_reviews_on_user_id" ON "user_reviews"  ("user_id")[0m
+  ↳ db/schema.rb:112
+  [1m[35m (45.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  ↳ db/schema.rb:123
+  [1m[35m (47.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "provider" character varying, "uid" character varying, "image" text)[0m
+  ↳ db/schema.rb:123
+  [1m[35m (44.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (41.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ db/schema.rb:13
+  [1m[35m (42.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20181125083519)[0m
+  ↳ db/schema.rb:13
+  [1m[35m (44.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20181108191031),
+(20181124165005),
+(20181124005911),
+(20181026182344),
+(20181115002905),
+(20181117215153),
+(20181026105400),
+(20181112231613),
+(20181010221622),
+(20181116033231),
+(20181125083313),
+(20181113231148),
+(20181009230255),
+(20181108225936),
+(20181112223911),
+(20181119021237),
+(20181108183937),
+(20181113231739),
+(20181026151647),
+(20181112221118),
+(20181103210205),
+(20181113203244),
+(20181112232238),
+(20181115004025),
+(20181108193416),
+(20181115005529),
+(20181116045847),
+(20181122025820),
+(20181112234238),
+(20181115001632),
+(20181120174015),
+(20181103181634);
+
+[0m
+  ↳ db/schema.rb:13
+  [1m[35m (61.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (39.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ db/schema.rb:13
+  [1m[35m (39.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Create (42.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-25 08:53:20.239913"], ["updated_at", "2018-11-25 08:53:20.239913"]]
+  ↳ db/schema.rb:13
+  [1m[35m (47.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/schema.rb:13
+  [1m[36mActiveRecord::InternalMetadata Load (41.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (52.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Update (47.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2018-11-25 08:53:20.472260"], ["key", "environment"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (52.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (38.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (33.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (36.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (38.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (37.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (33.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (47.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(transactions.isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (50.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (30.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (39.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (44.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (51.3ms)[0m  [1m[35mALTER TABLE "transaction" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (41.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (41.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (38.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.2ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(transactions.isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (43.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (36.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (53.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (39.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (42.1ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer USING CAST(borrows.isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (40.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (33.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (35.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (37.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (37.6ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(transactions.isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (48.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (41.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (35.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (40.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125084808)
+  [1m[35m (41.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (43.4ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125084808_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (39.6ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (48.0ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (47.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddIsreturnedTransactionsAsPsqlAsked (20181125085831)
+  [1m[35m (58.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (37.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD "isReturned" integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125085831_add_isreturned_transactions_as_psql_asked.rb:3
+  [1m[35m (38.9ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (40.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (36.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddIsreturnedTransactionsAsPsqlAsked (20181125085831)
+  [1m[35m (35.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (44.1ms)[0m  [1m[35mALTER TABLE "transactions" ADD "isReturned" integer[0m
+  ↳ db/migrate/20181125085831_add_isreturned_transactions_as_psql_asked.rb:3
+  [1m[35m (45.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (38.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (55.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (41.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125090003)
+  [1m[35m (42.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (37.3ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125090003_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (41.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (38.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ bin/rails:9
+  [1m[35m (43.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (45.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125090003)
+  [1m[35m (54.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.1ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125090003_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (40.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (38.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mUser Load (44.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (78.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (55.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (64.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6537078506820086610)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (63.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateUsers (20181009230255)
+  [1m[35m (41.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (51.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181009230255_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (39.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181009230255"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (46.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateItems (20181010221622)
+  [1m[35m (42.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (45.1ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181010221622_create_items.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (44.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181010221622"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateProfiles (20181026105400)
+  [1m[35m (64.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (63.2ms)[0m  [1m[35mCREATE TABLE "profiles" ("id" bigserial primary key, "username" character varying, "first_name" character varying, "last_name" character varying, "street_number" integer, "street_name" character varying, "city" character varying, "province" character varying, "country" character varying, "date_of_birth" date, "phone_number" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181026105400_create_profiles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (275.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026105400"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddNameAndDescriptionToItems (20181026151647)
+  [1m[35m (43.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (51.7ms)[0m  [1m[35mALTER TABLE "items" ADD "name" character varying[0m
+  ↳ db/migrate/20181026151647_add_name_and_description_to_items.rb:3
+  [1m[35m (42.3ms)[0m  [1m[35mALTER TABLE "items" ADD "description" character varying[0m
+  ↳ db/migrate/20181026151647_add_name_and_description_to_items.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (45.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026151647"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to AddUserToProfiles (20181026182344)
+  [1m[35m (44.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.9ms)[0m  [1m[35mALTER TABLE "profiles" ADD "user_id" bigint[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:3
+  [1m[35m (48.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_profiles_on_user_id" ON "profiles"  ("user_id")[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:3
+  [1m[35m (51.9ms)[0m  [1m[35mALTER TABLE "profiles" ADD CONSTRAINT "fk_rails_e424190865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  ↳ db/migrate/20181026182344_add_user_to_profiles.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (48.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181026182344"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateBorrows (20181103181634)
+  [1m[35m (49.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (47.1ms)[0m  [1m[35mCREATE TABLE "borrows" ("id" bigserial primary key, "user_id" bigint, "item_id" bigint, "start_date" date, "end_date" date, "isReturned" boolean, CONSTRAINT "fk_rails_4de2f604db"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_3ea8bf6ed5"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+)[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[35m (47.0ms)[0m  [1m[35mCREATE  INDEX  "index_borrows_on_user_id" ON "borrows"  ("user_id")[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[35m (47.0ms)[0m  [1m[35mCREATE  INDEX  "index_borrows_on_item_id" ON "borrows"  ("item_id")[0m
+  ↳ db/migrate/20181103181634_create_borrows.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (44.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181103181634"]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (43.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToInt (20181103210205)
+  [1m[35m (37.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.3ms)[0m  [1m[35mALTER TABLE "borrows" ALTER COLUMN "isReturned" TYPE integer[0m
+  ↳ db/migrate/20181103210205_change_isreturned_to_int.rb:3
+  [1m[35m (44.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (49.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(6537078506820086610)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (33.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (36.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125090003)
+  [1m[35m (40.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.4ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125090003_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (45.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (44.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (35.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (36.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to ChangeIsreturnedToBeIntegerInTransactionsAsPsqlAsked (20181125090003)
+  [1m[35m (41.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.5ms)[0m  [1m[35mALTER TABLE "transactions" ALTER COLUMN "isReturned" TYPE integer USING CAST(isReturned AS integer)[0m
+  ↳ db/migrate/20181125090003_change_isreturned_to_be_integer_in_transactions_as_psql_asked.rb:3
+  [1m[35m (37.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (41.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (45.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (36.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (47.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (37.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (40.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2517262164556680870)[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (42.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/KytTndr/.rvm/gems/ruby-2.5.1/bin/rake:23

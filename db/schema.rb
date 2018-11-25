@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_24_165005) do
+ActiveRecord::Schema.define(version: 2018_11_25_083519) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -100,10 +103,10 @@ ActiveRecord::Schema.define(version: 2018_11_24_165005) do
     t.integer "item_id"
     t.date "start_date"
     t.date "end_date"
-    t.integer "isReturned"
     t.integer "lender_id"
     t.integer "borrower_id"
     t.integer "isApproved"
+    t.integer "isReturned"
     t.index ["borrower_id"], name: "index_transactions_on_borrower_id"
     t.index ["item_id"], name: "index_transactions_on_item_id"
     t.index ["lender_id"], name: "index_transactions_on_lender_id"

@@ -40,3 +40,10 @@ Processing by WelcomeController#index as HTML
   Rendered welcome/index.html.erb within layouts/application (0.8ms)
 Completed 200 OK in 184ms (Views: 177.6ms | ActiveRecord: 0.0ms)
   [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.8ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT  "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
