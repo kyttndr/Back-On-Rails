@@ -17,6 +17,11 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ html, body {
+   height: 100%;
+ }
+ 
 footer {
   position: relative;
+  text-align: center;
 }

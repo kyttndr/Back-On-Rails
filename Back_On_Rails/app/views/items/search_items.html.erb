@@ -1,36 +1,7 @@
-<div class= "container">
+<div class= "container item_look_up_container">
+
   <%= render 'items/lookup' %>
+
+  <div id="map"></div>
+
 </div>
-<h1>Searching items</h1>
-
-<p>
-  <%= link_to 'All Items', items_path %>
-</p>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Owner</th>
-  </tr>
-  <% @items.each do |item| %>
-    <tr>
-      <td><%= item.name %></td>
-      <td><%= item.description %></td>
-      <td><%= item.user.username%></td>
-      <td><%= link_to 'Show', item_path(item) %></td>
-      <% if logged_in? && current_user == item.user %>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></td>
-      <% end %>
-
-      <% if current_user!=item.user%>
-        <% query_params = {item_id: item.id} %>
-        <td><%= link_to('Request to Borrow', new_transaction_path(query_params))%></td>
-      <% end %>
-
-    </tr>
-  <% end %>
-</table>
-
-
-

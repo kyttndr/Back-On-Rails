@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   resources :tags, except: [:destroy]
 
-  root "welcome#index"
+  root 'welcome#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

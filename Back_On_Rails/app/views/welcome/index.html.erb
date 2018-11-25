@@ -1,11 +1,88 @@
-<div class = "center container">
+<div class="index_container">
 
-	<div class = "jumbotron">
-		<h1>Back on Rails</h1>
+  <nav class="navbar navbar-default index_navbar">
+  	<div class="container-fluid">
+  		<!-- Brand and toggle get grouped for better mobile display -->
+  		<div class="navbar-header">
+  			<%= link_to "Back on Rails", main_app.root_path, class: "navbar-brand", id: "logo" %>
+  		</div>
 
-	</div>
-  <div class = "container">
-    <%= render 'items/lookup' %>
+  		<!-- Collect the nav links, forms, and other content for toggling -->
+  		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  			<ul class="nav navbar-nav navbar-right">
+  				<li>
+  					<% if session[:user_id] == nil %>
+  						<li class="dropdown">
+  							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id = "line">Get Started!<span class="caret"></span></a>
+  							<ul class="dropdown-menu">
+  								<li align = "center"><%= link_to 'Login With Email', main_app.login_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li align = "center"><%= link_to 'Sign Up With Email', main_app.new_user_path %></li>
+                  <li role="separator" class="divider"></li>
+  								<li align = "center"><%= link_to "Using Facebook", user_facebook_omniauth_authorize_path %></li>
+  							</ul>
+  						</li>
+  					<% else %>
+
+  					<% end %>
+  				</li>
+
+  				<li>
+  					<% if request.fullpath == "/users/new" %>
+
+  					<% elsif session[:user_id] == nil%>
+
+  					<% else %>
+  						<li class="dropdown">
+  							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" font-weight= "bold" id = "line">
+  							Welcome! <%= current_user.username %><span class="caret"></span></a>
+  							<ul class="dropdown-menu">
+  								<li align = "center"><%= link_to 'My Page', main_app.user_path(session[:user_id]) %></li>
+  								<li role="separator" class="divider"></li>
+  								<li align = "center"><%= link_to current_user.friends.count.to_s + ' Following', main_app.my_friends_path %></li>
+  	              <li role="separator" class="divider"></li>
+  	              <li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
+  								<li role="separator" class="divider"></li>
+  								<li align = "center"><%= link_to 'My addresses', main_app.my_places_path %></li>
+  								<li role="separator" class="divider"></li>
+  								<li align = "center"><%= link_to 'Log out', main_app.logout_path, method: :delete %></li>
+
+                  <li role="separator" class="divider"></li>
+                  <li align = "center"><%= link_to Notification.unread_count(current_user), main_app.notifications_path, class: "glyphicon glyphicon-bell", style: "font-size: 120%;" %></li>
+        					<input type="hidden" id="unread_count" value="<%= Notification.unread_count(current_user) %>">
+                  <li role="separator" class="divider"></li>
+                  <li align = "center"><a href="#">Your Listed Items</a></li>
+    							<li role="separator" class="divider"></li>
+    							<li align = "center"><%= link_to 'Borrowed Items', main_app.borrow_transactions_path %></li>
+                  <li role="separator" class="divider"></li>
+    							<li align = "center"><%= link_to 'Lent Items', main_app.lend_transactions_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li align = "center"><%= link_to 'Pending Transactions', main_app.pending_transactions_path %></li>
+    							<li role="separator" class="divider"></li>
+    							<li align = "center"><%= link_to 'View Borrow History', main_app.borrow_transactions_history_path %></li>
+                  <li role="separator" class="divider"></li>
+    							<li align = "center"><%= link_to 'View Lend History', main_app.lend_transactions_history_path %></li>
+  							</ul>
+  						</li>
+  					<% end %>
+  				</li>
+  			</ul>
+  		</div><!-- /.navbar-collapse -->
+  	</div><!-- /.container-fluid -->
+  </nav>
+
+  <div class = "container index_item_look_up">
+    <div id="item-lookup">
+      <%= form_tag search_items_path, method: :get, id: 'item-lookup-form' do %>
+        <div class="search__container">
+          <%= text_field_tag :search_item, params[:search_item],
+                              placeholder: "item name or description",
+                              class: "search__input" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+	<div id="index_map"></div>
 
 </div>

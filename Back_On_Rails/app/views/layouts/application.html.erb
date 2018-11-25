@@ -11,10 +11,16 @@
     <%= include_gon %>
   </head>
 
-  <%= render 'layouts/navigation' %>
+  <% if !@is_index %>
+    <%= render 'layouts/navigation' %>
+  <% end %>
+
   <body>
     <%= yield %>
   </body>
-  <%= render 'layouts/footer' %>
-  
+
+  <% if !@is_index %>
+    <%= render 'layouts/footer' %>
+  <% end %>
+
 </html>
