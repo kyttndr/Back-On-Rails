@@ -14,9 +14,12 @@ development:
   <<: *default
   database: db/development.sqlite3
 # development:
-#   <<: *default
+#   # <<: *default
+#   adapter: postgresql
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
 #   encoding: unicode
-#   database: backonrails
+#   database: backonrails_development
 #   username: backonrails
 #   password: backonrails
 #   host: back-on-rails.coeslrinkhee.us-east-1.rds.amazonaws.com
