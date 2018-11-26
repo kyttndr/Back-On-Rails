@@ -47,7 +47,7 @@ window.initMap = ->
       animation: google.maps.Animation.DROP
       url: '/places/' + gon.place.id)
 
-  else if last_url == '0.0.0.0:3000'
+  else if last_url == '0.0.0.0:3000' or last_url == 'back-on-rails.herokuapp.com'
     if gon.places.length == 0
       center_lat = 43.66090860000001
       center_lng = -79.39595179999999
