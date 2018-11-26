@@ -16,7 +16,7 @@ development:
 # development:
 #   <<: *default
 #   encoding: unicode
-#   database: backonrails_development
+#   database: backonrails
 #   username: backonrails
 #   password: backonrails
 #   host: back-on-rails.coeslrinkhee.us-east-1.rds.amazonaws.com
