@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(window).load ->
+  console.log 'test'
   window.initMap()
 
 $(document).on 'turbolinks:load', ->
