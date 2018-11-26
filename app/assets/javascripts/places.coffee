@@ -14,6 +14,7 @@ window.initMap = ->
   if last_url == ''
     last_url = url_array.pop()
   reg = new RegExp('^\\d+$')
+  console.log last_url
 
   if last_url == 'new'
     map = new (google.maps.Map)(document.getElementById('form_map'),
