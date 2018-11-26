@@ -91,6 +91,10 @@ li{
 	color: rgba(0, 42, 92, 0.7) !important;
 }
 
+.search__container #tag_id {
+	display: none;
+}
+
 .search {
     &__container {
         padding-top: 64px;
