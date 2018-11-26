@@ -1,0 +1,35 @@
+I"ò(function() {
+  var handleFileSelect;
+
+  handleFileSelect = function(evt) {
+    var f, files, i, list_element, reader;
+    list_element = document.getElementById('list');
+    while (list_element.firstChild) {
+      list_element.removeChild(list_element.firstChild);
+    }
+    files = evt.target.files;
+    i = 0;
+    f = void 0;
+    while (f = files[i]) {
+      if (!f.type.match('image.*')) {
+        i++;
+        continue;
+      }
+      reader = new FileReader;
+      reader.onload = (function(theFile) {
+        return function(e) {
+          var span;
+          span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb item_pic_preview" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+      reader.readAsDataURL(f);
+      i++;
+    }
+  };
+
+  document.getElementById('item_item_pictures').addEventListener('change', handleFileSelect, false);
+
+}).call(this);
+:ET
