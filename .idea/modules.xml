@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Back-On-Rails.iml" filepath="$PROJECT_DIR$/.idea/Back-On-Rails.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Back_On_Rails.iml" filepath="$PROJECT_DIR$/.idea/modules/Back_On_Rails.iml" />
     </modules>
   </component>
 </project>
