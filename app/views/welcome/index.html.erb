@@ -75,6 +75,8 @@
     <div id="item-lookup">
       <%= form_tag search_items_path, method: :get, id: 'item-lookup-form' do %>
         <div class="search__container">
+						<%= select_tag "tag_id", content_tag(:option,'All',:value=>'')+
+								options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]) %>
           <%= text_field_tag :search_item, params[:search_item],
                               placeholder: "item name or description",
                               class: "search__input" %>
