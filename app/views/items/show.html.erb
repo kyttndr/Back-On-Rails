@@ -2,6 +2,7 @@
 
 <div>
 	<%= @item.description %><br/>
+	<%= link_to @item.place.address, place_path(@item.place) %><br/>
   <div>
     <%=@item.item_pictures.length %>
   </div>
