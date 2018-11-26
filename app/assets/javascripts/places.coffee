@@ -3,19 +3,18 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(window).load ->
-  console.log 'test'
   window.initMap()
 
 $(document).on 'turbolinks:load', ->
   window.initMap()
 
 window.initMap = ->
+  url = window.location.href
   url_array = window.location.href.split('/')
   last_url = url_array.pop()
   if last_url == ''
     last_url = url_array.pop()
   reg = new RegExp('^\\d+$')
-  console.log last_url
 
   if last_url == 'new'
     map = new (google.maps.Map)(document.getElementById('form_map'),
@@ -49,7 +48,7 @@ window.initMap = ->
       animation: google.maps.Animation.DROP
       url: '/places/' + gon.place.id)
 
-  else if last_url == '0.0.0.0:3000' or last_url == 'back-on-rails.herokuapp.com'
+  else if url.includes '0.0.0.0:3000' or url.includes 'back-on-rails.herokuapp.com'
     if gon.places.length == 0
       center_lat = 43.66090860000001
       center_lng = -79.39595179999999
