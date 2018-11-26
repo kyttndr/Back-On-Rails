@@ -84,7 +84,7 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-group :test do
+group :production do
   gem 'pg'
 end
 
