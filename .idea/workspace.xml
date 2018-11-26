@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65f35c4e-0569-4fb1-ad41-f721f8365fd8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Back-On-Rails.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Back-On-Rails.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +53,7 @@
           <entry key="CoffeeScript" value="463" />
           <entry key="PLAIN_TEXT" value="135" />
           <entry key="RHTML" value="2108" />
-          <entry key="Ruby" value="1118" />
+          <entry key="Ruby" value="1210" />
           <entry key="SCSS" value="145" />
         </counts>
       </usages-collector>
@@ -65,12 +63,12 @@
           <entry key="Gemfile" value="3" />
           <entry key="coffee" value="5" />
           <entry key="css" value="3" />
-          <entry key="erb" value="36" />
+          <entry key="erb" value="37" />
           <entry key="gitignore" value="2" />
           <entry key="html" value="2" />
           <entry key="jpg" value="6" />
           <entry key="js" value="1" />
-          <entry key="rb" value="41" />
+          <entry key="rb" value="49" />
           <entry key="scss" value="8" />
           <entry key="sql" value="1" />
           <entry key="txt" value="1" />
@@ -84,7 +82,7 @@
           <entry key="coffee" value="463" />
           <entry key="erb" value="2108" />
           <entry key="gitignore" value="93" />
-          <entry key="rb" value="980" />
+          <entry key="rb" value="1072" />
           <entry key="scss" value="145" />
           <entry key="txt" value="42" />
         </counts>
@@ -97,8 +95,8 @@
           <entry key="Image" value="6" />
           <entry key="JavaScript" value="1" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="RHTML" value="36" />
-          <entry key="Ruby" value="44" />
+          <entry key="RHTML" value="37" />
+          <entry key="Ruby" value="52" />
           <entry key="SCSS" value="8" />
           <entry key="Scratch" value="1" />
         </counts>
@@ -107,12 +105,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+            <state relative-caret-position="216">
+              <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/mailers/application_mailer.rb">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/mailers/user_mailer.rb">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20181126022213_add_activation_to_users.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1167" />
           </provider>
         </entry>
       </file>
@@ -168,6 +228,9 @@
         <option value="$PROJECT_DIR$/Back_On_Rails/app/assets/stylesheets/items.scss" />
         <option value="$PROJECT_DIR$/Back_On_Rails/app/assets/javascripts/items.coffee" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20181126022213_add_activation_to_users.rb" />
       </list>
     </option>
   </component>
@@ -201,6 +264,41 @@
             <path>
               <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
               <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Back-On-Rails" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+              <item name="migrate" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Back-On-Rails" type="b2602c69:ProjectViewProjectNode" />
@@ -370,7 +468,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62953000" />
+    <option name="totallyTimeSpent" value="65524000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -414,24 +512,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/config/routes.rb" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/views/users/new.html.erb" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/80587b63-1426-46bc-93ea-aad25caca12f/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/views/users/edit.html.erb" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/Gemfile" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/uploaders/profile_pictrure_uploader.rb" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/sqlite3_fix.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/db/migrate/20181115004025_add_user_to_places.rb" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/db/migrate/20181108225936_add_is_approved_to_transaction.rb" />
-    <entry file="file://$PROJECT_DIR$/Back_On_Rails/db/migrate/20181116045847_add_tag_to_notifications.rb" />
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/db/migrate/20181117215153_add_profile_picture_to_profiles.rb" />
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/public/404.html" />
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/public/422.html" />
@@ -479,5 +559,61 @@
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/views/profiles/_form.html.erb" />
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/assets/javascripts/profiles.coffee" />
     <entry file="file://$PROJECT_DIR$/Back_On_Rails/app/assets/javascripts/items.coffee" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="25" column="15" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mailers/application_mailer.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mailers/user_mailer.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/transactions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/users_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1167" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/users/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20181126022213_add_activation_to_users.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

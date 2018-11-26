@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :user_reviews
   end
 
+  # Account activation routing
+  resources :account_activations, only: [:edit]
+
   get 'borrow_transactions', to: 'transactions#borrow_index'
   get 'lend_transactions', to: 'transactions#lend_index'
   get 'pending_transactions', to: 'transactions#pending_index'
