@@ -25,3 +25,5 @@ config/master.key
  # Ignore all the local uploads
 public/uploads/
 *.DS_Store
+# Ignore IDE files
+.idea/
