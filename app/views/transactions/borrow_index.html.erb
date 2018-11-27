@@ -1,5 +1,4 @@
-<div class = "center">
-	<div>
+<div class = "container center" style = "width: 95%;">
 		<div class="col-xs-6 manage_index">
 			<h2>BORROWED ITEMS</h2>
 			<p class="lead" style="font-size: 18px;">
@@ -17,7 +16,7 @@
 				      		<th class="col-xs-4">Description</th>
 				      		<th class="col-xs-2">Owner</th>
 				      		<th class="col-xs-2">Start Date</th>
-							<th class="col-xs-2">End Date</th>
+									<th class="col-xs-2">End Date</th>
 				    	</tr>
 				  	</thead>
 					<tbody>
@@ -87,5 +86,4 @@
 		<div class="col-xs-6">
 			<%= render 'calendar', list_transactions: [*@current_borrow_transactions, *@future_borrow_transactions], show: 'items' %>
 		</div>
-	</div>
 </div>
