@@ -13,9 +13,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(allowed_params)
     if @user.save
-      flash[:notice] = "Thank you for signing up!"
-      session[:user_id] = @user.id
-      redirect_to new_user_profile_path(@user)
+      UserMailer.account_activation(@user).deliver_now
+      flash[:notice] = "Thank you for signing up! Please check your email to activate account"
+      redirect_to root_path
+      # session[:user_id] = @user.id
+      # redirect_to new_user_profile_path(@user)
     else
       render 'new'
     end
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     @user.destroy
     flash[:notice] = "Deleted"
-    redirect_to users_path
+    redirect_to root_path
   end
 
   def my_friends
