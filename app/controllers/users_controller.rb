@@ -16,8 +16,6 @@ class UsersController < ApplicationController
       UserMailer.account_activation(@user).deliver_now
       flash[:notice] = "Thank you for signing up! Please check your email to activate account"
       redirect_to root_path
-      # session[:user_id] = @user.id
-      # redirect_to new_user_profile_path(@user)
     else
       render 'new'
     end
