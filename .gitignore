@@ -20,10 +20,10 @@ node_modules
 yarn-error.log
 public/assets
 .byebug_history
- # Ignore master key for decrypting credentials and more.
-config/master.key
  # Ignore all the local uploads
 public/uploads/
 *.DS_Store
 # Ignore IDE files
 .idea/
+# Ignore master key for decrypting credentials and more.
+/config/master.key

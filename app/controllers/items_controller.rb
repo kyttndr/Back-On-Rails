@@ -61,10 +61,20 @@ class ItemsController < ApplicationController
 
   def search
     if params[:search_item]
-      @item_by_name = Item.where('name LIKE ?', "%#{params[:search_item]}%")
-      @item_by_description = Item.where('description LIKE ?', "%#{params[:search_item]}%")
-      @items = (@item_by_name + @item_by_description).uniq
-      gon.places = @items.map{|i| i.place}
+      if params[:tag_id] != ''
+        @item_by_name = Item.joins(:tags).where('tags.id IS ? AND items.name LIKE ?',
+                                                "#{params[:tag_id]}", "%#{params[:search_item]}%")
+        @item_by_description = Item.joins(:tags).where('tags.id IS ? AND items.description LIKE ?',
+                                                       "#{params[:tag_id]}", "%#{params[:search_item]}%")
+        @items = (@item_by_name + @item_by_description).uniq
+        gon.places = @items.map{|i| i.place}
+      else
+        @item_by_name = Item.where('name LIKE ?', "%#{params[:search_item]}%")
+        @item_by_description = Item.where('description LIKE ?', "%#{params[:search_item]}%")
+        @items = (@item_by_name + @item_by_description).uniq
+        gon.places = @items.map{|i| i.place}
+      end
+
     else
     end
     render 'search_items'

@@ -34,4 +34,5 @@ handleFileSelect = (evt) ->
     i++
   return
 
-document.getElementById('item_item_pictures').addEventListener 'change', handleFileSelect, false
+if document.getElementById('item_item_pictures')
+  document.getElementById('item_item_pictures').addEventListener 'change', handleFileSelect, false

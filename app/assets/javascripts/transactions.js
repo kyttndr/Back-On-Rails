@@ -142,7 +142,7 @@ function highlightPendingCalendar(item_id, transaction_start_date, transaction_e
                     flag = 1;
                 }
             });
-            if(flag = 0){
+            if(flag == 0){
                 $(this).attr('style', 'background-color: lightgreen');
             }
         }

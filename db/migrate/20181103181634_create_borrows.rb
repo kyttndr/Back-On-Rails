@@ -6,7 +6,7 @@ class CreateBorrows < ActiveRecord::Migration[5.2]
         t.references :item, foreign_key: true, index: true
         t.date :start_date
         t.date :end_date
-        t.boolean :isReturned
+        t.integer :isReturned
 
     end
   end

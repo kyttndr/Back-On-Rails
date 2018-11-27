@@ -78,6 +78,8 @@
           <%= text_field_tag :search_item, params[:search_item],
                               placeholder: "item name or description",
                               class: "search__input" %>
+          <%= select_tag "tag_id", content_tag(:option,'All',:value=>'') +
+							options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]) %>
         </div>
       <% end %>
     </div>
