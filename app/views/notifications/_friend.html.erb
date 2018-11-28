@@ -1,7 +1,10 @@
 <div class="media-heading">
-    <% if notification.tag == 'follow' %>
-        <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
-        has followed you:
-        <%= link_to notification.user.name, main_app.user_path(notification.user) %>
+    <% if notification.actor && notification.user %>
+
+        <% if notification.tag == 'new_follower' %>
+            <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
+            has started following you!
+        <% end %>
+
     <% end %>
 </div>
