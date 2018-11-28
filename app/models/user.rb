@@ -76,6 +76,7 @@ class User < ApplicationRecord
       user.password = "11111111"
       user.username = auth.info.name
       user.image = auth.info.image
+      user.activated = true
     end
   end
 
