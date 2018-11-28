@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   mount Notifications::Engine => "/notifications"
   mount Crono::Web, at: '/crono'
 
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
 
   # Account activation routing
   resources :account_activations, only: [:edit]
+
+  # Password reset routing
+  resource :password_resets, only: [:new, :create, :edit, :update]
 
   get 'borrow_transactions', to: 'transactions#borrow_index'
   get 'lend_transactions', to: 'transactions#lend_index'
