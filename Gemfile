@@ -99,3 +99,7 @@ gem 'notifications'
 gem "simple_calendar", "~> 2.0"
 
 gem 'data-confirm-modal'
+
+gem 'crono'
+gem 'haml'
+gem 'sinatra', require: nil

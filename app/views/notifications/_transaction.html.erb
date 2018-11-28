@@ -1,24 +1,27 @@
 <div class="media-heading">
     <% if notification.actor && notification.user && notification.target %>
 
-        <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
-
-        <% if notification.tag == 'request' %>
-            has requested to borrow your item:
-        <% elsif notification.tag == 'accept' %>
-            has accepted your request to borrow their item:
-        <% elsif notification.tag == 'reject' %>
-            has rejected your request to borrow their item:
-        <% elsif notification.tag == 'item_returned' %>
-            has recieved <%= link_to notification.target.name, main_app.item_path(notification.target) %> back from you
-        <% elsif notification.tag == 'lender_cancel' %>
-            has cancelled the agreement to let you borrow
-        <% elsif notification.tag == 'borrower_cancel' %>
-            has cancelled the plans to borrow
-        <% end %>
-
-        <% if notification.tag != 'item_returned' %>
-            <%= link_to notification.target.name, main_app.item_path(notification.target) %>
+        <% if notification.tag == 'overdue_item' %>
+            Your borrowed item: <%= link_to notification.target.item.name, main_app.item_path(notification.target.item.name) %>
+            is OVERDUE! Please return it immediately!
+        <% else %>
+            <%= link_to notification.actor.username, main_app.user_path(notification.actor) %>
+            <% if notification.tag == 'request' %>
+                has requested to borrow your item:
+            <% elsif notification.tag == 'accept' %>
+                has accepted your request to borrow their item:
+            <% elsif notification.tag == 'reject' %>
+                has rejected your request to borrow their item:
+            <% elsif notification.tag == 'item_returned' %>
+                has recieved <%= link_to notification.target.name, main_app.item_path(notification.target) %> back from you
+            <% elsif notification.tag == 'lender_cancel' %>
+                has cancelled the agreement to let you borrow
+            <% elsif notification.tag == 'borrower_cancel' %>
+                has cancelled the plans to borrow
+            <% end %>
+            <% if notification.tag != 'item_returned' %>
+                <%= link_to notification.target.name, main_app.item_path(notification.target) %>
+            <% end %>
         <% end %>
     <% end %>
 </div>

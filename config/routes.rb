@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   mount Notifications::Engine => "/notifications"
+  mount Crono::Web, at: '/crono'
+
   get 'welcome/index'
   get 'welcome/about', to: 'welcome#about'
   get 'welcome/privacy_policy', to: 'welcome#privacy_policy'
