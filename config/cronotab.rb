@@ -15,4 +15,4 @@
 #
 
 
-Crono.perform(TransactionJob).every 1.minute   #, at: {hour: 0, min: 3}
+Crono.perform(TransactionJob).every 1.day, at: {hour: 0, min: 0}
