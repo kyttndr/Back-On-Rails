@@ -6,7 +6,7 @@ $(window).load ->
   window.initMap()
 
 $(document).on 'turbolinks:load', ->
-  if wdocument.getElementById('form_map') or document.getElementById('show_map') or document.getElementById('index_map') or document.getElementById('map')
+  if document.getElementById('form_map') or document.getElementById('show_map') or document.getElementById('index_map') or document.getElementById('map')
     window.initMap()
 
 window.initMap = ->
