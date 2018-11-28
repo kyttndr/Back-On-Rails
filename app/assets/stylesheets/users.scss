@@ -11,3 +11,14 @@
   border-top: 1px solid #eaeaea;
   padding-top: 10px;
 }
+
+.panel-body {
+  ul {
+    padding-left: 0;
+    list-style-type: disc !important;
+    padding-inline-start: 30px;
+  }
+  li {
+    display: list-item !important;
+  }
+}

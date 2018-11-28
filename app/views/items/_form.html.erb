@@ -1,15 +1,23 @@
 <div class = "container">
 
-
-
   <% if @item.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class = "row">
+      <div class = "col-xs-8 col-xs-offset-2">
+        <div class = "panel panel-danger">
+          <div class="panel-heading">
+            <h2 class = "panel-title">
+              The form contains <%= pluralize(@item.errors.count, "error") %>.
+            </h2>
+            <div class = "panel-body">
+              <ul>
+                <% @item.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 
@@ -50,7 +58,10 @@
           <%= form.label :place_id %>
         </div>
         <div class = "col-sm-8">
-          <%= form.select :place_id, options_for_select(Place.select{|p| p.user = current_user}.map{|s| [s.address, s.id]}), class:"form-control" %>
+          <%= form.collection_select(:place_id, Place.select{|p| p.user == current_user}, :id, :address, {:include_blank => ("Please select an address"), hide_label: true}, class: "form-control") %>
+          <% if Place.select{|p| p.user == current_user}.length == 0 %>
+            <small class="form-text text-muted">You don't have any addresses. <%= link_to 'Create an address', my_places_path %></small>
+          <% end %>
         </div>
       </div>
 

@@ -15,6 +15,7 @@ class Item < ApplicationRecord
     validates :name, presence: true, length: { minimum: 3}
     validates :description, presence: true, length: { minimum: 10}
     validate :item_pictures_number
+    validates :place_id, presence: true
 
     def item_pictures_number
         if item_pictures.length > 5

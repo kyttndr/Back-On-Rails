@@ -2,19 +2,14 @@
   <%= form_tag search_items_path, method: :get, id: 'item-lookup-form' do %>
     <div class="form-group">
       <div class="form-group row no-padding text-center col-md-12">
-        <div class="col-md-1">
-          <%= select_tag "tag_id", content_tag(:option,'All',:value=>'')+
-              options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]) %>
-        </div>
-        <div class="col-md-9">
+        <div class="col-md-11 search_sub_part">
           <%= text_field_tag :search_item, params[:search_item],
                               placeholder: "item name or description",
                               class: "form-control" %>
         </div>
-        <div class="col-md-2">
-          <%= button_tag(type: :submit, class: "btn btn-default") do %>
-            Look up an item
-          <% end %>
+        <div class="col-md-1 search_sub_part">
+          <%= select_tag "tag_id", content_tag(:option,'All',:value=>'')+
+              options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]), class: "form-control" %>
         </div>
       </div>
     </div>

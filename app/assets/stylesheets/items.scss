@@ -40,3 +40,11 @@
 .item_look_up_container {
   height: 90%;
 }
+
+.field_with_errors {
+  @extend .has-error;
+}
+
+#item-lookup .search_sub_part {
+  padding: 0px;
+}
