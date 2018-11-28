@@ -89,6 +89,7 @@ class TransactionsController < ApplicationController
             if params[:transaction][:type]
                 if params[:transaction][:type] == 'accept'
                     send_notification('transaction', 'accept', @user, @transaction.borrower, @item, @transaction)
+                    UserMailer.accepted_request(@transaction.borrower, @user, @transaction).deliver
                 end
                 if params[:transaction][:type] == 'reject'
                     send_notification('transaction', 'reject', @user, @transaction.borrower, @item, @transaction)

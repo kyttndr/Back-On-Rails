@@ -17,6 +17,14 @@ class UserMailer < ApplicationMailer
         mail to: @to_user.email, subject: "#{@from_user.username} has cancelled your transaction on '#{@item.name}'"
     end
 
+    def accepted_request(to_user, from_user, transaction)
+        @transaction = transaction
+        @to_user = to_user
+        @from_user = from_user
+        @item = transaction.item
+        mail to: @to_user.email, subject: "#{@from_user.username} has accepted your request to borrow '#{@item.name}'"
+    end
+
     def reminder_item_due_date
 
     end
