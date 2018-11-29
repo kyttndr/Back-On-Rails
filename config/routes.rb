@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
 
   # Password reset routing
-  resource :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   get 'borrow_transactions', to: 'transactions#borrow_index'
   get 'lend_transactions', to: 'transactions#lend_index'

@@ -5,6 +5,26 @@
 <br/><br/>
 
 <div class="container">
+
+  <% if @user.errors.any? %>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <div class="panel-body">
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
   <%= form_for(:password_reset,:html => {class:"form-horizontal", role: "form"}, url: password_resets_path) do |f| %>
     <div class="row">
         <div class="form-group">
