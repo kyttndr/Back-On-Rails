@@ -10,7 +10,7 @@
 			<ul class="nav navbar-nav">
 				<li><%= link_to "Browse all Items", main_app.items_path %></li>
 				<li><%= link_to "Browse all Users", main_app.users_path %></li>
-        <li><%= link_to "All tags", main_app.tags_path %></li>
+        		<li><%= link_to "All tags", main_app.tags_path %></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if session[:user_id] != nil %>
@@ -22,8 +22,6 @@
 							<li><%= link_to 'Borrowed Items', main_app.borrow_transactions_path %></li>
 							<li><%= link_to 'Lent Items', main_app.lend_transactions_path %></li>
 						</ul>
-					</li>
-					<li>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transactions<span class="caret"></span></a>
@@ -38,24 +36,19 @@
 					<input type="hidden" id="unread_count" value="<%= Notification.unread_count(current_user) %>">
 				<% end  %>
 
-				<li>
 					<% if session[:user_id] == nil %>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id = "line">Get Started!<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li align = "center"><%= link_to 'Login With Email', main_app.login_path %></li>
-                <li role="separator" class="divider"></li>
-                <li align = "center"><%= link_to 'Sign Up With Email', main_app.new_user_path %></li>
-                <li role="separator" class="divider"></li>
+                				<li role="separator" class="divider"></li>
+                				<li align = "center"><%= link_to 'Sign Up With Email', main_app.new_user_path %></li>
+                				<li role="separator" class="divider"></li>
 								<li align = "center"><%= link_to "Using Facebook", user_facebook_omniauth_authorize_path %></li>
 							</ul>
 						</li>
-					<% else %>
-
 					<% end %>
-				</li>
 
-				<li>
 					<% if request.fullpath == "/users/new" %>
 
 					<% elsif session[:user_id] == nil%>
@@ -69,8 +62,8 @@
 								<li align = "center"><%= link_to 'My Page', main_app.user_path(session[:user_id]) %></li>
 								<li role="separator" class="divider"></li>
 								<li align = "center"><%= link_to current_user.friends.count.to_s + ' Following', main_app.my_friends_path %></li>
-	              <li role="separator" class="divider"></li>
-	              <li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
+	              				<li role="separator" class="divider"></li>
+	              				<li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
 								<li role="separator" class="divider"></li>
 								<li align = "center"><%= link_to 'My addresses', main_app.my_places_path %></li>
 								<li role="separator" class="divider"></li>
@@ -78,7 +71,6 @@
 							</ul>
 						</li>
 					<% end %>
-				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

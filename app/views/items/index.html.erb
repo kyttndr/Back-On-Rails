@@ -40,7 +40,7 @@
                     <%= link_to 'Edit', edit_item_path(item), class: "btn btn-xs btn-primary" %>
                     <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" %>
                   <% end %>
-                  <% if current_user!=item.user%>
+                  <% if current_user && current_user!=item.user%>
                     <% query_params = {item_id: item.id} %>
                     <%= link_to('Request to Borrow', new_transaction_path(query_params), class: "btn btn-xs btn-warning" )%>
                 <% end %>
@@ -53,4 +53,3 @@
     </table>
   <div align = "center"><%= will_paginate %></div>
 </div>
-
