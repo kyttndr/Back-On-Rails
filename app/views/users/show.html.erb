@@ -42,7 +42,9 @@
         <div class = "control-label col-sm-7 col-xs-offset-1">
 	        <p><%=link_to "View profile", user_profile_path(@user), class: "btn btn-xl btn-primary"%></p>
 	        <p><%=link_to "View Reviews of this User", user_user_reviews_path(@user), class: "btn btn-xl btn-primary" %></p>
-	        <p><%=link_to "Review this User", new_user_user_review_path(@user), class: "btn btn-xl btn-primary" %></p>
+			<% if logged_in? %>
+		    	<p><%=link_to "Review this User", new_user_user_review_path(@user), class: "btn btn-xl btn-primary" %></p>
+			<% end %>
         </div>
       </div>
 
