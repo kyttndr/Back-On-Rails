@@ -41,7 +41,9 @@
 
     <br>
     <div class="col-sm-7">
-        <span class="pull-left"><%= link_to 'Review this user', new_user_user_review_path(@reviewee), class: "btn btn-primary" %></span>
+        <% if logged_in? %>
+            <span class="pull-left"><%= link_to 'Review this user', new_user_user_review_path(@reviewee), class: "btn btn-primary" %></span>
+        <% end %>
         <span class="pull-right"><%= link_to 'Back to user page', user_path(@reviewee), class: "btn btn-default" %></span>
 
 
