@@ -30,13 +30,11 @@ class PasswordResetsController < ApplicationController
       @user.errors.add(:password, "Can not be empty")
       render 'edit'
     elsif @user.update_attributes(user_params)
-      puts("params are fine")
       session[:user_id] = @user.id
       @user.update_attribute(:reset_digest, nil)
       flash[:success] = "Password has been reset."
       redirect_to root_path
     else
-      puts("something went wrong")
       render 'edit'
     end
   end
@@ -49,7 +47,6 @@ class PasswordResetsController < ApplicationController
 
   def get_user
     @user = User.find_by(email: params[:email])
-    puts("Found user with email #{@user.email}")
   end
 
   # Confirm that password is being reset for valid activated user

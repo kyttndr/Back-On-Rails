@@ -125,12 +125,9 @@ class User < ApplicationRecord
   end
 
   def authenticated?(attribute, token)
-    puts("#{attribute}")
-    puts ("Passed token is: #{token}")
     digest = send("#{attribute}_digest")
     puts("#{digest}")
     return false if digest.nil?
-    puts("Digest is not nil")
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -154,7 +151,6 @@ class User < ApplicationRecord
 
   def create_reset_digest
     self.reset_token = User.new_token
-    puts("Generated reset token: #{self.reset_token}")
     update_attribute(:reset_digest, User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
