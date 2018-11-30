@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'welcome/privacy_policy', to: 'welcome#privacy_policy'
   get 'welcome/faq', to: 'welcome#faq'
   get 'welcome/contact_us', to: 'welcome#contact_us'
+  get 'welcome/terms_of_service', to: 'welcome#terms_of_service'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :users do

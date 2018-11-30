@@ -2,10 +2,16 @@
   <div>
     <nav>
       <ul>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <li><%= link_to "About  ", main_app.welcome_about_path %></li>|
+        <li><%= link_to "terms of service  ", main_app.welcome_terms_of_service_path %></li>|
         <li><%= link_to "privacy policy  ", main_app.welcome_privacy_policy_path %></li>|
         <li><%= link_to "FAQ  ", main_app.welcome_faq_path %></li>|
-        <li><%= link_to "Contact Us", main_app.welcome_contact_us_path %></li>
+        <li><%= link_to "Contact Us ", main_app.welcome_contact_us_path %></li>|
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-instagram"></a>
       </ul>
     </nav>
   </div>
