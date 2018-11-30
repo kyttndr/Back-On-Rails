@@ -17,10 +17,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         #redirect_to new_user_profile_path(@user)
       #end
       if @user.profile.nil?
-        #session[:user_id] = @user.id
-        #redirect_to new_user_profile_path(@user)
-        UserMailer.account_activation(@user).deliver_now
-        redirect_to root_path
+        session[:user_id] = @user.id
+        redirect_to new_user_profile_path(@user)
+        #UserMailer.account_activation(@user).deliver_now
+        #redirect_to root_path
       else
         session[:user_id] = @user.id
         redirect_to root_path
