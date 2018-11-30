@@ -95,4 +95,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Set default host for sending emails, might need to change in prod
+  host = 'back-on-rails.herokuapp.com'                     # Local server
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 end
