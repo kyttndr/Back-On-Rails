@@ -1,0 +1,55 @@
+<div class= "container">
+  <%= render 'items/lookup' %>
+
+  <br/><br/><br/><h1 align = "center">Listing all items</h1>
+  <p>
+  <h4 style="float:left;"><%= link_to "Register new item", new_item_path, class: "btn btn-sm btn-success" %></h4>
+  </p>
+  <p>
+  <h4 style="float:right;"><%= link_to 'Home', root_path %></h4>
+  </p>
+</div>
+<div align = "center"><%= will_paginate %></div>
+<div class= "container">
+  <table>
+    <% @items.each do |item| %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="well">
+            <% if item.item_pictures.any? %>
+              <div><%= image_tag item.item_pictures_urls[0], class: "picture-in-index" %></div>
+            <% end %>
+            <div class="item-name">
+              <p><%= item.name %></p>
+            </div>
+            <div class="item-description">
+              <div><%= truncate(item.description, length: 100) %></div>
+            </div>
+            <div>Owned by: <%= item.user.username%>
+              <% if item.tags.any? %>
+                | Tags:
+                <% item.tags.each do |tag| %>
+                  <%= link_to tag.name, tag_path(tag) %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="article-actions">
+              <div>
+                <%= link_to 'Show', item_path(item), class: "btn btn-xs btn-info"  %>
+                <% if logged_in? && current_user == item.user %>
+                  <%= link_to 'Edit', edit_item_path(item), class: "btn btn-xs btn-primary" %>
+                  <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" %>
+                <% end %>
+                <% if current_user && current_user!=item.user%>
+                  <% query_params = {item_id: item.id} %>
+                  <%= link_to('Request to Borrow', new_transaction_path(query_params), class: "btn btn-xs btn-warning" )%>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </table>
+  <div align = "center"><%= will_paginate %></div>
+</div>

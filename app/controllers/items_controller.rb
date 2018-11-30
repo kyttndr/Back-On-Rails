@@ -85,6 +85,10 @@ class ItemsController < ApplicationController
     @items = User.find(params[:id_param]).items
   end
 
+  def listed_items
+    @items = current_user.items.paginate(page: params[:page], per_page: 5)
+  end
+
   private
 
   def allowed_params

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   #item search
   get 'search_items', to: 'items#search'
+  get 'listed_items', to: 'items#listed_items'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
