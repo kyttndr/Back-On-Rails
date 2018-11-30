@@ -25,7 +25,7 @@
             <div class="item-description">
               <div><%= truncate(item.description, length: 100) %></div>
             </div>
-            <div>Owned by: <%= item.user.username%>
+            <div>Owned by: <%= link_to item.user.username, user_path(item.user) %>
               <% if item.tags.any? %>
                 | Tags:
                 <% item.tags.each do |tag| %>
