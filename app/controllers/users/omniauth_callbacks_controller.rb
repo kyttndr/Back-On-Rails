@@ -9,13 +9,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         #session[:user_id] = @user.id
         #redirect_to new_user_registration_url
       #end
-      if @user.persisted?
-        session[:user_id] = @user.id
-        redirect_to root_path
-      else
+      #if @user.persisted?
+        #session[:user_id] = @user.id
+        #redirect_to root_path
+      #else
+        #session[:user_id] = @user.id
+        #redirect_to new_user_profile_path(@user)
+      #end
+      if @user.profile.nil?
         session[:user_id] = @user.id
         redirect_to new_user_profile_path(@user)
-      end
+      else
+        session[:user_id] = @user.id
+        redirect_to root_path
     end
   
     def failure
