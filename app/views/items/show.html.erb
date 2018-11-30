@@ -1,42 +1,51 @@
-<h1><%= @item.name%></h1>
+<div class="container">
+	<h1><%= @item.name%></h1>
 
-<div>
-	<%= @item.description %><br/>
-	<%= link_to @item.place.address, place_path(@item.place) %><br/>
-  <div>
-    <%=@item.item_pictures.length %>
-  </div>
 	<div>
-	  <%= 0.upto @item.item_pictures.length-1 do |index| %>
-	    <%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
-	  <% end %>
-	</div>
-</div><br/><br/>
+		<strong>Description: </strong><%= @item.description %><br/>
+		<strong>Located at: </strong><%= link_to @item.place.address, place_path(@item.place) %><br/>
+		<div>
+			<%=@item.item_pictures.length %>
+		</div>
+		<div>
+			<%= 0.upto @item.item_pictures.length-1 do |index| %>
+				<%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
+			<% end %>
+		</div>
+	</div><br/><br/>
 
-<div>Average Rating: <%= sprintf('%.2f', @item.get_average_rating) %>/5</div>
-<% if current_user %>
-	<%= link_to 'View Item Reviews', item_item_reviews_path(@item) %></br>
-<% end %>
-<%= link_to 'back to items', items_path %></br>
-<% if current_user && current_user != @item.user %>
-	<% if @all_item_borrowers.include?(current_user)%>
-		<%= link_to 'Review this Item', new_item_item_review_path(@item) %></br>
+	<div>Average Rating: <%= sprintf('%.2f', @item.get_average_rating) %>/5</div>
+	<div class="article-actions">
+		<div>
+			<% if current_user %>
+				<%= link_to 'View Item Reviews', item_item_reviews_path(@item) , class: "btn btn-xs btn-info" %>
+			<% end %>
+
+			<%= link_to 'back to items', items_path, class: "btn btn-xs btn-primary" %>
+			<% if current_user && current_user!=@item.user%>
+				<% if @all_item_borrowers.include?(current_user)%>
+					<%= link_to 'Review this Item', new_item_item_review_path(@item), class: "btn btn-xs btn-success" %></br>
+				<% end %>
+
+
+		<% query_params = {item_id: @item.id} %>
+				<%= link_to('Request to Borrow', new_transaction_path(query_params), class: "btn btn-xs btn-warning" )%>
+			<% end %>
+		</div>
+	</div>
+	<% if @item.tags.any? %>
+		<th>Tags:</th>
+		<% @item.tags.each do |tag| %>
+			<tr>
+				<td>
+					<%= link_to tag.name, tag_path(tag) %>
+				</td>
+			</tr>
+		<% end %>
 	<% end %>
-	<% query_params = {item_id: @item.id} %>
-	<%= link_to 'Request to Borrow', new_transaction_path(query_params) %></br>
-<% end %>
-<% if @item.tags.any? %>
-  <th>Tags:</th>
-  <% @item.tags.each do |tag| %>
-    <tr>
-      <td>
-        <%= link_to tag.name, tag_path(tag) %>
-      </td>
-    </tr>
-  <% end %>
-<% end %>
-<br/>
-<% if logged_in? && current_user == @item.user %>
-	<%= link_to 'Edit', edit_item_path(@item) %>
-	<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
+	<br/>
+	<% if logged_in? && current_user == @item.user %>
+		<%= link_to 'Edit', edit_item_path(@item) %>
+		<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
+	<% end %>
+</div>
