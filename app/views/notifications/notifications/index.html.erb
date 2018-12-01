@@ -1,0 +1,29 @@
+<div class="notifications row">
+  <div class="heading clearfix col-xs-12">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+        <p class="lead col-xs-6" style="font-size: 24px;"><%= t('notifications.all_notifications') %></p>
+        <span class="col-xs-6" align="right">
+          <%= link_to t('notifications.clean_all'), notifications.clean_notifications_path, class: 'btn btn-warning', method: 'delete' %>
+        </span>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+  <div class="list">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+    <% if @notifications.blank? %>
+      <div class="no-records"><%= t('notifications.no_records') %></div>
+    <% else %>
+      <% @notification_groups.each do |group, notifications| %>
+        <div class="notification-group">
+          <div class="group-title"><%= group %></div>
+          <%= render notifications %>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+    <div class="col-xs-2"></div>
+  </div>
+  <%= paginate @notifications %>
+</div>
