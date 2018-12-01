@@ -1,94 +1,97 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="rating-block">
-                <h4><%= @reviewee.username %> Reviews</h4>
-                <h2 class="bold padding-bottom-7"><%= sprintf('%.2f', @reviewee.get_average_rating) %><small>/ 5</small></h2>
-                <% for i in 1..5 %>
-                    <% if i<= (@reviewee.get_average_rating*10).round/10.0 %>
-                        <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                    <% else %>
-                        <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                        </button>
-                    <% end %>
-                <% end %>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <h4>Rating breakdown</h4>
-
-            <% for i in (5).downto(1)%>
-                <div class="pull-left">
-                    <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;"><%=i%> <span class="glyphicon glyphicon-star"></span></div>
-                    </div>
-                    <div class="pull-left" style="width:180px;">
-                        <div class="progress" style="height:9px; margin:8px 0;">
-                          <% total_ratings = @reviewee.get_rating_breakdown[1] + @reviewee.get_rating_breakdown[2] + @reviewee.get_rating_breakdown[3] + @reviewee.get_rating_breakdown[4] + @reviewee.get_rating_breakdown[5]%>
-                          <% rating_ratio = 100 * @reviewee.get_rating_breakdown[i] / [total_ratings, 1].max %>
-                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: <%= rating_ratio %>%"></div>
-                        </div>
-                    </div>
-                    <div class="pull-right" style="margin-left:10px;"><%= @reviewee.get_rating_breakdown[i] %></div>
-                </div>
-            <% end %>
-
-        </div>
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-3">
+          <div class="rating-block">
+              <h4><%= @reviewee.username %> Reviews</h4>
+              <h2 class="bold padding-bottom-7"><%= sprintf('%.2f', @reviewee.get_average_rating) %><small>/ 5</small></h2>
+              <% for i in 1..5 %>
+                  <% if i<= (@reviewee.get_average_rating*10).round/10.0 %>
+                      <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                  <% else %>
+                      <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                  <% end %>
+              <% end %>
+          </div>
+      </div>
+      <div class="col-sm-3">
+          <h4>Rating breakdown</h4>
+          <% for i in (5).downto(1)%>
+              <div class="pull-left">
+                  <div class="pull-left" style="width:35px; line-height:1;">
+                      <div style="height:9px; margin:5px 0;"><%=i%> <span class="glyphicon glyphicon-star"></span></div>
+                  </div>
+                  <div class="pull-left" style="width:180px;">
+                      <div class="progress" style="height:9px; margin:8px 0;">
+                        <% total_ratings = @reviewee.get_rating_breakdown[1] + @reviewee.get_rating_breakdown[2] + @reviewee.get_rating_breakdown[3] + @reviewee.get_rating_breakdown[4] + @reviewee.get_rating_breakdown[5]%>
+                        <% rating_ratio = 100 * @reviewee.get_rating_breakdown[i] / [total_ratings, 1].max %>
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: <%= rating_ratio %>%"></div>
+                      </div>
+                  </div>
+                  <div class="pull-right" style="margin-left:10px;"><%= @reviewee.get_rating_breakdown[i] %></div>
+              </div>
+          <% end %>
+      </div>
+      <div class="col-sm-3">
+      </div>
     </div>
 
     <br>
-    <div class="col-sm-7">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
         <% if logged_in? %>
             <span class="pull-left"><%= link_to 'Review this user', new_user_user_review_path(@reviewee), class: "btn btn-primary" %></span>
         <% end %>
         <span class="pull-right"><%= link_to 'Back to user page', user_path(@reviewee), class: "btn btn-default" %></span>
-
-
+    </div>
+    <div class="col-sm-3">
     </div>
 
     <div class="row">
-        <div class="col-sm-7">
-            <hr/>
-            <div class="review-block">
-
-                <% @reviewee.reviews_of_self.each do |review| %>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                            <div class="review-block-name"><a href="#"><%= link_to "#{review.user.username}", user_path(review.user) %></a></div>
-                            <div class="review-block-date"><%= review.updated_at.strftime("%Y-%m-%d") %><br/></div>
+      <div class="col-sm-12">
+        <hr/>
+        <div class="review-block">
+            <% @reviewee.reviews_of_self.each do |review| %>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                        <div class="review-block-name"><a href="#"><%= link_to "#{review.user.username}", user_path(review.user) %></a></div>
+                        <div class="review-block-date"><%= review.updated_at.strftime("%Y-%m-%d") %><br/></div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="review-block-rate">
+                            <% for i in 1..5 %>
+                                <% if i<=review.rating %>
+                                    <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                <% else %>
+                                    <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                <% end %>
+                            <% end %>
                         </div>
-                        <div class="col-sm-9">
-                            <div class="review-block-rate">
-                                <% for i in 1..5 %>
-                                    <% if i<=review.rating %>
-                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                        </button>
-                                    <% else %>
-                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                        </button>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div class="review-block-title"><%= review.comment[0, 30] %></div>
-                            <div class="review-block-description col-sm-9"><%= review.comment %></div>
-                            <div class="col-sm-3">
-                                <% if review.user == current_user %>
-                                    <td><%= link_to 'Edit Review', edit_user_user_review_path(@reviewee, review) %></td>
-                                    <td><%= link_to 'Delete Review', user_user_review_path(@reviewee, review), method: :delete %></td>
-                                <% end %>
-                            </div>
+                        <div class="review-block-title"><%= review.comment[0, 30] %></div>
+                        <div class="review-block-description col-sm-9"><%= review.comment %></div>
+                        <div class="col-sm-3">
+                            <% if review.user == current_user %>
+                                <td><%= link_to 'Edit Review', edit_user_user_review_path(@reviewee, review) %></td>
+                                <td><%= link_to 'Delete Review', user_user_review_path(@reviewee, review), method: :delete %></td>
+                            <% end %>
                         </div>
                     </div>
-                    <hr/>
-                <% end %>
+                </div>
+                <hr/>
+            <% end %>
 
-            </div>
         </div>
+      </div>
     </div>
 </div> <!-- /container -->
