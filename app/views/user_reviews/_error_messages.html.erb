@@ -1,16 +1,20 @@
 <% if @user_review.errors.any? %>
-    <div class="modal-dialog col-xs-4">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Invalid Form</h4>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <% @user_review.errors.full_messages.each do |message| %>
-                        <div align="left"><%= message %></div>
-                    <% end %>
-                </ul>
-            </div>
+  <div class = "row">
+    <div class = "col-xs-8 col-xs-offset-2">
+      <div class = "panel panel-danger">
+        <div class="panel-heading">
+          <h2 class = "panel-title">
+            The form contains <%= pluralize(@user_review.errors.count, "error") %>.
+          </h2>
+          <div class = "panel-body">
+            <ul>
+              <% @user_review.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 <% end %>
