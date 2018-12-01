@@ -75,9 +75,10 @@ li{
 	 transform: translateX(-39px); /* 10px to left */
 }
 
-// .search__container #tag_id {
-// 	display: none;
-// }
+.search__container #search_item::placeholder {
+  color: white !important;
+  font-style: bold;
+}
 
 .search {
     &__container {

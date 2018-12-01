@@ -13,7 +13,7 @@ ready_post = ->
 
     reader.onload = (e) ->
       $('.image_to_upload').attr('src', e.target.result).removeClass('hidden');
-      $('.current_pic').attr('src', e.target.result).addClass('hidden');
+      $('.current_pic').addClass('hidden');
       $swap = $('.swap')
       if $swap
         $swap.removeClass('hidden')
