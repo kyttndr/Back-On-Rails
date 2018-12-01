@@ -14,9 +14,9 @@ class TransactionJob < ActiveJob::Base
     def perform
         Transaction.all.each do |transaction|
             # ITEM IS NOT RETURNED AND IS OVERDUE
-            if transaction.isReturned == 0 && transaction.end_date < Date.current
+            if transaction.isApproved == 1 && transaction.isReturned == 0 && transaction.end_date < Date.current
                 send_notification('transaction', 'overdue_item', transaction.lender, transaction.borrower, transaction, nil)
-                #UserMailer.overdue_item(transaction.borrower, transaction.lender, transaction).deliver
+                UserMailer.overdue_item(transaction.borrower, transaction.lender, transaction).deliver
             end
         end
     end

@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :destroy]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
-  def index
-    @users = User.all
-  end
+  #def index
+    #@users = User.all
+  #end
 
   def new
     @user = User.new
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(allowed_params)
+    @user.admin = false
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:notice] = "Thank you for signing up! Please check your email to activate account"
@@ -92,6 +93,31 @@ class UsersController < ApplicationController
   def my_places
     @places = Place.where(user: current_user).order('created_at DESC')
   end
+
+  def manage_website
+    @users = User.all
+    @items = Item.all
+  end
+
+  def remove_admin
+    User.find(params[:id_param]).update_attribute(:admin, false)
+    redirect_to manage_website_path
+  end
+
+  def add_admin
+    User.find(params[:id_param]).update_attribute(:admin, true)
+    redirect_to manage_website_path
+  end
+
+  def setup_admin
+    @users = User.all
+  end
+
+  def ini
+    User.find(params[:id_param]).update_attribute(:admin, true)
+    redirect_to root_path
+  end
+
 
   # PRIVATE FUNCTIONS
   private

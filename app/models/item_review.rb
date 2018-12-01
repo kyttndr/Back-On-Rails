@@ -21,7 +21,7 @@ class ItemReview < ApplicationRecord
         transactions = review_user.borrow_transactions
 
         transactions.each do |transaction|
-            if transaction.isApproved == 1 && transaction.isReturned == 1
+            if transaction.isApproved == 1
                 borrowed_item = transaction.item
                 if borrowed_item == review_item
                     return 1

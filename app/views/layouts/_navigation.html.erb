@@ -8,9 +8,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><%= link_to "Browse all Items", main_app.items_path %></li>
-				<li><%= link_to "Browse all Users", main_app.users_path %></li>
-        		<li><%= link_to "All Tags", main_app.tags_path %></li>
+				<% if session[:user_id] != nil && current_user.admin == true %>
+					<li><%= link_to "Manage the Website", main_app.manage_website_path %></li>
+				<% end %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<% if session[:user_id] != nil %>
