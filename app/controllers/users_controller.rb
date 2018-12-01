@@ -108,6 +108,15 @@ class UsersController < ApplicationController
     redirect_to manage_website_path
   end
 
+  def setup_admin
+    @users = User.all
+  end
+
+  def ini
+    User.find(params[:id_param]).update_attribute(:admin, true)
+    redirect_to root_path
+  end
+
 
   # PRIVATE FUNCTIONS
   private

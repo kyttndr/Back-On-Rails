@@ -59,6 +59,8 @@ Rails.application.routes.draw do
   get 'manage_website', to: 'users#manage_website'
   get 'remove_admin', to: 'users#remove_admin'
   get 'add_admin', to: 'users#add_admin'
+  get 'setup_admin', to: 'users#setup_admin'
+  get 'ini', to: 'users#ini'
 
   resources :tags, except: [:destroy]
 
