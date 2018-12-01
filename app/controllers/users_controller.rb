@@ -94,6 +94,21 @@ class UsersController < ApplicationController
     @places = Place.where(user: current_user).order('created_at DESC')
   end
 
+  def manage_website
+    @users = User.all
+  end
+
+  def remove_admin
+    User.find(params[:id_param]).update_attribute(:admin, false)
+    redirect_to manage_website_path
+  end
+
+  def add_admin
+    User.find(params[:id_param]).update_attribute(:admin, true)
+    redirect_to manage_website_path
+  end
+
+
   # PRIVATE FUNCTIONS
   private
 

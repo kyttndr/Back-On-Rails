@@ -55,6 +55,11 @@ Rails.application.routes.draw do
 
   get 'show_items', to: 'items#show_items'
 
+  #for admin
+  get 'manage_website', to: 'users#manage_website'
+  get 'remove_admin', to: 'users#remove_admin'
+  get 'add_admin', to: 'users#add_admin'
+
   resources :tags, except: [:destroy]
 
   root 'welcome#index'
