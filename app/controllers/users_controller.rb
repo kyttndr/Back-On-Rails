@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :destroy]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
-  def index
-    @users = User.all
-  end
+  #def index
+    #@users = User.all
+  #end
 
   def new
     @user = User.new
@@ -96,6 +96,7 @@ class UsersController < ApplicationController
 
   def manage_website
     @users = User.all
+    @items = Item.all
   end
 
   def remove_admin

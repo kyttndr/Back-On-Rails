@@ -1,30 +1,45 @@
 <div class = "container">
 <% if @items.size > 0 %>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th colspan="3" class="page-header">
-					<h2>Items</h2>
-				</th>
-			</tr>
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @items.each do |item| %>
-				<tr>
-                    <td>
-                        <%= item.name %>
-                    </td>
-                    <td>
-                        <%= item.description %>
-                    </td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+<table>
+  <% @items.each do |item| %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="well">
+          <% if item.item_pictures.any? %>
+            <div><%= image_tag item.item_pictures_urls[0], class: "picture-in-index" %></div>
+          <% end %>
+          <div class="item-name">
+            <p><%= item.name %></p>
+          </div>
+          <div class="item-description">
+            <div><%= truncate(item.description, length: 100) %></div>
+          </div>
+          <div>Owned by: <%= link_to item.user.username, user_path(item.user) %>
+            <% if item.tags.any? %>
+              | Tags:
+              <% item.tags.each do |tag| %>
+                <%= link_to tag.name, tag_path(tag) %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="article-actions">
+            <div>
+              <%= link_to 'Show', item_path(item), class: "btn btn-xs btn-info"  %>
+              <% if logged_in? && current_user == item.user %>
+                <%= link_to 'Edit', edit_item_path(item), class: "btn btn-xs btn-primary" %>
+                <%= link_to 'Delete', item_path(item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger" %>
+              <% end %>
+              <% if current_user && current_user!=item.user%>
+                <% query_params = {item_id: item.id} %>
+                <%= link_to('Request to Borrow', new_transaction_path(query_params), class: "btn btn-xs btn-warning" )%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</table>
 <% else %>
 	<div align = "center">
 		<h2>This user does not have any item!</h2>
