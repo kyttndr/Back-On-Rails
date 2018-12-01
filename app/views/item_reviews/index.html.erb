@@ -1,5 +1,6 @@
     <div class="container">
 		<div class="row">
+            <div class="col-sm-3"></div>
 			<div class="col-sm-3">
 				<div class="rating-block">
 					<h4><%= @item.name%> Reviews</h4>
@@ -37,25 +38,28 @@
                 <% end %>
 
 			</div>
+            <div class="col-sm-3"></div>
 		</div>
 
         <br>
-        <div class="col-sm-7">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
             <% if logged_in? %>
                 <span class="pull-left"><%= link_to 'Review this item', new_item_item_review_path(@item), class: "btn btn-primary" %></span>
             <% end %>
             <span class="pull-right"><%= link_to 'Back to Item Description', item_path(@item), class: "btn btn-default" %></span>
         </div>
+        <div class="col-sm-3"></div>
 
 		<div class="row">
-			<div class="col-sm-7">
+			<div class="col-sm-12">
 				<hr/>
-				<div class="review-block">
-
+                <div class="col-sm-1"></div>
+				<div class="review-block col-sm-10">
                     <% @item.item_reviews.each do |review| %>
     					<div class="row">
     						<div class="col-sm-3">
-                                <div><%= image_tag review.user.profile.profile_picture.url, class: 'picture-in-index' if review.user.profile.profile_picture? %></div>
+                                <div class='row'><%= image_tag review.user.profile.profile_picture.url, class: 'picture-in-index' if review.user.profile.profile_picture? %></div>
     							<div class="review-block-name"><a href="#"><%= link_to "#{review.user.username}", user_path(review.user) %></a></div>
     							<div class="review-block-date"><%= review.updated_at.strftime("%Y-%m-%d") %><br/></div>
     						</div>
@@ -96,6 +100,7 @@
                     <% end %>
 
 				</div>
+                <div class="col-sm-1"></div>
 			</div>
 		</div>
     </div> <!-- /container -->

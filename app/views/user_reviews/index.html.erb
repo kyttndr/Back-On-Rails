@@ -56,11 +56,12 @@
     <div class="row">
       <div class="col-sm-12">
         <hr/>
-        <div class="review-block">
+        <div class="col-sm-1"></div>
+        <div class="review-block col-sm-10">
             <% @reviewee.reviews_of_self.each do |review| %>
                 <div class="row">
                     <div class="col-sm-3">
-                        <div><%= image_tag review.user.profile.profile_picture.url, class: 'picture-in-index' if review.user.profile.profile_picture? %></div>
+                        <div class='row'><%= image_tag review.user.profile.profile_picture.url, class: 'picture-in-index' if review.user.profile.profile_picture? %></div>
                         <div class="review-block-name"><a href="#"><%= link_to "#{review.user.username}", user_path(review.user) %></a></div>
                         <div class="review-block-date"><%= review.updated_at.strftime("%Y-%m-%d") %><br/></div>
                     </div>
@@ -101,6 +102,7 @@
             <% end %>
 
         </div>
+        <div class="col-sm-1"></div>
       </div>
     </div>
 </div> <!-- /container -->
