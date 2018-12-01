@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(allowed_params)
+    @user.admin = false
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:notice] = "Thank you for signing up! Please check your email to activate account"

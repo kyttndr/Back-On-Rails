@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_203741) do
+ActiveRecord::Schema.define(version: 2018_12_01_173403) do
 
   create_table "crono_jobs", force: :cascade do |t|
     t.string "job_id", null: false
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_203741) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.boolean "admin", default: true
   end
 
 end

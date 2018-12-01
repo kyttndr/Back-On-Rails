@@ -77,6 +77,7 @@ class User < ApplicationRecord
       user.username = auth.info.name
       user.image = auth.info.image
       user.activated = true
+      user.admin = false
     end
   end
 
