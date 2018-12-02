@@ -42,17 +42,28 @@ $(document).on('ready turbolinks:load', function(){
         $(this).attr('style', 'background-color: yellow');
 
         var transaction_id = $(this).find('.row_transaction_id').val();
-        highlightCalendar(transaction_id);
+        var transaction_start_date = $(this).find('.row_transaction_start_date').val();
+        var transaction_end_date = $(this).find('.row_transaction_end_date').val();
+
+        if($(this).hasClass('borrow_requests')){
+            highlightPendingBorrowCalendar(transaction_start_date, transaction_end_date);
+        }
+        else{
+            highlightCalendar(transaction_id);
+        }
 
     }, function(){
-        if($(this).attr('class')=='tr_table_1'){
+        if($(this).hasClass('tr_table_1')){
             $(this).attr('class', table1_class);
         }
-        if($(this).attr('class')=='tr_table_2'){
+        if($(this).hasClass('tr_table_2')){
             $(this).attr('class', table2_class);
         }
         $(this).attr('style', '');
 
+        $('.current-month.day').each(function(){
+            $(this).css("background-color", day_bg_color);
+        });
         $('.current-month.has-events').each(function(){
             $(this).css("background-color", events_bg_color);
         });
@@ -148,4 +159,18 @@ function highlightPendingCalendar(item_id, transaction_start_date, transaction_e
         }
     });
 
+}
+
+
+function highlightPendingBorrowCalendar(transaction_start_date, transaction_end_date){
+    $('.current-month.day').each(function(){
+        var current_date = $(this).find('.calendar_date').val();
+        var parsed_date = Date.parse(current_date);
+        var parsed_start_date = Date.parse(transaction_start_date);
+        var parsed_end_date = Date.parse(transaction_end_date);
+
+        if(parsed_date>=parsed_start_date && parsed_date<=parsed_end_date){
+            $(this).attr('style', 'background-color: lightgreen');
+        }
+    });
 }
