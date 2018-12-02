@@ -97,6 +97,7 @@ class UsersController < ApplicationController
   def manage_website
     @users = User.all
     @items = Item.all
+    @tags = Tag.all
   end
 
   def remove_admin
