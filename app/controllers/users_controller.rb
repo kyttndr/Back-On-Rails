@@ -10,16 +10,21 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    @user = User.new(allowed_params)
-    @user.admin = false
-    if @user.save
-      UserMailer.account_activation(@user).deliver_now
-      flash[:notice] = "Thank you for signing up! Please check your email to activate account"
-      redirect_to root_path
-    else
-      render 'new'
-    end
+    def create
+      @user = User.new(allowed_params)
+      @user.admin = false
+      if params[:agreed_terms_of_service]
+        if @user.save
+          UserMailer.account_activation(@user).deliver_now
+          flash[:notice] = "Thank you for signing up! Please check your email to activate account"
+          redirect_to root_path
+        else
+          render 'new'
+        end
+      else
+        flash[:danger] = "You need to read the terms and service."
+        render 'new'
+      end
   end
 
   def show
