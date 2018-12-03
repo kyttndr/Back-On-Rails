@@ -6,12 +6,9 @@
 		<strong>Owned by: </strong><%= link_to @item.user.username, user_path(@item.user) %><br/>
 		<strong>Located at: </strong><%= link_to @item.place.address, place_path(@item.place) %><br/>
 		<div>
-			<%=@item.item_pictures.length %>
-		</div>
-		<div>
-			<%= 0.upto @item.item_pictures.length-1 do |index| %>
-				<%= image_tag @item.item_pictures_urls[index], class: "item_pic" %>
-			<% end %>
+			<span style="visibility: hidden;"><%= @item.item_pictures_urls.each {|i| %></span>
+				<%= image_tag i, class: "item_pic" %>
+			<span style="visibility: hidden;"><% } %></span>
 		</div>
 	</div><br/><br/>
 

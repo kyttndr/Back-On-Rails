@@ -94,7 +94,8 @@
                               placeholder: "Need to borrow something? Your neighbours might have it! Search for item here. ",
                               class: "search__input" %>
           <%= select_tag "tag_id", content_tag(:option,'All',:value=>'') +
-							options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]) %>
+							options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]),
+              class: "search__tag" %>
         </div>
       <% end %>
     </div>
