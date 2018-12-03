@@ -19,13 +19,15 @@ class UserReview < ApplicationRecord
         user = self.user
         reviewee = self.reviewee
 
-        transactions = Transaction.find_by(borrower: user, lender: reviewee, isApproved: 1)
-        if transactions
+        transactions = Transaction.where(borrower: user, lender: reviewee, isApproved: 1)
+                                  .where("start_date <= ?", Date.current)
+        if transactions.any?
             return true
         end
 
-        transactions = Transaction.find_by(borrower: reviewee, lender: user, isApproved: 1)
-        if transactions
+        transactions = Transaction.where(borrower: reviewee, lender: user, isApproved: 1)
+                                  .where("start_date <= ?", Date.current)
+        if transactions.any?
             return true
         end
 
