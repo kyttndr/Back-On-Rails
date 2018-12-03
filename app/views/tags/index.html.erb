@@ -13,6 +13,8 @@
       </div>
     </ul>
   <% end %>
-  <%= link_to "new tag", new_tag_path %>
+  <% if logged_in? && current_user.admin == true %>
+    <%= link_to "new tag", new_tag_path %>
+  <% end %>
   <div align = "center"><%= will_paginate %></div>
 </div>

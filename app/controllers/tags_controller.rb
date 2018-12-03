@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:edit, :update, :show]
+  before_action :require_admin, only: [:new, :edit]
   def new
     @tag = Tag.new
   end
@@ -44,6 +45,13 @@ class TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.find(params[:id])
+  end
+
+  def require_admin
+    if !logged_in? || current_user.admin == false
+      flash[:danger] = "you have no permission"
+      redirect_to tags_path
+    end
   end
 
 end
