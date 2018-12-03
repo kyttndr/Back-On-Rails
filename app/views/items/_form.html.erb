@@ -73,7 +73,11 @@
           <div class = "col-sm-offset-2 col-sm-10">
             <%  Tag.all.each do |role| %>
               <li>
-                <%= check_box_tag 'tag_ids[]', role.id %>
+                <% if @item.tags.include?role %>
+                  <%= check_box_tag 'tag_ids[]', role.id, :checked => true %>
+                <% else %>
+                  <%= check_box_tag 'tag_ids[]', role.id %>
+                <% end %>
                 <%= role.name %>
               </li>
             <% end %>
