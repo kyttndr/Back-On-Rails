@@ -1,5 +1,26 @@
 <%= form_for @place do |f| %>
 
+  <% if @place.errors.any? %>
+    <div class = "row">
+      <div class = "col-xs-8 col-xs-offset-2">
+        <div class = "panel panel-danger">
+          <div class="panel-heading">
+            <h2 class = "panel-title">
+              The form contains <%= pluralize(@place.errors.count, "error") %>.
+            </h2>
+            <div class = "panel-body">
+              <ul>
+                <% @place.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <fieldset class="form-group">
     <%= f.label :address, 'Address' %>
     <div style="display: flex;">
