@@ -10,30 +10,31 @@
   		<!-- Collect the nav links, forms, and other content for toggling -->
   		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   			<ul class="nav navbar-nav">
-					<li><%= link_to "Browse all Items", main_app.items_path %></li>
-					<% if session[:user_id] != nil && current_user.admin == true %>
-						<li><%= link_to "Manage the Website", main_app.manage_website_path %></li>
-					<% end %>
+				<li><%= link_to "Browse all Items", main_app.items_path %></li>
+				<% if session[:user_id] != nil && current_user.admin == true %>
+					<li><%= link_to "Manage the Website", main_app.manage_website_path %></li>
+				<% end %>
+                <% if session[:user_id] != nil %>
+                    <li><%= link_to "Register a new item", main_app.new_item_path %></li>
+                <% end %>
   			</ul>
   			<ul class="nav navbar-nav navbar-right">
   				<% if session[:user_id] != nil %>
   					<li class="dropdown">
   						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Your Items<span class="caret"></span></a>
   						<ul class="dropdown-menu">
-								<li><%= link_to "Register a new item", main_app.new_item_path %></li>
-								<li><%= link_to 'Your Listed Items', main_app.listed_items_path %></li>
+							<li><%= link_to 'Your Listed Items', main_app.listed_items_path %></li>
   							<li role="separator" class="divider"></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
   							<li><%= link_to 'Borrowed Items', main_app.borrow_transactions_path %></li>
   							<li><%= link_to 'Lent Items', main_app.lend_transactions_path %></li>
   						</ul>
-  					</li>
-  					<li>
   					</li>
   					<li class="dropdown">
   						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transactions<span class="caret"></span></a>
   						<ul class="dropdown-menu">
   							<li><%= link_to 'Pending Transactions', main_app.pending_transactions_path %></li>
-  							<li role="separator" class="divider"></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
   							<li><%= link_to 'View Borrow History', main_app.borrow_transactions_history_path %></li>
   							<li><%= link_to 'View Lend History', main_app.lend_transactions_history_path %></li>
   						</ul>
@@ -42,47 +43,38 @@
   					<input type="hidden" id="unread_count" value="<%= Notification.unread_count(current_user) %>">
   				<% end  %>
 
-  				<li>
-  					<% if session[:user_id] == nil %>
-  						<li class="dropdown">
-  							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id = "line">Get Started!<span class="caret"></span></a>
-  							<ul class="dropdown-menu">
-  								<li align = "center"><%= link_to 'Login With Email', main_app.login_path %></li>
-                  <li role="separator" class="divider"></li>
-                  <li align = "center"><%= link_to 'Sign Up With Email', main_app.new_user_path %></li>
-                  <li role="separator" class="divider"></li>
-  								<li align = "center"><%= link_to "Using Facebook", user_facebook_omniauth_authorize_path %></li>
-  							</ul>
-  						</li>
-  					<% else %>
+  				<% if session[:user_id] == nil %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id = "line">Get Started!<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+  							<li align = "center"><%= link_to 'Login With Email', main_app.login_path %></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
+                            <li align = "center"><%= link_to 'Sign Up With Email', main_app.new_user_path %></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
+  							<li align = "center"><%= link_to "Using Facebook", user_facebook_omniauth_authorize_path %></li>
+  						</ul>
+  					</li>
+  				<% else %>
+                <% end %>
 
-  					<% end %>
-  				</li>
-
-  				<li>
-  					<% if request.fullpath == "/users/new" %>
-
-  					<% elsif session[:user_id] == nil%>
-
-  					<% else %>
-
-  						<li class="dropdown">
-  							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" font-weight= "bold" id = "line">
-  							Welcome! <%= current_user.username %><span class="caret"></span></a>
-  							<ul class="dropdown-menu">
-  								<li align = "center"><%= link_to 'My Page', main_app.user_path(session[:user_id]) %></li>
-  								<li role="separator" class="divider"></li>
-  								<li align = "center"><%= link_to current_user.friends.count.to_s + ' Following', main_app.my_friends_path %></li>
-  	              <li role="separator" class="divider"></li>
-  	              <li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
-  								<li role="separator" class="divider"></li>
-  								<li align = "center"><%= link_to 'My addresses', main_app.my_places_path %></li>
-  								<li role="separator" class="divider"></li>
-  								<li align = "center"><%= link_to 'Log out', main_app.logout_path, method: :delete %></li>
-  							</ul>
-  						</li>
-  					<% end %>
-  				</li>
+  				<% if request.fullpath == "/users/new" %>
+  				<% elsif session[:user_id] == nil%>
+  				<% else %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" font-weight= "bold" id = "line">
+                            Welcome! <%= current_user.username %><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li align = "center"><%= link_to 'My Page', main_app.user_path(session[:user_id]) %></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
+                            <li align = "center"><%= link_to 'My Addresses', main_app.my_places_path %></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
+  							<li align = "center"><%= link_to current_user.friends.count.to_s + ' Following', main_app.my_friends_path %></li>
+                            <li align = "center"><%= link_to Friendship.where(:friend_id => current_user.id).all.count.to_s + ' Followers', main_app.my_followers_path %></li>
+                            <hr style='margin-top: 5px; margin-bottom: 5px;'>
+                            <li align = "center"><%= link_to 'Log out', main_app.logout_path, method: :delete %></li>
+                        </ul>
+  					</li>
+  				<% end %>
   			</ul>
   		</div><!-- /.navbar-collapse -->
   	</div><!-- /.container-fluid -->
