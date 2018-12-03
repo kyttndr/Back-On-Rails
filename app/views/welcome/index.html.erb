@@ -97,6 +97,7 @@
 							options_from_collection_for_select(Tag.all, "id", "name", params[:tag_id]),
               class: "search__tag" %>
         </div>
+        <input type="submit" name="search" value="search" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
       <% end %>
     </div>
   </div>
