@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :destroy]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update]
 
   #def index
     #@users = User.all
@@ -38,10 +38,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
     @user.destroy
     flash[:notice] = "Deleted"
-    redirect_to root_path
+    redirect_to manage_website_path
   end
 
   def my_friends
