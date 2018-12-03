@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:edit, :update, :show]
+  before_action :set_tag, only: [:edit, :update, :show, :destroy]
   before_action :require_admin, only: [:new, :edit]
   def new
     @tag = Tag.new
@@ -34,6 +34,12 @@ class TagsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @tag.destroy
+    flash[:notice] = "Deleted"
+    redirect_to manage_website_path
   end
 
 

@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   get 'setup_admin', to: 'users#setup_admin'
   get 'ini', to: 'users#ini'
 
-  resources :tags, except: [:destroy]
+  resources :tags
 
   root 'welcome#index'
 
