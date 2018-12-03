@@ -1,59 +1,107 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-  <br/><br/><br/><br/><br/>
-	<body>
-    <div class = "container">
-      <%= form_with(model: @user, :html => {class:"form-horizontal", role: "form"}, url: login_path) do |form| %>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<br/><br/><br/><br/><br/>
+<body>
+<div class="container">
+  <div class="col-xs-4">
+    <div class="profile_picture">
+      <%= image_tag @user.profile.profile_picture.url, class: 'profile_picture responsive' if @user.profile.profile_picture? %>
+    </div>
+    <div class="user-show-actions">
+      <div class="control-label col-sm-7 col-xs-offset-1">
 
-        <div class = 'row'>
-          <div class = 'col-xs-12'>
 
-            <div class = "form-group">
-              <div class = "control-label col-sm-2">
-                <%= form.label :username %>:
-              </div>
-              <div class = "col-sm-2">
-                <div class = "control-label col-sm-2">
-                  <%= @user.username %>
-                </div>
-              </div>
-            </div>
-            <div class = "form-group">
-              <div class = "control-label col-sm-2">
-                <%= form.label :email %>:
-              </div>
-              <div class = "col-sm-2">
-                <div class = "control-label col-sm-2">
-                  <%= @user.email %>
-                </div>
-              </div>
-            </div>
+        <p>
+          <% if logged_in? && current_user == @user %>
+            <%= link_to "Update information", edit_user_profile_path(@user), class: "btn btn-xl btn-success" %>
+          <% end %>
+        </p>
+
+        <p><%= link_to "View Reviews", user_user_reviews_path(@user), class: "btn btn-xl btn-primary" %></p>
+        <% if logged_in? && current_user != @user %>
+          <p><%= link_to "Review this User", new_user_user_review_path(@user), class: "btn btn-xl btn-primary" %></p>
+        <% end %>
+        <% if @user.id == session[:user_id] && @user.provider == "facebook" %>
+          <p><%= link_to "Deauthorize", user_path(@user), method: :delete, data: {confirm: "Are you sure you want to deauthorize your account?"}, class: "btn btn-xl btn-primary" %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-8 center">
+    <%= form_with(model: @user, :html => {class: "form-horizontal", role: "form"}, url: login_path) do |form| %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :username %>
+        </div>
+        <div class="col-sm-2">
+          <div class="control-label col-sm-2">
+            <%= @user.username %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :email %>
+        </div>
+        <div class="col-sm-2">
+          <div class="control-label col-sm-2">
+            <%= @user.email %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :first_name %>
+        </div>
+        <div class="col-sm-2">
+          <div class="control-label col-sm-2">
+            <%= @user.profile.first_name %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :last_name %>
+        </div>
+        <div class="col-sm-2">
+          <div class="control-label col-sm-2">
+            <%= @user.profile.last_name %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= form.label :date_of_birth %>
+        </div>
+        <div class="control-label col-sm-2">
+          <%= @user.profile.date_of_birth %>
+        </div>
+      </div>
+      <% if logged_in? && current_user == @user %>
+        <div class="form-group">
+          <div class="control-label col-sm-2">
+            <%= form.label :phone_number %>
+          </div>
+          <div class="control-label col-sm-2">
+            <%= @user.profile.phone_number %>
           </div>
         </div>
       <% end %>
-
-      <br/>
-
-      <div class= "user-show-actions">
-        <div class = "control-label col-sm-7 col-xs-offset-1">
-	        <p><%=link_to "View profile", user_profile_path(@user), class: "btn btn-xl btn-primary"%></p>
-	        <p><%=link_to "View Reviews of this User", user_user_reviews_path(@user), class: "btn btn-xl btn-primary" %></p>
-			<% if logged_in? %>
-		    	<p><%=link_to "Review this User", new_user_user_review_path(@user), class: "btn btn-xl btn-primary" %></p>
-      <% end %>
-      <% if @user.id == session[:user_id] && @user.provider == "facebook" %>
-		    	<p><%=link_to "Deauthorize", user_path(@user), method: :delete, data: {confirm: "Are you sure you want to deauthorize your account?"}, class: "btn btn-xl btn-primary" %></p>
-      <% end %>
-        </div>
-      </div>
-
+    <% end %>
+    <br>
+    <div class="col-sm-4">
       <% if logged_in? && current_user == @user %>
-        <%= link_to 'Edit', edit_user_path(@user),  class: "btn btn-xl btn-success"%>
+        <%= link_to 'Change Password', edit_user_path(@user), class: "btn btn-xl btn-success" %>
       <% end %>
     </div>
-	</body>
+  </div>
+  <br/>
+
+
+</div>
+</body>
 </html>
