@@ -87,6 +87,9 @@ group :test do
   gem 'chromedriver-helper'
 
   gem 'rspec'
+
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :production do
