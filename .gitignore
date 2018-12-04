@@ -28,3 +28,4 @@ public/assets
 /config/master.key
 Vlad_sqlite_fix.txt
 *.xml
+public/uploads/*
