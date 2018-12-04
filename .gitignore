@@ -21,7 +21,6 @@ yarn-error.log
 public/assets
 .byebug_history
  # Ignore all the local uploads
-public/uploads/
 *.DS_Store
 # Ignore IDE files
 .idea/

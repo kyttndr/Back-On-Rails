@@ -63,9 +63,9 @@ class ItemsController < ApplicationController
     if params[:search_item]
       if params[:tag_id] != ''
         @item_by_name = Item.joins(:tags).where('tags.id IS ? AND items.name LIKE ?',
-                                                "#{params[:tag_id]}", "%#{params[:search_item]}%")
+                                                "#{params[:tag_id]}".to_i, "%#{params[:search_item]}%")
         @item_by_description = Item.joins(:tags).where('tags.id IS ? AND items.description LIKE ?',
-                                                       "#{params[:tag_id]}", "%#{params[:search_item]}%")
+                                                       "#{params[:tag_id]}".to_i, "%#{params[:search_item]}%")
         @items = (@item_by_name + @item_by_description).uniq
         gon.places = @items.map{|i| i.place}
       else
