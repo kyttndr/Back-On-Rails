@@ -9,10 +9,10 @@ class TagsController < ApplicationController
     @tag = Tag.new(allowed_params)
     if @tag.save
       flash[:notice] = "a new tag"
+      redirect_to tags_path
     else
       render 'new'
     end
-    redirect_to tags_path
   end
 
   def index
