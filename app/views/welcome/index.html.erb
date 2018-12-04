@@ -11,6 +11,7 @@
   		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   			<ul class="nav navbar-nav">
 				<li><%= link_to "Browse all Items", main_app.items_path %></li>
+					<li><%= link_to "Browse all Tags", main_app.tags_path %></li>
 				<% if session[:user_id] != nil && current_user.admin == true %>
 					<li><%= link_to "Manage the Website", main_app.manage_website_path %></li>
 				<% end %>
