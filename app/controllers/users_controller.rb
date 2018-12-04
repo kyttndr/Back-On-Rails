@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     else
       flash[:danger] = "Friend was failed to be added"
     end
-    redirect_to my_friends_path
+    redirect_to request.referrer
   end
 
   def add_follower
