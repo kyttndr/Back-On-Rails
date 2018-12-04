@@ -67,7 +67,10 @@
           </div>
         </div>
 
-
+          <div class = "control-label col-sm-5">
+        <%= check_box_tag 'agreed_terms_of_service' %>
+        I have read and agree to the<li><%= link_to " terms of service", main_app.welcome_terms_of_service_path %>.</li>
+          </div>
         <div class = "form-group">
           <div class = "col-sm-offset-2 col-sm-10">
             <%= form.submit "Sign Up", class: 'btn btn-primary btn-lg'%>
