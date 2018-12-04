@@ -2,17 +2,10 @@
 
  <%= render 'form' %>
 
-<div class= "container" >
-  <div class = "col-sm-offset-2 col-sm-10">
-    <%= link_to 'back', item_path(@item) %>
-  </div>
-</div>
-
 <br/>
 
-<div class= "container" >
+<div class= "container">
   <div class = "col-sm-offset-2 col-sm-10">
-    <%= link_to 'All items', items_path %>
+    <%= link_to 'Back to all items', items_path, class: "btn btn-success btn-lg" %>
   </div>
 </div>
-
