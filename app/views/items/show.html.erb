@@ -4,6 +4,18 @@
 	<div>
 		<strong>Description: </strong><%= @item.description %><br/>
 		<strong>Owned by: </strong><%= link_to @item.user.username, user_path(@item.user) %><br/>
+    <div>
+      <% if @item.tags.any? %>
+				<strong><th>Tags:</th></strong>
+        <% @item.tags.each do |tag| %>
+          <tr>
+            <td>
+              <%= link_to tag.name, tag_path(tag) %>|
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </div>
 		<strong>Located at: </strong><%= link_to @item.place.address, place_path(@item.place) %><br/>
 		<div>
 			<span style="visibility: hidden;"><%= @item.item_pictures_urls.each {|i| %></span>
@@ -31,20 +43,12 @@
 			<% end %>
 		</div>
 	</div>
-	<% if @item.tags.any? %>
-		<th>Tags:</th>
-		<% @item.tags.each do |tag| %>
-			<tr>
-				<td>
-					<%= link_to tag.name, tag_path(tag) %>
-				</td>
-			</tr>
-		<% end %>
-	<% end %>
+
 	<br/>
 	<% if logged_in? && current_user == @item.user %>
-		<%= link_to 'Edit', edit_item_path(@item) %>
-		<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"} %>
+    <br/>
+		<%= link_to 'Edit', edit_item_path(@item), class: "btn btn-xs btn-success"  %>
+		<%= link_to 'Delete', item_path(@item), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-xs btn-danger"  %>
 	<% end %>
 </div>
 

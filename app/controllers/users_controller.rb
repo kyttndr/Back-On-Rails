@@ -88,6 +88,7 @@ class UsersController < ApplicationController
     #if current_user.save
     if current_user.friends << @friend
       flash[:notice] = "Friend was successfully added"
+      send_notification('friend', 'new_follower', current_user, @friend, nil, nil)
     else
       flash[:danger] = "Friend was failed to be added"
     end
