@@ -4,7 +4,7 @@ class FriendshipsController <ApplicationController
     @friendship = current_user.friendships.where(friend_id: params[:id]).first
     @friendship.destroy
     flash[:notice] = "Friend was successfully deleted"
-    redirect_to my_friends_path     
+    redirect_to request.referrer
   end
 
 end

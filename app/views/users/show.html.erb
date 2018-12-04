@@ -28,6 +28,15 @@
         <% if @user.id == session[:user_id] && @user.provider == "facebook" %>
           <p><%= link_to "Deauthorize", user_path(@user), method: :delete, data: {confirm: "Are you sure you want to deauthorize your account?"}, class: "btn btn-xl btn-primary" %></p>
         <% end %>
+
+        <% if current_user.not_friends_with?(@user.id) && @user != current_user %>
+          <%= link_to "Follow", add_friend_path(user: current_user, friend: @user), class: "btn btn-xl btn-primary", method: :post %>
+        <% else %>
+          <% if @user != current_user %>
+            <%= link_to "Unfollow", friendship_path(@user), method: :delete,
+              data: { confirm: "Are you sure?" }, class: "btn btn-xl btn-danger" %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -95,7 +104,8 @@
     <br>
     <div class="col-sm-4">
       <% if logged_in? && current_user == @user %>
-        <%= link_to 'Change Password', edit_user_path(@user), class: "btn btn-xl btn-success" %>
+        <p><%= link_to 'My Addresses', main_app.my_places_path, class: "btn btn-xl btn-success" %></p>
+        <p><%= link_to 'Change Password', edit_user_path(@user), class: "btn btn-xl btn-success" %></p>
       <% end %>
     </div>
   </div>
