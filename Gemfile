@@ -16,7 +16,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 
 #Image upload and storage gems
 gem 'carrierwave',             '1.2.2'
-gem 'mini_magick',             '4.7.0'
+gem 'mini_magick',             '4.9.4'
 
 #pagination
 gem 'will_paginate', '>= 3.1'
